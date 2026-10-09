@@ -265,7 +265,6 @@ def flow_error_user_workload():
     f.var("varOwnerId", "String")
     f.var("varOpenCount", "Number", scale=0, default=0)
     f.var("varOverdue", "Number", scale=0, default=0)
-    f.var("varMoved", "Number", scale=0, default=0)
     f.var("varRouting", "String")
     f.var("varTask", "SObject", obj="Task")
     f.formula("fxSubject", "String", f"LEFT('{PFX}Fix flow error: ' & {{!$Record.FlowApiName}}, 255)")
@@ -273,15 +272,15 @@ def flow_error_user_workload():
                   "Interview {!$Record.InterviewGuid} started {!$Record.InterviewStartDate} by user {!$Record.InterviewStartedById}.\n"
                   "Routing: {!varRouting}\nUser workload: {!varOpenCount} open / {!varOverdue} overdue tasks.")
     f.tt("ttHandover", "User {!Get_Interview_User.Username} is deactivated but started flow {!$Record.FlowApiName}, which failed: {!$Record.ErrorMessage}\n"
-                       "{!varMoved} open tasks were reassigned to you.")
+                       "All of their open tasks were reassigned to you.")
     f.get("Get_Interview_User", "User", [("Id", "EqualTo", R("$Record.InterviewStartedById"))], "Get_Admin_Profile", "Log_Fault", first=True)
     admin_lookup(f, "Dec_User_State", "Log_Fault")
     f.decision("Dec_User_State", [
-        ("Deactivated", [("Get_Interview_User", "IsNull", False), ("Get_Interview_User.IsActive", "EqualTo", False)], "Sub_Reassign_Open_Tasks"),
+        ("Deactivated", [("Get_Interview_User", "IsNull", False), ("Get_Interview_User.IsActive", "EqualTo", False)], "Upd_Reassign_Open_Tasks"),
         ("Active", [("Get_Interview_User", "IsNull", False), ("Get_Interview_User.IsActive", "EqualTo", True)], "Get_User_Open_Tasks")],
         "Asg_Owner_Admin", "Unknown User")
-    f.subflow("Sub_Reassign_Open_Tasks", "AUT_Task_Bulk_Reassign", {"inFromUserId": R("Get_Interview_User.Id"), "inToUserId": R("Get_Admin_User.Id"),
-                                                                    "inHighOnly": False}, {"outMovedCount": "varMoved"}, nxt="Create_Handover_Task")
+    f.update("Upd_Reassign_Open_Tasks", "Task", [("OwnerId", "EqualTo", R("Get_Interview_User.Id")), ("IsClosed", "EqualTo", False)],
+             {"OwnerId": R("Get_Admin_User.Id")}, "Create_Handover_Task", "Log_Fault")
     f.create("Create_Handover_Task", "Task", {"Subject": PFX + "Deactivated user hit a flow error - tasks handed over", "Description": R("ttHandover"),
                                               "OwnerId": R("Get_Admin_User.Id"), "Priority": "High", "Status": "Not Started",
                                               "ActivityDate": R("$Flow.CurrentDate")}, None, "Log_Fault")

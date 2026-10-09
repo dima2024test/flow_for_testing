@@ -469,7 +469,7 @@
             </defaultValue>
             <fieldText>Primary contact</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
         </fields>
         <fields>
             <name>Plan_Kickoff</name>
@@ -479,7 +479,7 @@
             </defaultValue>
             <fieldText>Create a kickoff task</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
         </fields>
         <fields>
             <name>Kickoff_Date</name>

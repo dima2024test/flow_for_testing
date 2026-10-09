@@ -137,9 +137,7 @@
         <connector>
             <targetReference>Loop_Existing_Cases</targetReference>
         </connector>
-        <limit>
-            <numberValue>1.0</numberValue>
-        </limit>
+        <limit>1</limit>
         <sortOptions>
             <doesPutEmptyStringAndNullFirst>false</doesPutEmptyStringAndNullFirst>
             <sortField>CreatedDate</sortField>
@@ -233,6 +231,11 @@
         <dataType>String</dataType>
         <expression>LEFT(BLANKVALUE({!varCase.Description}, '') &amp; ' || ' &amp; '--- Repeat at ' &amp; TEXT(NOW()) &amp; ': ' &amp; BLANKVALUE({!$Record.Message}, ''), 31000)</expression>
     </formulas>
+    <formulas>
+        <name>fxLog_Fault_Subject</name>
+        <dataType>String</dataType>
+        <expression>LEFT('[Flow Error] ' &amp; 'PEF_Batch_Apex_Error_Case_Creator' &amp; ' (' &amp; 'Critical' &amp; ')', 255)</expression>
+    </formulas>
     <interviewLabel>PEF Batch Apex Error Case Creator {!$Flow.CurrentDateTime}</interviewLabel>
     <label>PEF Batch Apex Error Case Creator</label>
     <loops>
@@ -318,6 +321,44 @@
             </value>
         </inputAssignments>
         <object>Case</object>
+    </recordCreates>
+    <recordCreates>
+        <name>Log_Fault</name>
+        <label>Log Fault</label>
+        <locationX>314</locationX>
+        <locationY>518</locationY>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>fxLog_Fault_Subject</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>ttLog_Fault_Details</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>High</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordLookups>
         <name>Get_Existing_Cases</name>
@@ -427,37 +468,22 @@
         <triggerType>PlatformEvent</triggerType>
     </start>
     <status>Active</status>
-    <subflows>
-        <name>Log_Fault</name>
-        <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
-        <flowName>AUT_Log_Flow_Error</flowName>
-        <inputAssignments>
-            <name>inFlowName</name>
-            <value>
-                <stringValue>PEF_Batch_Apex_Error_Case_Creator</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inErrorMessage</name>
-            <value>
-                <elementReference>$Flow.FaultMessage</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inSeverity</name>
-            <value>
-                <stringValue>Critical</stringValue>
-            </value>
-        </inputAssignments>
-    </subflows>
     <textTemplates>
         <name>ttDescription</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
         <text>Batch Apex job {!$Record.AsyncApexJobId} failed in phase {!$Record.Phase}.
 {!$Record.ExceptionType}: {!$Record.Message}
 {!$Record.StackTrace}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ttLog_Fault_Details</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Flow: PEF_Batch_Apex_Error_Case_Creator
+Severity: Critical
+Record / reference: 
+Logged at: {!$Flow.CurrentDateTime}
+Error message:
+{!$Flow.FaultMessage}</text>
     </textTemplates>
     <variables>
         <name>varSubject</name>

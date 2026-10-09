@@ -156,6 +156,17 @@ for api, f in flows.items():
             op = el.find(NS + "operator").text
             if fld.split(".")[-1] in PICKLISTS and op in ("Contains", "StartsWith", "EndsWith") and ("$Record" in fld or el.find(NS + "field") is not None):
                 errors.append(f"{api}: text operator {op} on picklist {fld}")
+    if f.kind == "pef" and any(e["tag"] == "subflows" for e in f.elements):
+        errors.append(f"{api}: Subflow element in platform event-triggered flow")
+    if re.search(r"<limit><numberValue>", xml):
+        errors.append(f"{api}: limit must be a plain integer")
+    for el in root.iter(NS + "fields"):
+        dt = el.find(NS + "dataType"); req = el.find(NS + "isRequired")
+        if dt is not None and dt.text == "Boolean" and req is not None and req.text == "false":
+            errors.append(f"{api}: boolean screen input with isRequired=false")
+    if "<pathType>AsyncAfterCommit</pathType>" in xml and re.search(r"<recordTriggerType>(Update|CreateAndUpdate)</recordTriggerType>", xml) \
+            and "<doesRequireRecordChangedToMeetCriteria>true" not in xml and "<operator>IsChanged</operator>" not in xml:
+        errors.append(f"{api}: async path on update needs 'changed' or IsChanged filter")
     if f.kind != "auto" and any(e["tag"] == "waits" for e in f.elements):
         errors.append(f"{api}: wait outside autolaunched")
     if f.kind == "screen" and not any(e["tag"] == "screens" for e in f.elements):

@@ -83,9 +83,7 @@
         <connector>
             <targetReference>Loop_Similar</targetReference>
         </connector>
-        <limit>
-            <numberValue>5.0</numberValue>
-        </limit>
+        <limit>5</limit>
         <sortOptions>
             <doesPutEmptyStringAndNullFirst>false</doesPutEmptyStringAndNullFirst>
             <sortField>ClosedDate</sortField>

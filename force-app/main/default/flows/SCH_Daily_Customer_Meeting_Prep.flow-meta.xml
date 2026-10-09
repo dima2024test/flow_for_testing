@@ -168,9 +168,7 @@
         <connector>
             <targetReference>Loop_Events</targetReference>
         </connector>
-        <limit>
-            <numberValue>30.0</numberValue>
-        </limit>
+        <limit>30</limit>
         <sortOptions>
             <doesPutEmptyStringAndNullFirst>false</doesPutEmptyStringAndNullFirst>
             <sortField>StartDateTime</sortField>

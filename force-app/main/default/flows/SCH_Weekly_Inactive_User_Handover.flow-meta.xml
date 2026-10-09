@@ -89,9 +89,7 @@
         <connector>
             <targetReference>Loop_Users</targetReference>
         </connector>
-        <limit>
-            <numberValue>20.0</numberValue>
-        </limit>
+        <limit>20</limit>
         <sortOptions>
             <doesPutEmptyStringAndNullFirst>false</doesPutEmptyStringAndNullFirst>
             <sortField>LastModifiedDate</sortField>

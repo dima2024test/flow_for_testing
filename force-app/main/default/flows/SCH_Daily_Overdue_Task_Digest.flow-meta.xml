@@ -112,9 +112,7 @@
         <connector>
             <targetReference>Loop_Overdue</targetReference>
         </connector>
-        <limit>
-            <numberValue>50.0</numberValue>
-        </limit>
+        <limit>50</limit>
         <sortOptions>
             <doesPutEmptyStringAndNullFirst>false</doesPutEmptyStringAndNullFirst>
             <sortField>ActivityDate</sortField>

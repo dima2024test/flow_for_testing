@@ -148,6 +148,16 @@
         <dataType>String</dataType>
         <expression>LEFT(BLANKVALUE({!Get_Rollup_Task.Description}, '') &amp; ' || ' &amp; {!fxLine}, 31000)</expression>
     </formulas>
+    <formulas>
+        <name>fxSub_Log_Error_Subject</name>
+        <dataType>String</dataType>
+        <expression>LEFT('[Flow Error] ' &amp; 'BatchApexRollup' &amp; ' (' &amp; 'Error' &amp; ')', 255)</expression>
+    </formulas>
+    <formulas>
+        <name>fxLog_Fault_Subject</name>
+        <dataType>String</dataType>
+        <expression>LEFT('[Flow Error] ' &amp; 'PEF_Batch_Error_Daily_Rollup' &amp; ' (' &amp; 'Critical' &amp; ')', 255)</expression>
+    </formulas>
     <interviewLabel>PEF Batch Error Daily Rollup {!$Flow.CurrentDateTime}</interviewLabel>
     <label>PEF Batch Error Daily Rollup</label>
     <loops>
@@ -227,6 +237,85 @@
             </value>
         </inputAssignments>
         <object>Task</object>
+    </recordCreates>
+    <recordCreates>
+        <name>Sub_Log_Error</name>
+        <label>Sub Log Error</label>
+        <locationX>578</locationX>
+        <locationY>1190</locationY>
+        <faultConnector>
+            <targetReference>Log_Fault</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>fxSub_Log_Error_Subject</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>ttSub_Log_Error_Details</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Log_Fault</name>
+        <label>Log Fault</label>
+        <locationX>314</locationX>
+        <locationY>350</locationY>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>fxLog_Fault_Subject</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>ttLog_Fault_Details</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>High</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordLookups>
         <name>Get_Rollup_Task</name>
@@ -384,60 +473,30 @@
         <triggerType>PlatformEvent</triggerType>
     </start>
     <status>Active</status>
-    <subflows>
-        <name>Sub_Log_Error</name>
-        <label>Sub Log Error</label>
-        <locationX>578</locationX>
-        <locationY>1190</locationY>
-        <flowName>AUT_Log_Flow_Error</flowName>
-        <inputAssignments>
-            <name>inFlowName</name>
-            <value>
-                <stringValue>BatchApexRollup</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inErrorMessage</name>
-            <value>
-                <elementReference>fxLine</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inSeverity</name>
-            <value>
-                <stringValue>Error</stringValue>
-            </value>
-        </inputAssignments>
-    </subflows>
-    <subflows>
-        <name>Log_Fault</name>
-        <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
-        <flowName>AUT_Log_Flow_Error</flowName>
-        <inputAssignments>
-            <name>inFlowName</name>
-            <value>
-                <stringValue>PEF_Batch_Error_Daily_Rollup</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inErrorMessage</name>
-            <value>
-                <elementReference>$Flow.FaultMessage</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inSeverity</name>
-            <value>
-                <stringValue>Critical</stringValue>
-            </value>
-        </inputAssignments>
-    </subflows>
     <textTemplates>
         <name>ttAlert</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
         <text>{!varErrorCount} batch Apex errors were logged today. Latest: {!fxLine}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ttSub_Log_Error_Details</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Flow: BatchApexRollup
+Severity: Error
+Record / reference: 
+Logged at: {!$Flow.CurrentDateTime}
+Error message:
+{!fxLine}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ttLog_Fault_Details</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Flow: PEF_Batch_Error_Daily_Rollup
+Severity: Critical
+Record / reference: 
+Logged at: {!$Flow.CurrentDateTime}
+Error message:
+{!$Flow.FaultMessage}</text>
     </textTemplates>
     <variables>
         <name>varErrorCount</name>

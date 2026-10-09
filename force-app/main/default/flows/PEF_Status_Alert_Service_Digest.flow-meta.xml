@@ -180,6 +180,16 @@
         <dataType>String</dataType>
         <expression>LEFT(BLANKVALUE({!Get_Digest_Task.Description}, '') &amp; ' || ' &amp; {!fxLine}, 31000)</expression>
     </formulas>
+    <formulas>
+        <name>fxSub_Log_Alert_Subject</name>
+        <dataType>String</dataType>
+        <expression>LEFT('[Flow Error] ' &amp; 'PlatformStatusAlert' &amp; ' (' &amp; 'Warning' &amp; ')', 255)</expression>
+    </formulas>
+    <formulas>
+        <name>fxLog_Fault_Subject</name>
+        <dataType>String</dataType>
+        <expression>LEFT('[Flow Error] ' &amp; 'PEF_Status_Alert_Service_Digest' &amp; ' (' &amp; 'Critical' &amp; ')', 255)</expression>
+    </formulas>
     <interviewLabel>PEF Status Alert Service Digest {!$Flow.CurrentDateTime}</interviewLabel>
     <label>PEF Status Alert Service Digest</label>
     <processMetadataValues>
@@ -228,6 +238,85 @@
             <field>Priority</field>
             <value>
                 <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Sub_Log_Alert</name>
+        <label>Sub Log Alert</label>
+        <locationX>314</locationX>
+        <locationY>1022</locationY>
+        <faultConnector>
+            <targetReference>Log_Fault</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>fxSub_Log_Alert_Subject</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>ttSub_Log_Alert_Details</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Log_Fault</name>
+        <label>Log Fault</label>
+        <locationX>314</locationX>
+        <locationY>686</locationY>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>fxLog_Fault_Subject</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>ttLog_Fault_Details</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>High</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -401,60 +490,30 @@
         <triggerType>PlatformEvent</triggerType>
     </start>
     <status>Active</status>
-    <subflows>
-        <name>Sub_Log_Alert</name>
-        <label>Sub Log Alert</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
-        <flowName>AUT_Log_Flow_Error</flowName>
-        <inputAssignments>
-            <name>inFlowName</name>
-            <value>
-                <stringValue>PlatformStatusAlert</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inErrorMessage</name>
-            <value>
-                <elementReference>fxLine</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inSeverity</name>
-            <value>
-                <stringValue>Warning</stringValue>
-            </value>
-        </inputAssignments>
-    </subflows>
-    <subflows>
-        <name>Log_Fault</name>
-        <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
-        <flowName>AUT_Log_Flow_Error</flowName>
-        <inputAssignments>
-            <name>inFlowName</name>
-            <value>
-                <stringValue>PEF_Status_Alert_Service_Digest</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inErrorMessage</name>
-            <value>
-                <elementReference>$Flow.FaultMessage</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inSeverity</name>
-            <value>
-                <stringValue>Critical</stringValue>
-            </value>
-        </inputAssignments>
-    </subflows>
     <textTemplates>
         <name>ttEscalation</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
         <text>{!varServicesToday} services reported platform status alerts today. Latest: {!fxLine}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ttSub_Log_Alert_Details</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Flow: PlatformStatusAlert
+Severity: Warning
+Record / reference: 
+Logged at: {!$Flow.CurrentDateTime}
+Error message:
+{!fxLine}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ttLog_Fault_Details</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Flow: PEF_Status_Alert_Service_Digest
+Severity: Critical
+Record / reference: 
+Logged at: {!$Flow.CurrentDateTime}
+Error message:
+{!$Flow.FaultMessage}</text>
     </textTemplates>
     <variables>
         <name>varServiceKey</name>

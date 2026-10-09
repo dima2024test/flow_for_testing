@@ -165,6 +165,16 @@
         <dataType>String</dataType>
         <expression>LEFT('[Flow Demo] Platform alert for inactive user ' &amp; {!fxUserLabel}, 255)</expression>
     </formulas>
+    <formulas>
+        <name>fxSub_Log_Alert_Subject</name>
+        <dataType>String</dataType>
+        <expression>LEFT('[Flow Error] ' &amp; 'PlatformStatusUserCheck' &amp; ' (' &amp; 'Warning' &amp; ')', 255)</expression>
+    </formulas>
+    <formulas>
+        <name>fxLog_Fault_Subject</name>
+        <dataType>String</dataType>
+        <expression>LEFT('[Flow Error] ' &amp; 'PEF_Status_Alert_Deactivated_User_Check' &amp; ' (' &amp; 'Critical' &amp; ')', 255)</expression>
+    </formulas>
     <interviewLabel>PEF Status Alert Deactivated User Check {!$Flow.CurrentDateTime}</interviewLabel>
     <label>PEF Status Alert Deactivated User Check</label>
     <loops>
@@ -301,6 +311,91 @@
         <object>Case</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
+    <recordCreates>
+        <name>Sub_Log_Alert</name>
+        <label>Sub Log Alert</label>
+        <locationX>314</locationX>
+        <locationY>1022</locationY>
+        <faultConnector>
+            <targetReference>Log_Fault</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>fxSub_Log_Alert_Subject</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>ttSub_Log_Alert_Details</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Get_Admin_User.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Log_Fault</name>
+        <label>Log Fault</label>
+        <locationX>314</locationX>
+        <locationY>350</locationY>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>fxLog_Fault_Subject</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>ttLog_Fault_Details</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>High</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
     <recordLookups>
         <name>Get_Alert_User</name>
         <label>Get Alert User</label>
@@ -423,68 +518,6 @@
         <triggerType>PlatformEvent</triggerType>
     </start>
     <status>Active</status>
-    <subflows>
-        <name>Sub_Log_Alert</name>
-        <label>Sub Log Alert</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
-        <flowName>AUT_Log_Flow_Error</flowName>
-        <inputAssignments>
-            <name>inFlowName</name>
-            <value>
-                <stringValue>PlatformStatusUserCheck</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inErrorMessage</name>
-            <value>
-                <elementReference>$Record.Subject</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inRecordId</name>
-            <value>
-                <elementReference>$Record.UserId</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inSeverity</name>
-            <value>
-                <stringValue>Warning</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inOwnerId</name>
-            <value>
-                <elementReference>Get_Admin_User.Id</elementReference>
-            </value>
-        </inputAssignments>
-    </subflows>
-    <subflows>
-        <name>Log_Fault</name>
-        <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
-        <flowName>AUT_Log_Flow_Error</flowName>
-        <inputAssignments>
-            <name>inFlowName</name>
-            <value>
-                <stringValue>PEF_Status_Alert_Deactivated_User_Check</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inErrorMessage</name>
-            <value>
-                <elementReference>$Flow.FaultMessage</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inSeverity</name>
-            <value>
-                <stringValue>Critical</stringValue>
-            </value>
-        </inputAssignments>
-    </subflows>
     <textTemplates>
         <name>ttCase</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
@@ -503,6 +536,26 @@ Status: {!$Record.StatusType}
 API error code: {!$Record.ApiErrorCode}
 Service: {!$Record.ServiceName} / {!$Record.ComponentName}
 Subject: {!$Record.Subject}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ttSub_Log_Alert_Details</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Flow: PlatformStatusUserCheck
+Severity: Warning
+Record / reference: {!$Record.UserId}
+Logged at: {!$Flow.CurrentDateTime}
+Error message:
+{!$Record.Subject}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ttLog_Fault_Details</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Flow: PEF_Status_Alert_Deactivated_User_Check
+Severity: Critical
+Record / reference: 
+Logged at: {!$Flow.CurrentDateTime}
+Error message:
+{!$Flow.FaultMessage}</text>
     </textTemplates>
     <variables>
         <name>varOpp</name>

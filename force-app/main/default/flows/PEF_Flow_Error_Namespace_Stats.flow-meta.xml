@@ -181,6 +181,16 @@
         <dataType>Boolean</dataType>
         <expression>AND({!varTotal} &gt;= 10, {!fxShare} &gt;= 50, MOD({!varMine}, 10) = 0)</expression>
     </formulas>
+    <formulas>
+        <name>fxSub_Log_Flow_Error_Subject</name>
+        <dataType>String</dataType>
+        <expression>LEFT('[Flow Error] ' &amp; BLANKVALUE({!$Record.FlowApiName}, '') &amp; ' (' &amp; 'Error' &amp; ')', 255)</expression>
+    </formulas>
+    <formulas>
+        <name>fxLog_Fault_Subject</name>
+        <dataType>String</dataType>
+        <expression>LEFT('[Flow Error] ' &amp; 'PEF_Flow_Error_Namespace_Stats' &amp; ' (' &amp; 'Critical' &amp; ')', 255)</expression>
+    </formulas>
     <interviewLabel>PEF Flow Error Namespace Stats {!$Flow.CurrentDateTime}</interviewLabel>
     <label>PEF Flow Error Namespace Stats</label>
     <loops>
@@ -262,6 +272,91 @@
             <field>Status</field>
             <value>
                 <stringValue>In Progress</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Sub_Log_Flow_Error</name>
+        <label>Sub Log Flow Error</label>
+        <locationX>578</locationX>
+        <locationY>1526</locationY>
+        <faultConnector>
+            <targetReference>Log_Fault</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>fxSub_Log_Flow_Error_Subject</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>ttSub_Log_Flow_Error_Details</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Get_Admin_User.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Log_Fault</name>
+        <label>Log Fault</label>
+        <locationX>314</locationX>
+        <locationY>350</locationY>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>fxLog_Fault_Subject</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>ttLog_Fault_Details</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>High</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
             </value>
         </inputAssignments>
         <object>Task</object>
@@ -429,73 +524,31 @@
         <triggerType>PlatformEvent</triggerType>
     </start>
     <status>Active</status>
-    <subflows>
-        <name>Sub_Log_Flow_Error</name>
-        <label>Sub Log Flow Error</label>
-        <locationX>578</locationX>
-        <locationY>1526</locationY>
-        <flowName>AUT_Log_Flow_Error</flowName>
-        <inputAssignments>
-            <name>inFlowName</name>
-            <value>
-                <elementReference>$Record.FlowApiName</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inErrorMessage</name>
-            <value>
-                <elementReference>fxLine</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inRecordId</name>
-            <value>
-                <elementReference>$Record.InterviewGuid</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inSeverity</name>
-            <value>
-                <stringValue>Error</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inOwnerId</name>
-            <value>
-                <elementReference>Get_Admin_User.Id</elementReference>
-            </value>
-        </inputAssignments>
-    </subflows>
-    <subflows>
-        <name>Log_Fault</name>
-        <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
-        <flowName>AUT_Log_Flow_Error</flowName>
-        <inputAssignments>
-            <name>inFlowName</name>
-            <value>
-                <stringValue>PEF_Flow_Error_Namespace_Stats</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inErrorMessage</name>
-            <value>
-                <elementReference>$Flow.FaultMessage</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inSeverity</name>
-            <value>
-                <stringValue>Critical</stringValue>
-            </value>
-        </inputAssignments>
-    </subflows>
     <textTemplates>
         <name>ttDominant</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
         <text>Namespace {!fxNamespace} caused {!varMine} of {!varTotal} tracked flow errors ({!fxShare}%).
 Latest: {!fxLine}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ttSub_Log_Flow_Error_Details</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Flow: {!$Record.FlowApiName}
+Severity: Error
+Record / reference: {!$Record.InterviewGuid}
+Logged at: {!$Flow.CurrentDateTime}
+Error message:
+{!fxLine}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ttLog_Fault_Details</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Flow: PEF_Flow_Error_Namespace_Stats
+Severity: Critical
+Record / reference: 
+Logged at: {!$Flow.CurrentDateTime}
+Error message:
+{!$Flow.FaultMessage}</text>
     </textTemplates>
     <variables>
         <name>varTotal</name>

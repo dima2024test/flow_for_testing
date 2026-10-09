@@ -121,9 +121,7 @@
         <connector>
             <targetReference>Loop_Cases</targetReference>
         </connector>
-        <limit>
-            <numberValue>200.0</numberValue>
-        </limit>
+        <limit>200</limit>
         <sortOptions>
             <doesPutEmptyStringAndNullFirst>false</doesPutEmptyStringAndNullFirst>
             <sortField>CreatedDate</sortField>

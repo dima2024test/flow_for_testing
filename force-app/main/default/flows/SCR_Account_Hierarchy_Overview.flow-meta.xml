@@ -263,7 +263,7 @@
             </defaultValue>
             <fieldText>Create a hierarchy review task</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>

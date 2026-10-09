@@ -88,8 +88,9 @@ Flow работают с реальными данными орга, поэто�
 
 ## Общие паттерны
 
-- **Fault path**: почти каждый DML, Get Records, Action и Wait имеет fault connector на subflow `AUT_Log_Flow_Error` с передачей `$Flow.FaultMessage`. В screen flow после логирования показывается экран ошибки. Before-save flow fault path не нужен.
-- **Вложенные flow**: autolaunched-утилиты (health score, pipeline summary, activity snapshot, normalizer, lead scoring, warranty check, duplicate finder, data quality report и др.) вызываются из всех типов flow. Глубина вложенности доходит до 4 уровней.
+- **Fault path**: почти каждый DML, Get Records, Action и Wait имеет fault connector на логирование `$Flow.FaultMessage`: subflow `AUT_Log_Flow_Error`, а в platform-event flow — прямое создание Task. В screen flow после логирования показывается экран ошибки. Before-save flow fault path не нужен.
+- **Вложенные flow**: autolaunched-утилиты (health score, pipeline summary, activity snapshot, normalizer, lead scoring, warranty check, duplicate finder, data quality report и др.) вызываются из autolaunched, record-triggered, scheduled и screen flow. Глубина вложенности доходит до 4 уровней.
+- **Platform-event flow не могут содержать Subflow**: это ограничение платформы. Поэтому вместо вызова логгера они сами создают Task `[Flow Error] …` (в том числе в fault path).
 - **Wait (Pause)** есть только в autolaunched flow: {waits}. Другие типы его не поддерживают. Эти flow не вызываются как subflow; их запускают через REST, Apex или из другого autolaunched flow.
 - В record-triggered flow вместо Wait используются **Scheduled Paths** (в том числе с отрицательным смещением, «за N дней до») и **Async Path**. Есть before-save, after-save и before-delete flow; `$Record__Prior` используется в after-save update flow.
 - **Platform-event flow** подписаны на стандартные события `BatchApexErrorEvent`, `FlowExecutionErrorEvent` и `PlatformStatusAlertEvent`.
@@ -114,7 +115,8 @@ python3 flowgen/make_readme.py .             # обновить README и packag
 - входы и выходы subflow;
 - число элементов (10–20);
 - picklist в формулах и условиях, `BR()`, ссылки на loop-элементы в формулах;
-- Wait вне autolaunched flow.
+- Wait вне autolaunched flow, Subflow в platform-event flow;
+- checkbox-поля на экранах (`isRequired` должен быть true), `limit` в сортировке, async path на update без условия изменения.
 '''
 open(os.path.join(PACK, "README.md"), "w").write(readme)
 print("README + package.xml:", len(names), "flows")

@@ -360,6 +360,16 @@
         <dataType>String</dataType>
         <expression>'[Flow Demo] Batch error category: ' &amp; {!varCategory}</expression>
     </formulas>
+    <formulas>
+        <name>fxSub_Log_Batch_Error_Subject</name>
+        <dataType>String</dataType>
+        <expression>LEFT('[Flow Error] ' &amp; 'BatchApexKeyword' &amp; ' (' &amp; 'Error' &amp; ')', 255)</expression>
+    </formulas>
+    <formulas>
+        <name>fxLog_Fault_Subject</name>
+        <dataType>String</dataType>
+        <expression>LEFT('[Flow Error] ' &amp; 'PEF_Batch_Error_Keyword_Classifier' &amp; ' (' &amp; 'Critical' &amp; ')', 255)</expression>
+    </formulas>
     <interviewLabel>PEF Batch Error Keyword Classifier {!$Flow.CurrentDateTime}</interviewLabel>
     <label>PEF Batch Error Keyword Classifier</label>
     <loops>
@@ -429,6 +439,91 @@
             <field>Priority</field>
             <value>
                 <elementReference>varPriority</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Sub_Log_Batch_Error</name>
+        <label>Sub Log Batch Error</label>
+        <locationX>314</locationX>
+        <locationY>1694</locationY>
+        <faultConnector>
+            <targetReference>Log_Fault</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>fxSub_Log_Batch_Error_Subject</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>ttSub_Log_Batch_Error_Details</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Get_Admin_User.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Log_Fault</name>
+        <label>Log Fault</label>
+        <locationX>314</locationX>
+        <locationY>686</locationY>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>fxLog_Fault_Subject</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>ttLog_Fault_Details</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>High</stringValue>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -557,68 +652,6 @@
         <triggerType>PlatformEvent</triggerType>
     </start>
     <status>Active</status>
-    <subflows>
-        <name>Sub_Log_Batch_Error</name>
-        <label>Sub Log Batch Error</label>
-        <locationX>314</locationX>
-        <locationY>1694</locationY>
-        <flowName>AUT_Log_Flow_Error</flowName>
-        <inputAssignments>
-            <name>inFlowName</name>
-            <value>
-                <stringValue>BatchApexKeyword</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inErrorMessage</name>
-            <value>
-                <elementReference>$Record.Message</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inRecordId</name>
-            <value>
-                <elementReference>$Record.AsyncApexJobId</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inSeverity</name>
-            <value>
-                <stringValue>Error</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inOwnerId</name>
-            <value>
-                <elementReference>Get_Admin_User.Id</elementReference>
-            </value>
-        </inputAssignments>
-    </subflows>
-    <subflows>
-        <name>Log_Fault</name>
-        <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
-        <flowName>AUT_Log_Flow_Error</flowName>
-        <inputAssignments>
-            <name>inFlowName</name>
-            <value>
-                <stringValue>PEF_Batch_Error_Keyword_Classifier</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inErrorMessage</name>
-            <value>
-                <elementReference>$Flow.FaultMessage</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inSeverity</name>
-            <value>
-                <stringValue>Critical</stringValue>
-            </value>
-        </inputAssignments>
-    </subflows>
     <textTemplates>
         <name>ttCategory</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
@@ -627,6 +660,26 @@ Advice: {!varAdvice}
 First seen in job {!$Record.AsyncApexJobId} (phase {!$Record.Phase}):
 {!$Record.ExceptionType}: {!$Record.Message}
 {!$Record.StackTrace}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ttSub_Log_Batch_Error_Details</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Flow: BatchApexKeyword
+Severity: Error
+Record / reference: {!$Record.AsyncApexJobId}
+Logged at: {!$Flow.CurrentDateTime}
+Error message:
+{!$Record.Message}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ttLog_Fault_Details</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Flow: PEF_Batch_Error_Keyword_Classifier
+Severity: Critical
+Record / reference: 
+Logged at: {!$Flow.CurrentDateTime}
+Error message:
+{!$Flow.FaultMessage}</text>
     </textTemplates>
     <variables>
         <name>varCategory</name>

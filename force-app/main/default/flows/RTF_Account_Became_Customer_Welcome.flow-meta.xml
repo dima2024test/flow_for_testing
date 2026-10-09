@@ -115,9 +115,7 @@
         <connector>
             <targetReference>Loop_Contacts</targetReference>
         </connector>
-        <limit>
-            <numberValue>5.0</numberValue>
-        </limit>
+        <limit>5</limit>
         <sortOptions>
             <doesPutEmptyStringAndNullFirst>false</doesPutEmptyStringAndNullFirst>
             <sortField>CreatedDate</sortField>

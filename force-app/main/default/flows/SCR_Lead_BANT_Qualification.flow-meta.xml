@@ -649,7 +649,7 @@
             </defaultValue>
             <fieldText>Apply rating to other open leads of this company</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>

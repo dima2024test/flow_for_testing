@@ -95,7 +95,8 @@ def opp_amount_audit():
               {"outTotalPipeline": "varPipeline"})
     log_fault(f, record=R("$Record.Id"))
     f.start("Dec_What_Changed", obj="Opportunity", trigger="RecordAfterSave", record_trigger="Update",
-            filters=[("IsClosed", "EqualTo", False)], paths=[{"async": "Dec_Has_Account"}])
+            filters=[("IsClosed", "EqualTo", False), ("Amount", "IsChanged", True), ("Probability", "IsChanged", True)],
+            filter_logic="1 AND (2 OR 3)", paths=[{"async": "Dec_Has_Account"}])
     return f
 
 

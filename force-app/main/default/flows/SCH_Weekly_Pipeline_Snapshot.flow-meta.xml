@@ -158,9 +158,7 @@
         <connector>
             <targetReference>Loop_Top_Deals</targetReference>
         </connector>
-        <limit>
-            <numberValue>10.0</numberValue>
-        </limit>
+        <limit>10</limit>
         <sortOptions>
             <doesPutEmptyStringAndNullFirst>false</doesPutEmptyStringAndNullFirst>
             <sortField>Amount</sortField>

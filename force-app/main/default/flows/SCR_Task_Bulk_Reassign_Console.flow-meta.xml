@@ -432,7 +432,7 @@
             </defaultValue>
             <fieldText>Only High priority tasks</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
         </fields>
         <fields>
             <name>Reassign_Reason</name>

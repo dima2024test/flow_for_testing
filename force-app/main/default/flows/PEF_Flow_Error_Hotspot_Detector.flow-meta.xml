@@ -179,6 +179,16 @@
         <dataType>String</dataType>
         <expression>LEFT('[Flow Demo] Error hotspot: ' &amp; {!$Record.FlowApiName} &amp; ' / ' &amp; BLANKVALUE({!$Record.ElementApiName}, '?'), 255)</expression>
     </formulas>
+    <formulas>
+        <name>fxSub_Log_Error_Subject</name>
+        <dataType>String</dataType>
+        <expression>LEFT('[Flow Error] ' &amp; BLANKVALUE({!$Record.FlowApiName}, '') &amp; ' (' &amp; 'Error' &amp; ')', 255)</expression>
+    </formulas>
+    <formulas>
+        <name>fxLog_Fault_Subject</name>
+        <dataType>String</dataType>
+        <expression>LEFT('[Flow Error] ' &amp; 'PEF_Flow_Error_Hotspot_Detector' &amp; ' (' &amp; 'Critical' &amp; ')', 255)</expression>
+    </formulas>
     <interviewLabel>PEF Flow Error Hotspot Detector {!$Flow.CurrentDateTime}</interviewLabel>
     <label>PEF Flow Error Hotspot Detector</label>
     <loops>
@@ -248,6 +258,85 @@
             <field>Status</field>
             <value>
                 <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Sub_Log_Error</name>
+        <label>Sub Log Error</label>
+        <locationX>314</locationX>
+        <locationY>1022</locationY>
+        <faultConnector>
+            <targetReference>Log_Fault</targetReference>
+        </faultConnector>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>fxSub_Log_Error_Subject</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>ttSub_Log_Error_Details</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Log_Fault</name>
+        <label>Log Fault</label>
+        <locationX>314</locationX>
+        <locationY>350</locationY>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>fxLog_Fault_Subject</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>ttLog_Fault_Details</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>High</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
             </value>
         </inputAssignments>
         <object>Task</object>
@@ -332,68 +421,32 @@
         <triggerType>PlatformEvent</triggerType>
     </start>
     <status>Active</status>
-    <subflows>
-        <name>Sub_Log_Error</name>
-        <label>Sub Log Error</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
-        <flowName>AUT_Log_Flow_Error</flowName>
-        <inputAssignments>
-            <name>inFlowName</name>
-            <value>
-                <elementReference>$Record.FlowApiName</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inErrorMessage</name>
-            <value>
-                <elementReference>$Record.ErrorMessage</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inRecordId</name>
-            <value>
-                <elementReference>$Record.ElementApiName</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inSeverity</name>
-            <value>
-                <stringValue>Error</stringValue>
-            </value>
-        </inputAssignments>
-    </subflows>
-    <subflows>
-        <name>Log_Fault</name>
-        <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
-        <flowName>AUT_Log_Flow_Error</flowName>
-        <inputAssignments>
-            <name>inFlowName</name>
-            <value>
-                <stringValue>PEF_Flow_Error_Hotspot_Detector</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inErrorMessage</name>
-            <value>
-                <elementReference>$Flow.FaultMessage</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inSeverity</name>
-            <value>
-                <stringValue>Critical</stringValue>
-            </value>
-        </inputAssignments>
-    </subflows>
     <textTemplates>
         <name>ttHotspot</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
         <text>Element {!$Record.ElementApiName} in flow {!$Record.FlowApiName} failed {!varHits} times in 7 days.
 Recent occurrences: {!varDates}
 Latest error: {!$Record.ErrorMessage}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ttSub_Log_Error_Details</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Flow: {!$Record.FlowApiName}
+Severity: Error
+Record / reference: {!$Record.ElementApiName}
+Logged at: {!$Flow.CurrentDateTime}
+Error message:
+{!$Record.ErrorMessage}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ttLog_Fault_Details</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Flow: PEF_Flow_Error_Hotspot_Detector
+Severity: Critical
+Record / reference: 
+Logged at: {!$Flow.CurrentDateTime}
+Error message:
+{!$Flow.FaultMessage}</text>
     </textTemplates>
     <variables>
         <name>varHits</name>

@@ -152,9 +152,7 @@
         <connector>
             <targetReference>Loop_Leads</targetReference>
         </connector>
-        <limit>
-            <numberValue>25.0</numberValue>
-        </limit>
+        <limit>25</limit>
         <sortOptions>
             <doesPutEmptyStringAndNullFirst>false</doesPutEmptyStringAndNullFirst>
             <sortField>CreatedDate</sortField>

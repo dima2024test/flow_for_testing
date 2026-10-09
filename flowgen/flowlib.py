@@ -199,6 +199,10 @@ class Flow:
         return self._el("loops", name, self.lbl(name), body, [nxt, done])
 
     def subflow(self, name, flow, inputs, outputs=None, nxt=None):
+        if self.kind == "pef":
+            # Platform event-triggered flows cannot contain Subflow elements: inline the logger as a Task insert.
+            assert flow == "AUT_Log_Flow_Error" and not outputs, f"{self.api}: subflow {flow} not allowed in PE flow"
+            return self._inline_log(name, inputs, nxt)
         body = conn("connector", nxt) + tag("flowName", flow)
         body += "".join(tag("inputAssignments", tag("name", k) + tag("value", value_xml(v))) for k, v in inputs.items())
         for k, v in (outputs or {}).items():
@@ -206,6 +210,25 @@ class Flow:
         el = self._el("subflows", name, self.lbl(name), body, [nxt])
         self.elements[-1]["subflow"] = (flow, list(inputs), list((outputs or {}).keys()))
         return el
+
+    def _inline_log(self, name, inputs, nxt):
+        def fx(v):
+            if isinstance(v, R):
+                return "BLANKVALUE({!" + v.ref + "}, '')"
+            return "'" + str(v).replace("\\", "\\\\").replace("'", "\\'") + "'"
+        def tt(v):
+            return "{!" + v.ref + "}" if isinstance(v, R) else str(v)
+        sev = inputs.get("inSeverity", "Error")
+        subj = self.formula(f"fx{name}_Subject", "String",
+                            f"LEFT('[Flow Error] ' & {fx(inputs.get('inFlowName', self.api))} & ' (' & {fx(sev)} & ')', 255)")
+        desc = self.tt(f"tt{name}_Details", f"Flow: {tt(inputs.get('inFlowName', self.api))}\nSeverity: {tt(sev)}\n"
+                                            f"Record / reference: {tt(inputs.get('inRecordId', ''))}\nLogged at: {{!$Flow.CurrentDateTime}}\n\n"
+                                            f"Error message:\n{tt(inputs.get('inErrorMessage', ''))}")
+        fields = {"Subject": subj, "Description": desc, "Priority": "High" if sev == "Critical" else "Normal",
+                  "Status": "Not Started", "ActivityDate": R("$Flow.CurrentDate")}
+        if isinstance(inputs.get("inOwnerId"), R):
+            fields["OwnerId"] = inputs["inOwnerId"]
+        return self.create(name, "Task", fields, nxt=nxt, fault=None if name == "Log_Fault" else "Log_Fault")
 
     def email(self, name, to, subject, body_v, nxt=None, fault=None):
         body = tag("actionName", "emailSimple") + tag("actionType", "emailSimple") + conn("connector", nxt) + conn("faultConnector", fault)
@@ -236,7 +259,7 @@ class Flow:
     def sort_coll(self, name, coll, field, order, nxt, limit=None):
         body = tag("collectionProcessorType", "SortCollectionProcessor") + tag("collectionReference", coll) + conn("connector", nxt)
         if limit:
-            body += tag("limit", value_xml(limit))
+            body += tag("limit", str(int(limit)))
         body += tag("sortOptions", tag("doesPutEmptyStringAndNullFirst", "false") + tag("sortField", field) + tag("sortOrder", order))
         return self._el("collectionProcessors", name, self.lbl(name), body, [nxt], subtype="SortCollectionProcessor")
 
@@ -247,6 +270,8 @@ class Flow:
 
     def f_input(self, name, label, dt, required=False, scale=None, default=None):
         self._reg(name)
+        if dt == "Boolean":
+            required = True  # platform rule: checkbox inputs must have isRequired=true
         x = tag("name", name) + tag("dataType", dt)
         if default is not None:
             x += tag("defaultValue", value_xml(default))

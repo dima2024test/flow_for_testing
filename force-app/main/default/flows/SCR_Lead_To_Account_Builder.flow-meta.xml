@@ -427,7 +427,7 @@
             </defaultValue>
             <fieldText>Create an opportunity</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
         </fields>
         <fields>
             <name>Opp_Amount</name>

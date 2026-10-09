@@ -106,7 +106,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Sub_Reassign_Open_Tasks</targetReference>
+                <targetReference>Upd_Reassign_Open_Tasks</targetReference>
             </connector>
             <label>Deactivated</label>
         </rules>
@@ -196,6 +196,11 @@
         <name>fxSubject</name>
         <dataType>String</dataType>
         <expression>LEFT('[Flow Demo] Fix flow error: ' &amp; {!$Record.FlowApiName}, 255)</expression>
+    </formulas>
+    <formulas>
+        <name>fxLog_Fault_Subject</name>
+        <dataType>String</dataType>
+        <expression>LEFT('[Flow Error] ' &amp; 'PEF_Flow_Error_Interview_User_Workload' &amp; ' (' &amp; 'Error' &amp; ')', 255)</expression>
     </formulas>
     <interviewLabel>PEF Flow Error Interview User Workload {!$Flow.CurrentDateTime}</interviewLabel>
     <label>PEF Flow Error Interview User Workload</label>
@@ -304,6 +309,44 @@
             <field>OwnerId</field>
             <value>
                 <elementReference>varOwnerId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Priority</field>
+            <value>
+                <stringValue>Normal</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Log_Fault</name>
+        <label>Log Fault</label>
+        <locationX>314</locationX>
+        <locationY>350</locationY>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <elementReference>fxLog_Fault_Subject</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Description</field>
+            <value>
+                <elementReference>ttLog_Fault_Details</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -439,6 +482,40 @@
         <object>Task</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordUpdates>
+        <name>Upd_Reassign_Open_Tasks</name>
+        <label>Upd Reassign Open Tasks</label>
+        <locationX>50</locationX>
+        <locationY>854</locationY>
+        <connector>
+            <targetReference>Create_Handover_Task</targetReference>
+        </connector>
+        <faultConnector>
+            <targetReference>Log_Fault</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>OwnerId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Interview_User.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>IsClosed</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>OwnerId</field>
+            <value>
+                <elementReference>Get_Admin_User.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+    </recordUpdates>
     <start>
         <locationX>50</locationX>
         <locationY>0</locationY>
@@ -449,63 +526,6 @@
         <triggerType>PlatformEvent</triggerType>
     </start>
     <status>Active</status>
-    <subflows>
-        <name>Sub_Reassign_Open_Tasks</name>
-        <label>Sub Reassign Open Tasks</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
-        <connector>
-            <targetReference>Create_Handover_Task</targetReference>
-        </connector>
-        <flowName>AUT_Task_Bulk_Reassign</flowName>
-        <inputAssignments>
-            <name>inFromUserId</name>
-            <value>
-                <elementReference>Get_Interview_User.Id</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inToUserId</name>
-            <value>
-                <elementReference>Get_Admin_User.Id</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inHighOnly</name>
-            <value>
-                <booleanValue>false</booleanValue>
-            </value>
-        </inputAssignments>
-        <outputAssignments>
-            <assignToReference>varMoved</assignToReference>
-            <name>outMovedCount</name>
-        </outputAssignments>
-    </subflows>
-    <subflows>
-        <name>Log_Fault</name>
-        <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
-        <flowName>AUT_Log_Flow_Error</flowName>
-        <inputAssignments>
-            <name>inFlowName</name>
-            <value>
-                <stringValue>PEF_Flow_Error_Interview_User_Workload</stringValue>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inErrorMessage</name>
-            <value>
-                <elementReference>$Flow.FaultMessage</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>inSeverity</name>
-            <value>
-                <stringValue>Error</stringValue>
-            </value>
-        </inputAssignments>
-    </subflows>
     <textTemplates>
         <name>ttFix</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
@@ -519,7 +539,17 @@ User workload: {!varOpenCount} open / {!varOverdue} overdue tasks.</text>
         <name>ttHandover</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
         <text>User {!Get_Interview_User.Username} is deactivated but started flow {!$Record.FlowApiName}, which failed: {!$Record.ErrorMessage}
-{!varMoved} open tasks were reassigned to you.</text>
+All of their open tasks were reassigned to you.</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ttLog_Fault_Details</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Flow: PEF_Flow_Error_Interview_User_Workload
+Severity: Error
+Record / reference: 
+Logged at: {!$Flow.CurrentDateTime}
+Error message:
+{!$Flow.FaultMessage}</text>
     </textTemplates>
     <variables>
         <name>varOwnerId</name>
@@ -541,17 +571,6 @@ User workload: {!varOpenCount} open / {!varOverdue} overdue tasks.</text>
     </variables>
     <variables>
         <name>varOverdue</name>
-        <dataType>Number</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <scale>0</scale>
-        <value>
-            <numberValue>0.0</numberValue>
-        </value>
-    </variables>
-    <variables>
-        <name>varMoved</name>
         <dataType>Number</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>

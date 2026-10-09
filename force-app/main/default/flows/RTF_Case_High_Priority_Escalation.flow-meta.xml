@@ -82,9 +82,7 @@
         <connector>
             <targetReference>Loop_Related_Cases</targetReference>
         </connector>
-        <limit>
-            <numberValue>10.0</numberValue>
-        </limit>
+        <limit>10</limit>
         <sortOptions>
             <doesPutEmptyStringAndNullFirst>false</doesPutEmptyStringAndNullFirst>
             <sortField>CreatedDate</sortField>

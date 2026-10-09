@@ -499,7 +499,7 @@
             </defaultValue>
             <fieldText>Competitor product</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
         </fields>
         <fields>
             <name>Schedule_Install</name>
@@ -509,7 +509,7 @@
             </defaultValue>
             <fieldText>Create an installation task</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>

@@ -346,7 +346,7 @@
             </defaultValue>
             <fieldText>Also create a new-business opportunity</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <isRequired>true</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>

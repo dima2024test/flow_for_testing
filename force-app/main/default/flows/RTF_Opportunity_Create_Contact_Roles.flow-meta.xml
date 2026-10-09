@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Existing_Count</name>
         <label>Asg Existing Count</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varExistingRoles</assignToReference>
             <operator>AssignCount</operator>
@@ -20,8 +20,8 @@
     <assignments>
         <name>Asg_Role</name>
         <label>Asg Role</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varRole.OpportunityId</assignToReference>
             <operator>Assign</operator>
@@ -65,8 +65,8 @@
         <name>Filter_Senior_Contacts</name>
         <elementSubtype>FilterCollectionProcessor</elementSubtype>
         <label>Filter Senior Contacts</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>currentItem_Filter_Senior_Contacts</assignNextValueToReference>
         <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Account_Contacts</collectionReference>
@@ -106,8 +106,8 @@
     <decisions>
         <name>Dec_Roles_Exist</name>
         <label>Dec Roles Exist</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Get_Account_Contacts</targetReference>
         </defaultConnector>
@@ -128,8 +128,8 @@
     <decisions>
         <name>Dec_Any_Roles</name>
         <label>Dec Any Roles</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Role_Review_Task</targetReference>
         </defaultConnector>
@@ -153,8 +153,8 @@
     <decisions>
         <name>Dec_Many_Deals</name>
         <label>Dec Many Deals</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Normal Load</defaultConnectorLabel>
         <rules>
             <name>Many_Open_Deals</name>
@@ -184,8 +184,8 @@
     <loops>
         <name>Loop_Senior_Contacts</name>
         <label>Loop Senior Contacts</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varContact</assignNextValueToReference>
         <collectionReference>Filter_Senior_Contacts</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -205,7 +205,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -218,9 +218,10 @@
     <recordCreates>
         <name>Create_Contact_Roles</name>
         <label>Create Contact Roles</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colRoles</inputReference>
@@ -228,9 +229,10 @@
     <recordCreates>
         <name>Create_Role_Review_Task</name>
         <label>Create Role Review Task</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -275,9 +277,10 @@
     <recordCreates>
         <name>Create_Capacity_Task</name>
         <label>Create Capacity Task</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -328,8 +331,8 @@
     <recordLookups>
         <name>Get_Existing_Roles</name>
         <label>Get Existing Roles</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Existing_Count</targetReference>
@@ -352,13 +355,14 @@
     <recordLookups>
         <name>Get_Account_Contacts</name>
         <label>Get Account Contacts</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Filter_Senior_Contacts</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -376,7 +380,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Existing_Roles</targetReference>
@@ -403,8 +407,8 @@
     <subflows>
         <name>Sub_Pipeline_Summary</name>
         <label>Sub Pipeline Summary</label>
-        <locationX>314</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Many_Deals</targetReference>
         </connector>
@@ -437,8 +441,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>578</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

@@ -3,11 +3,12 @@
     <actionCalls>
         <name>Send_Handover_Email</name>
         <label>Send Handover Email</label>
-        <locationX>314</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -35,8 +36,8 @@
     <assignments>
         <name>Asg_User_Count</name>
         <label>Asg User Count</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varUserCount</assignToReference>
             <operator>AssignCount</operator>
@@ -51,8 +52,8 @@
     <assignments>
         <name>Asg_Tally</name>
         <label>Asg Tally</label>
-        <locationX>50</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varTotalMoved</assignToReference>
             <operator>Add</operator>
@@ -82,8 +83,8 @@
         <name>Sort_Users</name>
         <elementSubtype>SortCollectionProcessor</elementSubtype>
         <label>Sort Users</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionProcessorType>SortCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Inactive_Users</collectionReference>
         <connector>
@@ -99,8 +100,8 @@
     <decisions>
         <name>Dec_Admin_Found</name>
         <label>Dec Admin Found</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>No Admin</defaultConnectorLabel>
         <rules>
             <name>Found</name>
@@ -121,8 +122,8 @@
     <decisions>
         <name>Dec_Any_Users</name>
         <label>Dec Any Users</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>No Deactivations</defaultConnectorLabel>
         <rules>
             <name>Has_Users</name>
@@ -143,8 +144,8 @@
     <decisions>
         <name>Dec_Anything_Processed</name>
         <label>Dec Anything Processed</label>
-        <locationX>314</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Nothing</defaultConnectorLabel>
         <rules>
             <name>Processed</name>
@@ -179,8 +180,8 @@
     <loops>
         <name>Loop_Users</name>
         <label>Loop Users</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varUser</assignNextValueToReference>
         <collectionReference>Get_Inactive_Users</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -200,7 +201,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -213,12 +214,13 @@
     <recordCreates>
         <name>Create_Handover_Task</name>
         <label>Create Handover Task</label>
-        <locationX>314</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Handover_Email</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -263,8 +265,8 @@
     <recordLookups>
         <name>Get_Admin_Profile</name>
         <label>Get Admin Profile</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Admin_User</targetReference>
@@ -287,13 +289,14 @@
     <recordLookups>
         <name>Get_Admin_User</name>
         <label>Get Admin User</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Admin_Found</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -320,13 +323,14 @@
     <recordLookups>
         <name>Get_Inactive_Users</name>
         <label>Get Inactive Users</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_User_Count</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -358,12 +362,13 @@
     <recordUpdates>
         <name>Update_User_Opportunities</name>
         <label>Update User Opportunities</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Asg_Tally</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -390,7 +395,7 @@
         <object>Opportunity</object>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Admin_Profile</targetReference>
@@ -406,8 +411,8 @@
     <subflows>
         <name>Sub_Reassign_Tasks</name>
         <label>Sub Reassign Tasks</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Update_User_Opportunities</targetReference>
         </connector>
@@ -442,8 +447,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

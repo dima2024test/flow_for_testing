@@ -3,11 +3,12 @@
     <actionCalls>
         <name>Send_Owner_Email</name>
         <label>Send Owner Email</label>
-        <locationX>50</locationX>
-        <locationY>2366</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -35,8 +36,8 @@
     <assignments>
         <name>Asg_Contact</name>
         <label>Asg Contact</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varContactId</assignToReference>
             <operator>Assign</operator>
@@ -51,8 +52,8 @@
     <assignments>
         <name>Asg_Raise_Priority</name>
         <label>Asg Raise Priority</label>
-        <locationX>50</locationX>
-        <locationY>2198</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varTask.Priority</assignToReference>
             <operator>Assign</operator>
@@ -81,8 +82,8 @@
     <assignments>
         <name>Asg_Progressed</name>
         <label>Asg Progressed</label>
-        <locationX>314</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outResult</assignToReference>
             <operator>Assign</operator>
@@ -94,8 +95,8 @@
     <assignments>
         <name>Asg_Done_Closed</name>
         <label>Asg Done Closed</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outResult</assignToReference>
             <operator>Assign</operator>
@@ -107,8 +108,8 @@
     <decisions>
         <name>Dec_Is_Open</name>
         <label>Dec Is Open</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Done_Closed</targetReference>
         </defaultConnector>
@@ -139,8 +140,8 @@
     <decisions>
         <name>Dec_Stage_Progressed</name>
         <label>Dec Stage Progressed</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Followup_Task</targetReference>
         </defaultConnector>
@@ -156,6 +157,7 @@
                 </rightValue>
             </conditions>
             <connector>
+                <isGoTo>true</isGoTo>
                 <targetReference>Asg_Done_Closed</targetReference>
             </connector>
             <label>Closed Meanwhile</label>
@@ -198,8 +200,8 @@
     <loops>
         <name>Loop_Tasks</name>
         <label>Loop Tasks</label>
-        <locationX>50</locationX>
-        <locationY>2030</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varTask</assignNextValueToReference>
         <collectionReference>Get_Open_Tasks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -219,7 +221,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -232,12 +234,13 @@
     <recordCreates>
         <name>Create_Intro_Task</name>
         <label>Create Intro Task</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Wait_2_Days</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -282,12 +285,13 @@
     <recordCreates>
         <name>Create_Followup_Task</name>
         <label>Create Followup Task</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Wait_5_Days</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -332,8 +336,8 @@
     <recordLookups>
         <name>Get_Opportunity</name>
         <label>Get Opportunity</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Is_Open</targetReference>
@@ -356,13 +360,14 @@
     <recordLookups>
         <name>Get_Primary_Contact_Role</name>
         <label>Get Primary Contact Role</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Contact</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -387,13 +392,14 @@
     <recordLookups>
         <name>Get_Opportunity_Check</name>
         <label>Get Opportunity Check</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Stage_Progressed</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -411,13 +417,14 @@
     <recordLookups>
         <name>Get_Open_Tasks</name>
         <label>Get Open Tasks</label>
-        <locationX>50</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Tasks</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -449,18 +456,19 @@
     <recordUpdates>
         <name>Update_Tasks</name>
         <label>Update Tasks</label>
-        <locationX>314</locationX>
-        <locationY>2198</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Owner_Email</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colTasksToUpdate</inputReference>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Opportunity</targetReference>
@@ -470,8 +478,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>
@@ -555,10 +563,11 @@ Open follow-up tasks escalated: {!varRaisedCount}</text>
     <waits>
         <name>Wait_2_Days</name>
         <label>Wait 2 Days</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Default Path</defaultConnectorLabel>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <waitEvents>
@@ -592,10 +601,11 @@ Open follow-up tasks escalated: {!varRaisedCount}</text>
     <waits>
         <name>Wait_5_Days</name>
         <label>Wait 5 Days</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Default Path</defaultConnectorLabel>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <waitEvents>

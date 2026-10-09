@@ -3,14 +3,15 @@
     <actionCalls>
         <name>Send_Nurture_Email</name>
         <label>Send Nurture Email</label>
-        <locationX>50</locationX>
-        <locationY>2030</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
             <targetReference>Asg_Cold</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -38,8 +39,8 @@
     <assignments>
         <name>Asg_Step_1</name>
         <label>Asg Step 1</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varStep</assignToReference>
             <operator>Assign</operator>
@@ -54,8 +55,8 @@
     <assignments>
         <name>Asg_Cold</name>
         <label>Asg Cold</label>
-        <locationX>50</locationX>
-        <locationY>2198</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outStage</assignToReference>
             <operator>Assign</operator>
@@ -67,8 +68,8 @@
     <assignments>
         <name>Asg_Converted</name>
         <label>Asg Converted</label>
-        <locationX>578</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outStage</assignToReference>
             <operator>Assign</operator>
@@ -80,8 +81,8 @@
     <assignments>
         <name>Asg_Skipped</name>
         <label>Asg Skipped</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outStage</assignToReference>
             <operator>Assign</operator>
@@ -93,8 +94,8 @@
     <decisions>
         <name>Dec_Lead_Open</name>
         <label>Dec Lead Open</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Skipped</targetReference>
         </defaultConnector>
@@ -125,8 +126,8 @@
     <decisions>
         <name>Dec_Still_New</name>
         <label>Dec Still New</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Wait_7_Days</targetReference>
         </defaultConnector>
@@ -142,6 +143,7 @@
                 </rightValue>
             </conditions>
             <connector>
+                <isGoTo>true</isGoTo>
                 <targetReference>Asg_Converted</targetReference>
             </connector>
             <label>Converted</label>
@@ -165,8 +167,8 @@
     <decisions>
         <name>Dec_Converted_Final</name>
         <label>Dec Converted Final</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Update_Lead_Cold</targetReference>
         </defaultConnector>
@@ -210,7 +212,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -223,12 +225,13 @@
     <recordCreates>
         <name>Create_First_Touch</name>
         <label>Create First Touch</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Asg_Step_1</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -273,12 +276,14 @@
     <recordCreates>
         <name>Create_Second_Touch</name>
         <label>Create Second Touch</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
+            <isGoTo>true</isGoTo>
             <targetReference>Wait_7_Days</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -323,8 +328,8 @@
     <recordLookups>
         <name>Get_Lead</name>
         <label>Get Lead</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Lead_Open</targetReference>
@@ -347,13 +352,14 @@
     <recordLookups>
         <name>Get_Lead_After_First</name>
         <label>Get Lead After First</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Still_New</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -371,13 +377,14 @@
     <recordLookups>
         <name>Get_Lead_Final</name>
         <label>Get Lead Final</label>
-        <locationX>314</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Converted_Final</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -395,12 +402,13 @@
     <recordUpdates>
         <name>Update_Lead_Warm</name>
         <label>Update Lead Warm</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Create_Second_Touch</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -422,12 +430,13 @@
     <recordUpdates>
         <name>Update_Lead_Cold</name>
         <label>Update Lead Cold</label>
-        <locationX>50</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Nurture_Email</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -447,7 +456,7 @@
         <object>Lead</object>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Lead</targetReference>
@@ -457,8 +466,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>
@@ -518,10 +527,11 @@
     <waits>
         <name>Wait_3_Days</name>
         <label>Wait 3 Days</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Default Path</defaultConnectorLabel>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <waitEvents>
@@ -555,10 +565,11 @@
     <waits>
         <name>Wait_7_Days</name>
         <label>Wait 7 Days</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Default Path</defaultConnectorLabel>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <waitEvents>

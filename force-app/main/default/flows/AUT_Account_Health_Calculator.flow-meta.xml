@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Not_Found</name>
         <label>Asg Not Found</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outScore</assignToReference>
             <operator>Assign</operator>
@@ -24,8 +24,8 @@
     <assignments>
         <name>Asg_Won</name>
         <label>Asg Won</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varWonAmount</assignToReference>
             <operator>Add</operator>
@@ -47,8 +47,8 @@
     <assignments>
         <name>Asg_Open</name>
         <label>Asg Open</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOpenPipeline</assignToReference>
             <operator>Add</operator>
@@ -63,8 +63,8 @@
     <assignments>
         <name>Asg_Case_Count</name>
         <label>Asg Case Count</label>
-        <locationX>578</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOpenCases</assignToReference>
             <operator>AssignCount</operator>
@@ -79,8 +79,8 @@
     <assignments>
         <name>Asg_Score</name>
         <label>Asg Score</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outScore</assignToReference>
             <operator>Assign</operator>
@@ -95,8 +95,8 @@
     <assignments>
         <name>Asg_Hot</name>
         <label>Asg Hot</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outRating</assignToReference>
             <operator>Assign</operator>
@@ -111,8 +111,8 @@
     <assignments>
         <name>Asg_Warm</name>
         <label>Asg Warm</label>
-        <locationX>314</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outRating</assignToReference>
             <operator>Assign</operator>
@@ -127,8 +127,8 @@
     <assignments>
         <name>Asg_Cold</name>
         <label>Asg Cold</label>
-        <locationX>578</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outRating</assignToReference>
             <operator>Assign</operator>
@@ -143,8 +143,8 @@
     <decisions>
         <name>Dec_Account_Found</name>
         <label>Dec Account Found</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Not_Found</targetReference>
         </defaultConnector>
@@ -168,8 +168,8 @@
     <decisions>
         <name>Dec_Opp_Status</name>
         <label>Dec Opp Status</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Loop_Opportunities</targetReference>
         </defaultConnector>
@@ -208,8 +208,8 @@
     <decisions>
         <name>Dec_Rating</name>
         <label>Dec Rating</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Cold</targetReference>
         </defaultConnector>
@@ -248,8 +248,8 @@
     <decisions>
         <name>Dec_Rating_Changed</name>
         <label>Dec Rating Changed</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Unchanged</defaultConnectorLabel>
         <rules>
             <name>Rating_Changed</name>
@@ -286,8 +286,8 @@
     <loops>
         <name>Loop_Opportunities</name>
         <label>Loop Opportunities</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varOpp</assignNextValueToReference>
         <collectionReference>Get_Opportunities</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -307,7 +307,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -320,8 +320,8 @@
     <recordLookups>
         <name>Get_Account</name>
         <label>Get Account</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Account_Found</targetReference>
@@ -344,13 +344,14 @@
     <recordLookups>
         <name>Get_Opportunities</name>
         <label>Get Opportunities</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Opportunities</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -368,13 +369,14 @@
     <recordLookups>
         <name>Get_Open_Cases</name>
         <label>Get Open Cases</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Case_Count</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -399,9 +401,10 @@
     <recordUpdates>
         <name>Update_Account_Rating</name>
         <label>Update Account Rating</label>
-        <locationX>50</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -421,7 +424,7 @@
         <object>Account</object>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Account</targetReference>
@@ -431,8 +434,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

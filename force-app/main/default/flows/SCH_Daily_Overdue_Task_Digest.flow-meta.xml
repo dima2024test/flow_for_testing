@@ -3,11 +3,12 @@
     <actionCalls>
         <name>Send_Digest_Email</name>
         <label>Send Digest Email</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -35,8 +36,8 @@
     <assignments>
         <name>Asg_Total</name>
         <label>Asg Total</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varTotal</assignToReference>
             <operator>AssignCount</operator>
@@ -51,8 +52,8 @@
     <assignments>
         <name>Asg_Append_Line</name>
         <label>Asg Append Line</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varList</assignToReference>
             <operator>Add</operator>
@@ -74,8 +75,8 @@
     <assignments>
         <name>Asg_Escalate</name>
         <label>Asg Escalate</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varTask.Priority</assignToReference>
             <operator>Assign</operator>
@@ -105,8 +106,8 @@
         <name>Sort_By_Due_Date</name>
         <elementSubtype>SortCollectionProcessor</elementSubtype>
         <label>Sort By Due Date</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionProcessorType>SortCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Overdue_Tasks</collectionReference>
         <connector>
@@ -122,8 +123,8 @@
     <decisions>
         <name>Dec_Any_Overdue</name>
         <label>Dec Any Overdue</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Nothing Overdue</defaultConnectorLabel>
         <rules>
             <name>Has_Overdue</name>
@@ -144,8 +145,8 @@
     <decisions>
         <name>Dec_Very_Old</name>
         <label>Dec Very Old</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Loop_Overdue</targetReference>
         </defaultConnector>
@@ -176,8 +177,8 @@
     <decisions>
         <name>Dec_Has_Escalations</name>
         <label>Dec Has Escalations</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Digest_Task</targetReference>
         </defaultConnector>
@@ -215,8 +216,8 @@
     <loops>
         <name>Loop_Overdue</name>
         <label>Loop Overdue</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varTask</assignNextValueToReference>
         <collectionReference>Get_Overdue_Tasks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -236,7 +237,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -249,12 +250,13 @@
     <recordCreates>
         <name>Create_Digest_Task</name>
         <label>Create Digest Task</label>
-        <locationX>578</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Digest_Email</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -293,8 +295,8 @@
     <recordLookups>
         <name>Get_Overdue_Tasks</name>
         <label>Get Overdue Tasks</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Total</targetReference>
@@ -324,18 +326,19 @@
     <recordUpdates>
         <name>Update_Tasks</name>
         <label>Update Tasks</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Create_Digest_Task</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colToUpdate</inputReference>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Overdue_Tasks</targetReference>
@@ -351,8 +354,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

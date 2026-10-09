@@ -3,11 +3,12 @@
     <actionCalls>
         <name>Send_Summary_Email</name>
         <label>Send Summary Email</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -35,8 +36,8 @@
     <assignments>
         <name>Asg_Total</name>
         <label>Asg Total</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varTotal</assignToReference>
             <operator>AssignCount</operator>
@@ -51,8 +52,8 @@
     <assignments>
         <name>Asg_Raise_Priority</name>
         <label>Asg Raise Priority</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varCase.Priority</assignToReference>
             <operator>Assign</operator>
@@ -81,8 +82,8 @@
     <assignments>
         <name>Asg_Bucket_30</name>
         <label>Asg Bucket 30</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOver30</assignToReference>
             <operator>Add</operator>
@@ -97,8 +98,8 @@
     <assignments>
         <name>Asg_Bucket_7</name>
         <label>Asg Bucket 7</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOver7</assignToReference>
             <operator>Add</operator>
@@ -114,8 +115,8 @@
         <name>Sort_By_Age</name>
         <elementSubtype>SortCollectionProcessor</elementSubtype>
         <label>Sort By Age</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionProcessorType>SortCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Aging_Cases</collectionReference>
         <connector>
@@ -131,8 +132,8 @@
     <decisions>
         <name>Dec_Any_Cases</name>
         <label>Dec Any Cases</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Summary_Task</targetReference>
         </defaultConnector>
@@ -156,8 +157,8 @@
     <decisions>
         <name>Dec_Age_Bucket</name>
         <label>Dec Age Bucket</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Bucket_7</targetReference>
         </defaultConnector>
@@ -181,8 +182,8 @@
     <decisions>
         <name>Dec_Already_High</name>
         <label>Dec Already High</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Raise_Priority</targetReference>
         </defaultConnector>
@@ -206,8 +207,8 @@
     <decisions>
         <name>Dec_Has_Updates</name>
         <label>Dec Has Updates</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Summary_Task</targetReference>
         </defaultConnector>
@@ -245,8 +246,8 @@
     <loops>
         <name>Loop_Cases</name>
         <label>Loop Cases</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varCase</assignNextValueToReference>
         <collectionReference>Get_Aging_Cases</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -266,7 +267,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -279,12 +280,13 @@
     <recordCreates>
         <name>Create_Summary_Task</name>
         <label>Create Summary Task</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Summary_Email</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -323,8 +325,8 @@
     <recordLookups>
         <name>Get_Aging_Cases</name>
         <label>Get Aging Cases</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Total</targetReference>
@@ -354,18 +356,19 @@
     <recordUpdates>
         <name>Update_Cases</name>
         <label>Update Cases</label>
-        <locationX>578</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Create_Summary_Task</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colCasesToUpdate</inputReference>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Aging_Cases</targetReference>
@@ -381,8 +384,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

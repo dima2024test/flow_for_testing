@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Opp_Count</name>
         <label>Asg Opp Count</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOppCount</assignToReference>
             <operator>AssignCount</operator>
@@ -20,8 +20,8 @@
     <assignments>
         <name>Asg_Apply_Changes</name>
         <label>Asg Apply Changes</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOpp.StageName</assignToReference>
             <operator>Assign</operator>
@@ -57,8 +57,8 @@
     <decisions>
         <name>Dec_Has_Opportunities</name>
         <label>Dec Has Opportunities</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Scr_No_Opportunities</targetReference>
         </defaultConnector>
@@ -82,8 +82,8 @@
     <decisions>
         <name>Dec_Stage_Differs</name>
         <label>Dec Stage Differs</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Loop_Opportunities</targetReference>
         </defaultConnector>
@@ -114,6 +114,7 @@
                 </rightValue>
             </conditions>
             <connector>
+                <isGoTo>true</isGoTo>
                 <targetReference>Asg_Apply_Changes</targetReference>
             </connector>
             <label>Date Differs</label>
@@ -122,8 +123,8 @@
     <decisions>
         <name>Dec_Anything_To_Update</name>
         <label>Dec Anything To Update</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Scr_Result</targetReference>
         </defaultConnector>
@@ -174,8 +175,8 @@
     <loops>
         <name>Loop_Opportunities</name>
         <label>Loop Opportunities</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varOpp</assignNextValueToReference>
         <collectionReference>Get_Open_Opportunities</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -195,7 +196,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -208,12 +209,13 @@
     <recordCreates>
         <name>Create_Audit_Task</name>
         <label>Create Audit Task</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Scr_Result</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -258,8 +260,8 @@
     <recordLookups>
         <name>Get_Open_Opportunities</name>
         <label>Get Open Opportunities</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Opp_Count</targetReference>
@@ -291,12 +293,13 @@
     <recordUpdates>
         <name>Update_Opportunities</name>
         <label>Update Opportunities</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Create_Audit_Task</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colOppsToUpdate</inputReference>
@@ -304,8 +307,8 @@
     <screens>
         <name>Scr_Select_Account</name>
         <label>Scr Select Account</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -326,8 +329,8 @@
     <screens>
         <name>Scr_Choose_Stage</name>
         <label>Scr Choose Stage</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -363,8 +366,8 @@
     <screens>
         <name>Scr_Result</name>
         <label>Scr Result</label>
-        <locationX>578</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -379,8 +382,8 @@
     <screens>
         <name>Scr_No_Opportunities</name>
         <label>Scr No Opportunities</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -395,8 +398,8 @@
     <screens>
         <name>Scr_Error</name>
         <label>Scr Error</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -409,7 +412,7 @@
         <showHeader>true</showHeader>
     </screens>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Scr_Select_Account</targetReference>
@@ -419,8 +422,8 @@
     <subflows>
         <name>Sub_Log_Fault</name>
         <label>Sub Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Scr_Error</targetReference>
         </connector>

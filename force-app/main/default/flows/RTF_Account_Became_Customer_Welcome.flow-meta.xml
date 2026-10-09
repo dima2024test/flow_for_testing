@@ -3,11 +3,12 @@
     <actionCalls>
         <name>Send_Customer_Email</name>
         <label>Send Customer Email</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -35,8 +36,8 @@
     <assignments>
         <name>Asg_Welcome_Task</name>
         <label>Asg Welcome Task</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varTask.Subject</assignToReference>
             <operator>Assign</operator>
@@ -108,8 +109,8 @@
         <name>Sort_Contacts</name>
         <elementSubtype>SortCollectionProcessor</elementSubtype>
         <label>Sort Contacts</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionProcessorType>SortCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Contacts</collectionReference>
         <connector>
@@ -125,8 +126,8 @@
     <decisions>
         <name>Dec_Previous_Type</name>
         <label>Dec Previous Type</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Type_Change_Task</targetReference>
         </defaultConnector>
@@ -150,9 +151,10 @@
     <decisions>
         <name>Dec_Any_Contacts</name>
         <label>Dec Any Contacts</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Create_Type_Change_Task</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>No Contacts</defaultConnectorLabel>
@@ -175,8 +177,8 @@
     <decisions>
         <name>Dec_Health_Low</name>
         <label>Dec Health Low</label>
-        <locationX>578</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Healthy</defaultConnectorLabel>
         <rules>
             <name>Low_Health</name>
@@ -216,8 +218,8 @@
     <loops>
         <name>Loop_Contacts</name>
         <label>Loop Contacts</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varContact</assignNextValueToReference>
         <collectionReference>Get_Contacts</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -237,7 +239,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -250,12 +252,13 @@
     <recordCreates>
         <name>Create_Welcome_Tasks</name>
         <label>Create Welcome Tasks</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Customer_Email</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colTasks</inputReference>
@@ -263,8 +266,8 @@
     <recordCreates>
         <name>Create_Type_Change_Task</name>
         <label>Create Type Change Task</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Customer_Email</targetReference>
         </connector>
@@ -319,9 +322,10 @@
     <recordCreates>
         <name>Create_Health_Task</name>
         <label>Create Health Task</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -372,13 +376,14 @@
     <recordLookups>
         <name>Get_Contacts</name>
         <label>Get Contacts</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Sort_Contacts</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -401,7 +406,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Previous_Type</targetReference>
@@ -436,8 +441,8 @@
     <subflows>
         <name>Sub_Normalize_Contacts</name>
         <label>Sub Normalize Contacts</label>
-        <locationX>314</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Sub_Account_Health</targetReference>
         </connector>
@@ -456,8 +461,8 @@
     <subflows>
         <name>Sub_Account_Health</name>
         <label>Sub Account Health</label>
-        <locationX>578</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Health_Low</targetReference>
         </connector>
@@ -480,8 +485,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>842</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Existing_Contact</name>
         <label>Asg Existing Contact</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varContactId</assignToReference>
             <operator>Assign</operator>
@@ -27,8 +27,8 @@
     <assignments>
         <name>Asg_Open_Count</name>
         <label>Asg Open Count</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOpenCount</assignToReference>
             <operator>AssignCount</operator>
@@ -43,8 +43,8 @@
     <assignments>
         <name>Asg_Bump_Priority</name>
         <label>Asg Bump Priority</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varPriority</assignToReference>
             <operator>Assign</operator>
@@ -59,8 +59,8 @@
     <assignments>
         <name>Asg_Keep_Priority</name>
         <label>Asg Keep Priority</label>
-        <locationX>314</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varPriority</assignToReference>
             <operator>Assign</operator>
@@ -99,8 +99,8 @@
     <decisions>
         <name>Dec_Contact_Found</name>
         <label>Dec Contact Found</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Scr_New_Contact</targetReference>
         </defaultConnector>
@@ -124,8 +124,8 @@
     <decisions>
         <name>Dec_Repeat_Customer</name>
         <label>Dec Repeat Customer</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Keep_Priority</targetReference>
         </defaultConnector>
@@ -172,7 +172,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -185,13 +185,14 @@
     <recordCreates>
         <name>Create_Contact</name>
         <label>Create Contact</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignRecordIdToReference>varContactId</assignRecordIdToReference>
         <connector>
             <targetReference>Scr_Case_Details</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -217,13 +218,14 @@
     <recordCreates>
         <name>Create_Case</name>
         <label>Create Case</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignRecordIdToReference>varCaseId</assignRecordIdToReference>
         <connector>
             <targetReference>Create_Followup_Task</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -273,12 +275,13 @@
     <recordCreates>
         <name>Create_Followup_Task</name>
         <label>Create Followup Task</label>
-        <locationX>50</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Scr_Confirmation</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -323,8 +326,8 @@
     <recordLookups>
         <name>Get_Contact_By_Email</name>
         <label>Get Contact By Email</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Contact_Found</targetReference>
@@ -347,13 +350,14 @@
     <recordLookups>
         <name>Get_Open_Cases</name>
         <label>Get Open Cases</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Open_Count</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -378,8 +382,8 @@
     <screens>
         <name>Scr_Customer_Lookup</name>
         <label>Scr Customer Lookup</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -404,8 +408,8 @@
     <screens>
         <name>Scr_New_Contact</name>
         <label>Scr New Contact</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -437,8 +441,8 @@
     <screens>
         <name>Scr_Case_Details</name>
         <label>Scr Case Details</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -483,8 +487,8 @@
     <screens>
         <name>Scr_Confirmation</name>
         <label>Scr Confirmation</label>
-        <locationX>50</locationX>
-        <locationY>2030</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -499,8 +503,8 @@
     <screens>
         <name>Scr_Error</name>
         <label>Scr Error</label>
-        <locationX>578</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -513,7 +517,7 @@
         <showHeader>true</showHeader>
     </screens>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Scr_Customer_Lookup</targetReference>
@@ -523,8 +527,8 @@
     <subflows>
         <name>Sub_Log_Fault</name>
         <label>Sub Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Scr_Error</targetReference>
         </connector>

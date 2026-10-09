@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Conflicts</name>
         <label>Asg Conflicts</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varConflicts</assignToReference>
             <operator>AssignCount</operator>
@@ -36,8 +36,8 @@
     <decisions>
         <name>Dec_Valid_Input</name>
         <label>Dec Valid Input</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Get_Contact</targetReference>
         </defaultConnector>
@@ -68,8 +68,8 @@
     <decisions>
         <name>Dec_Conflict</name>
         <label>Dec Conflict</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Event</targetReference>
         </defaultConnector>
@@ -93,8 +93,8 @@
     <decisions>
         <name>Dec_Conflict_Choice</name>
         <label>Dec Conflict Choice</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Scr_Cancelled</targetReference>
         </defaultConnector>
@@ -110,6 +110,7 @@
                 </rightValue>
             </conditions>
             <connector>
+                <isGoTo>true</isGoTo>
                 <targetReference>Create_Event</targetReference>
             </connector>
             <label>Proceed</label>
@@ -156,7 +157,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -169,13 +170,14 @@
     <recordCreates>
         <name>Create_Event</name>
         <label>Create Event</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignRecordIdToReference>varEventId</assignRecordIdToReference>
         <connector>
             <targetReference>Create_Prep_Task</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -219,12 +221,13 @@
     <recordCreates>
         <name>Create_Prep_Task</name>
         <label>Create Prep Task</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Scr_Confirmation</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -269,8 +272,8 @@
     <recordLookups>
         <name>Get_Contact</name>
         <label>Get Contact</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Overlapping_Events</targetReference>
@@ -293,13 +296,14 @@
     <recordLookups>
         <name>Get_Overlapping_Events</name>
         <label>Get Overlapping Events</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Conflicts</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -331,8 +335,8 @@
     <screens>
         <name>Scr_Meeting_Details</name>
         <label>Scr Meeting Details</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -378,8 +382,8 @@
     <screens>
         <name>Scr_Conflict</name>
         <label>Scr Conflict</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -407,8 +411,8 @@
     <screens>
         <name>Scr_Confirmation</name>
         <label>Scr Confirmation</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -423,8 +427,8 @@
     <screens>
         <name>Scr_Invalid</name>
         <label>Scr Invalid</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -439,8 +443,8 @@
     <screens>
         <name>Scr_Cancelled</name>
         <label>Scr Cancelled</label>
-        <locationX>314</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -455,8 +459,8 @@
     <screens>
         <name>Scr_Error</name>
         <label>Scr Error</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -469,7 +473,7 @@
         <showHeader>true</showHeader>
     </screens>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Scr_Meeting_Details</targetReference>
@@ -479,8 +483,8 @@
     <subflows>
         <name>Sub_Log_Fault</name>
         <label>Sub Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Scr_Error</targetReference>
         </connector>

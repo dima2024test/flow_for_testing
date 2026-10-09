@@ -3,14 +3,15 @@
     <actionCalls>
         <name>Send_Reminder_Email</name>
         <label>Send Reminder Email</label>
-        <locationX>578</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
             <targetReference>Asg_Pending</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -38,8 +39,8 @@
     <assignments>
         <name>Asg_Checklist_Items</name>
         <label>Asg Checklist Items</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>colItems</assignToReference>
             <operator>Add</operator>
@@ -68,8 +69,8 @@
     <assignments>
         <name>Asg_Build_Task</name>
         <label>Asg Build Task</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varNewTask.Subject</assignToReference>
             <operator>Assign</operator>
@@ -126,8 +127,8 @@
     <assignments>
         <name>Asg_Open_Item</name>
         <label>Asg Open Item</label>
-        <locationX>50</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOpenItems</assignToReference>
             <operator>Add</operator>
@@ -142,8 +143,8 @@
     <assignments>
         <name>Asg_Activated</name>
         <label>Asg Activated</label>
-        <locationX>50</locationX>
-        <locationY>2030</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outResult</assignToReference>
             <operator>Assign</operator>
@@ -155,8 +156,8 @@
     <assignments>
         <name>Asg_Pending</name>
         <label>Asg Pending</label>
-        <locationX>314</locationX>
-        <locationY>2030</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outResult</assignToReference>
             <operator>Assign</operator>
@@ -168,8 +169,8 @@
     <assignments>
         <name>Asg_Skipped</name>
         <label>Asg Skipped</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outResult</assignToReference>
             <operator>Assign</operator>
@@ -181,8 +182,8 @@
     <decisions>
         <name>Dec_Is_Draft</name>
         <label>Dec Is Draft</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Skipped</targetReference>
         </defaultConnector>
@@ -213,8 +214,8 @@
     <decisions>
         <name>Dec_Item_Done</name>
         <label>Dec Item Done</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Loop_Checklist</targetReference>
         </defaultConnector>
@@ -238,8 +239,8 @@
     <decisions>
         <name>Dec_All_Done</name>
         <label>Dec All Done</label>
-        <locationX>314</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Send_Reminder_Email</targetReference>
         </defaultConnector>
@@ -282,8 +283,8 @@
     <loops>
         <name>Loop_Items</name>
         <label>Loop Items</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varItem</assignNextValueToReference>
         <collectionReference>colItems</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -297,8 +298,8 @@
     <loops>
         <name>Loop_Checklist</name>
         <label>Loop Checklist</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varCheckTask</assignNextValueToReference>
         <collectionReference>Get_Checklist_Tasks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -318,7 +319,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -331,12 +332,13 @@
     <recordCreates>
         <name>Create_Checklist_Tasks</name>
         <label>Create Checklist Tasks</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Wait_7_Days</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colNewTasks</inputReference>
@@ -344,8 +346,8 @@
     <recordLookups>
         <name>Get_Contract</name>
         <label>Get Contract</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Is_Draft</targetReference>
@@ -368,13 +370,14 @@
     <recordLookups>
         <name>Get_Checklist_Tasks</name>
         <label>Get Checklist Tasks</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Checklist</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -399,12 +402,13 @@
     <recordUpdates>
         <name>Update_Contract_Activated</name>
         <label>Update Contract Activated</label>
-        <locationX>314</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Asg_Activated</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -431,7 +435,7 @@
         <object>Contract</object>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Contract</targetReference>
@@ -441,8 +445,8 @@
     <subflows>
         <name>Sub_Warranty_Check</name>
         <label>Sub Warranty Check</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Asg_Checklist_Items</targetReference>
         </connector>
@@ -473,8 +477,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>
@@ -584,10 +588,11 @@ Expired assets on the account: {!varExpiredAssets}</text>
     <waits>
         <name>Wait_7_Days</name>
         <label>Wait 7 Days</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Default Path</defaultConnectorLabel>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <waitEvents>

@@ -3,11 +3,12 @@
     <actionCalls>
         <name>Send_Activation_Email</name>
         <label>Send Activation Email</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -35,8 +36,8 @@
     <assignments>
         <name>Asg_Sum_Term</name>
         <label>Asg Sum Term</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varActiveCount</assignToReference>
             <operator>Add</operator>
@@ -58,8 +59,8 @@
     <assignments>
         <name>Asg_Case_Count</name>
         <label>Asg Case Count</label>
-        <locationX>578</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varCaseCount</assignToReference>
             <operator>AssignCount</operator>
@@ -74,8 +75,8 @@
     <decisions>
         <name>Dec_First_Contract</name>
         <label>Dec First Contract</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Expansion_Task</targetReference>
         </defaultConnector>
@@ -99,8 +100,8 @@
     <decisions>
         <name>Dec_Checkin_Outcome</name>
         <label>Dec Checkin Outcome</label>
-        <locationX>578</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Checkin_Task</targetReference>
         </defaultConnector>
@@ -146,8 +147,8 @@
     <loops>
         <name>Loop_Contracts</name>
         <label>Loop Contracts</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varContract</assignNextValueToReference>
         <collectionReference>Get_Other_Active_Contracts</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -167,7 +168,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -180,12 +181,13 @@
     <recordCreates>
         <name>Create_Kickoff_Task</name>
         <label>Create Kickoff Task</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Activation_Email</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -236,12 +238,13 @@
     <recordCreates>
         <name>Create_Expansion_Task</name>
         <label>Create Expansion Task</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Activation_Email</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -292,9 +295,10 @@
     <recordCreates>
         <name>Create_Risk_Task</name>
         <label>Create Risk Task</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -345,9 +349,10 @@
     <recordCreates>
         <name>Create_Checkin_Task</name>
         <label>Create Checkin Task</label>
-        <locationX>578</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -398,8 +403,8 @@
     <recordLookups>
         <name>Get_Other_Active_Contracts</name>
         <label>Get Other Active Contracts</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Contracts</targetReference>
@@ -436,13 +441,14 @@
     <recordLookups>
         <name>Get_Cases_Since_Activation</name>
         <label>Get Cases Since Activation</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Case_Count</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -465,7 +471,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Other_Active_Contracts</targetReference>
@@ -498,8 +504,8 @@
     <subflows>
         <name>Sub_Account_Health</name>
         <label>Sub Account Health</label>
-        <locationX>314</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Get_Cases_Since_Activation</targetReference>
         </connector>
@@ -522,8 +528,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>578</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

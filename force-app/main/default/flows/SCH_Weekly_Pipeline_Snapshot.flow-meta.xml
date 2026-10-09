@@ -3,11 +3,12 @@
     <actionCalls>
         <name>Send_Snapshot_Email</name>
         <label>Send Snapshot Email</label>
-        <locationX>578</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -35,8 +36,8 @@
     <assignments>
         <name>Asg_Count</name>
         <label>Asg Count</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varCount</assignToReference>
             <operator>AssignCount</operator>
@@ -51,8 +52,8 @@
     <assignments>
         <name>Asg_Totals</name>
         <label>Asg Totals</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varTotal</assignToReference>
             <operator>Add</operator>
@@ -67,8 +68,8 @@
     <assignments>
         <name>Asg_Past_Due</name>
         <label>Asg Past Due</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varPastDue</assignToReference>
             <operator>Add</operator>
@@ -83,8 +84,8 @@
     <assignments>
         <name>Asg_Closing_Soon</name>
         <label>Asg Closing Soon</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varClosingSoon</assignToReference>
             <operator>AssignCount</operator>
@@ -99,8 +100,8 @@
     <assignments>
         <name>Asg_Top_Line</name>
         <label>Asg Top Line</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varTopList</assignToReference>
             <operator>Add</operator>
@@ -123,8 +124,8 @@
         <name>Filter_Closing_Soon</name>
         <elementSubtype>FilterCollectionProcessor</elementSubtype>
         <label>Filter Closing Soon</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>currentItem_Filter_Closing_Soon</assignNextValueToReference>
         <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Open_Opportunities</collectionReference>
@@ -151,8 +152,8 @@
         <name>Sort_By_Amount</name>
         <elementSubtype>SortCollectionProcessor</elementSubtype>
         <label>Sort By Amount</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionProcessorType>SortCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Open_Opportunities</collectionReference>
         <connector>
@@ -168,8 +169,8 @@
     <decisions>
         <name>Dec_Any_Open</name>
         <label>Dec Any Open</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Snapshot_Task</targetReference>
         </defaultConnector>
@@ -193,8 +194,8 @@
     <decisions>
         <name>Dec_Past_Due</name>
         <label>Dec Past Due</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Loop_All_Deals</targetReference>
         </defaultConnector>
@@ -238,8 +239,8 @@
     <loops>
         <name>Loop_All_Deals</name>
         <label>Loop All Deals</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varOpp</assignNextValueToReference>
         <collectionReference>Get_Open_Opportunities</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -253,8 +254,8 @@
     <loops>
         <name>Loop_Top_Deals</name>
         <label>Loop Top Deals</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varTop</assignNextValueToReference>
         <collectionReference>Get_Open_Opportunities</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -274,7 +275,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -287,12 +288,13 @@
     <recordCreates>
         <name>Create_Snapshot_Task</name>
         <label>Create Snapshot Task</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Snapshot_Email</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -331,8 +333,8 @@
     <recordLookups>
         <name>Get_Open_Opportunities</name>
         <label>Get Open Opportunities</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Count</targetReference>
@@ -353,7 +355,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Open_Opportunities</targetReference>
@@ -369,8 +371,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

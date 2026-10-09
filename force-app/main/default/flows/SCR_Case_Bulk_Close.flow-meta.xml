@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Open_Count</name>
         <label>Asg Open Count</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOpenCount</assignToReference>
             <operator>AssignCount</operator>
@@ -20,8 +20,8 @@
     <assignments>
         <name>Asg_Low_Cases</name>
         <label>Asg Low Cases</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>colSource</assignToReference>
             <operator>Assign</operator>
@@ -36,8 +36,8 @@
     <assignments>
         <name>Asg_All_Cases</name>
         <label>Asg All Cases</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>colSource</assignToReference>
             <operator>Assign</operator>
@@ -52,8 +52,8 @@
     <assignments>
         <name>Asg_Close_Case</name>
         <label>Asg Close Case</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varCase.Description</assignToReference>
             <operator>Assign</operator>
@@ -97,8 +97,8 @@
         <name>Filter_Low_Priority</name>
         <elementSubtype>FilterCollectionProcessor</elementSubtype>
         <label>Filter Low Priority</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>currentItem_Filter_Low_Priority</assignNextValueToReference>
         <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Open_Cases</collectionReference>
@@ -117,8 +117,8 @@
     <decisions>
         <name>Dec_Has_Cases</name>
         <label>Dec Has Cases</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Scr_No_Cases</targetReference>
         </defaultConnector>
@@ -142,8 +142,8 @@
     <decisions>
         <name>Dec_Scope</name>
         <label>Dec Scope</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_All_Cases</targetReference>
         </defaultConnector>
@@ -167,8 +167,8 @@
     <decisions>
         <name>Dec_Anything</name>
         <label>Dec Anything</label>
-        <locationX>314</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Scr_Result</targetReference>
         </defaultConnector>
@@ -219,8 +219,8 @@
     <loops>
         <name>Loop_Cases</name>
         <label>Loop Cases</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varCase</assignNextValueToReference>
         <collectionReference>colSource</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -240,7 +240,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -253,12 +253,13 @@
     <recordCreates>
         <name>Create_Audit_Task</name>
         <label>Create Audit Task</label>
-        <locationX>50</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Scr_Result</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -303,8 +304,8 @@
     <recordLookups>
         <name>Get_Open_Cases</name>
         <label>Get Open Cases</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Open_Count</targetReference>
@@ -336,12 +337,13 @@
     <recordUpdates>
         <name>Update_Cases</name>
         <label>Update Cases</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Create_Audit_Task</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colToClose</inputReference>
@@ -349,8 +351,8 @@
     <screens>
         <name>Scr_Select_Account</name>
         <label>Scr Select Account</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -371,8 +373,8 @@
     <screens>
         <name>Scr_Close_Options</name>
         <label>Scr Close Options</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -414,8 +416,8 @@
     <screens>
         <name>Scr_Result</name>
         <label>Scr Result</label>
-        <locationX>314</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -430,8 +432,8 @@
     <screens>
         <name>Scr_No_Cases</name>
         <label>Scr No Cases</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -446,8 +448,8 @@
     <screens>
         <name>Scr_Error</name>
         <label>Scr Error</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -460,7 +462,7 @@
         <showHeader>true</showHeader>
     </screens>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Scr_Select_Account</targetReference>
@@ -470,8 +472,8 @@
     <subflows>
         <name>Sub_Log_Fault</name>
         <label>Sub Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Scr_Error</targetReference>
         </connector>

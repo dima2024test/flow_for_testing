@@ -3,11 +3,12 @@
     <actionCalls>
         <name>Send_Report_Email</name>
         <label>Send Report Email</label>
-        <locationX>578</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -35,8 +36,8 @@
     <assignments>
         <name>Asg_Total</name>
         <label>Asg Total</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varTotal</assignToReference>
             <operator>AssignCount</operator>
@@ -51,8 +52,8 @@
     <assignments>
         <name>Asg_Web</name>
         <label>Asg Web</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varWeb</assignToReference>
             <operator>Add</operator>
@@ -67,8 +68,8 @@
     <assignments>
         <name>Asg_Phone</name>
         <label>Asg Phone</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varPhone</assignToReference>
             <operator>Add</operator>
@@ -83,8 +84,8 @@
     <assignments>
         <name>Asg_Partner</name>
         <label>Asg Partner</label>
-        <locationX>578</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varPartner</assignToReference>
             <operator>Add</operator>
@@ -99,8 +100,8 @@
     <assignments>
         <name>Asg_Other</name>
         <label>Asg Other</label>
-        <locationX>842</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOther</assignToReference>
             <operator>Add</operator>
@@ -115,8 +116,8 @@
     <assignments>
         <name>Asg_Call_Task</name>
         <label>Asg Call Task</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varNewTask.Subject</assignToReference>
             <operator>Assign</operator>
@@ -181,8 +182,8 @@
         <name>Filter_Hot_Uncontacted</name>
         <elementSubtype>FilterCollectionProcessor</elementSubtype>
         <label>Filter Hot Uncontacted</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>currentItem_Filter_Hot_Uncontacted</assignNextValueToReference>
         <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_New_Leads</collectionReference>
@@ -208,8 +209,8 @@
     <decisions>
         <name>Dec_Any_Leads</name>
         <label>Dec Any Leads</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Report_Task</targetReference>
         </defaultConnector>
@@ -233,8 +234,8 @@
     <decisions>
         <name>Dec_Source</name>
         <label>Dec Source</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Other</targetReference>
         </defaultConnector>
@@ -288,8 +289,8 @@
     <decisions>
         <name>Dec_Has_Hot</name>
         <label>Dec Has Hot</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Report_Task</targetReference>
         </defaultConnector>
@@ -327,8 +328,8 @@
     <loops>
         <name>Loop_Leads</name>
         <label>Loop Leads</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varLead</assignNextValueToReference>
         <collectionReference>Get_New_Leads</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -342,8 +343,8 @@
     <loops>
         <name>Loop_Hot_Leads</name>
         <label>Loop Hot Leads</label>
-        <locationX>1106</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varHotLead</assignNextValueToReference>
         <collectionReference>Filter_Hot_Uncontacted</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -363,7 +364,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -376,12 +377,13 @@
     <recordCreates>
         <name>Create_Call_Tasks</name>
         <label>Create Call Tasks</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Create_Report_Task</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colNewTasks</inputReference>
@@ -389,12 +391,13 @@
     <recordCreates>
         <name>Create_Report_Task</name>
         <label>Create Report Task</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Report_Email</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -433,8 +436,8 @@
     <recordLookups>
         <name>Get_New_Leads</name>
         <label>Get New Leads</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Total</targetReference>
@@ -462,7 +465,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_New_Leads</targetReference>
@@ -478,8 +481,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Role_Count</name>
         <label>Asg Role Count</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varRoleCount</assignToReference>
             <operator>AssignCount</operator>
@@ -20,8 +20,8 @@
     <assignments>
         <name>Asg_Primary_Found</name>
         <label>Asg Primary Found</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varPrimaryExists</assignToReference>
             <operator>Assign</operator>
@@ -36,8 +36,8 @@
     <decisions>
         <name>Dec_Is_Primary</name>
         <label>Dec Is Primary</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Loop_Roles</targetReference>
         </defaultConnector>
@@ -61,8 +61,8 @@
     <decisions>
         <name>Dec_Role_Exists</name>
         <label>Dec Role Exists</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Role</targetReference>
         </defaultConnector>
@@ -86,8 +86,8 @@
     <decisions>
         <name>Dec_Kickoff</name>
         <label>Dec Kickoff</label>
-        <locationX>50</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Scr_Done</targetReference>
         </defaultConnector>
@@ -164,8 +164,8 @@
     <loops>
         <name>Loop_Roles</name>
         <label>Loop Roles</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varRole</assignNextValueToReference>
         <collectionReference>Get_Existing_Roles</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -185,7 +185,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -198,12 +198,13 @@
     <recordCreates>
         <name>Create_Role</name>
         <label>Create Role</label>
-        <locationX>314</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Sub_Contact_Snapshot</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -236,12 +237,13 @@
     <recordCreates>
         <name>Create_Kickoff_Task</name>
         <label>Create Kickoff Task</label>
-        <locationX>50</locationX>
-        <locationY>2030</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Scr_Done</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -298,8 +300,8 @@
     <recordLookups>
         <name>Get_Opportunity</name>
         <label>Get Opportunity</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Existing_Roles</targetReference>
@@ -322,13 +324,14 @@
     <recordLookups>
         <name>Get_Existing_Roles</name>
         <label>Get Existing Roles</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Role_Count</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -346,13 +349,14 @@
     <recordLookups>
         <name>Get_Contact_Role</name>
         <label>Get Contact Role</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Role_Exists</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -377,12 +381,13 @@
     <recordUpdates>
         <name>Update_Role</name>
         <label>Update Role</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Sub_Contact_Snapshot</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -410,8 +415,8 @@
     <screens>
         <name>Scr_Select_Opportunity</name>
         <label>Scr Select Opportunity</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -432,8 +437,8 @@
     <screens>
         <name>Scr_Assign_Role</name>
         <label>Scr Assign Role</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -497,8 +502,8 @@
     <screens>
         <name>Scr_Done</name>
         <label>Scr Done</label>
-        <locationX>314</locationX>
-        <locationY>2030</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -513,8 +518,8 @@
     <screens>
         <name>Scr_Error</name>
         <label>Scr Error</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -527,7 +532,7 @@
         <showHeader>true</showHeader>
     </screens>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Scr_Select_Opportunity</targetReference>
@@ -537,8 +542,8 @@
     <subflows>
         <name>Sub_Contact_Snapshot</name>
         <label>Sub Contact Snapshot</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Kickoff</targetReference>
         </connector>
@@ -561,8 +566,8 @@
     <subflows>
         <name>Sub_Log_Fault</name>
         <label>Sub Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Scr_Error</targetReference>
         </connector>

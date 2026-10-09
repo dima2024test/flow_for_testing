@@ -3,14 +3,15 @@
     <actionCalls>
         <name>Send_Reminder_Email</name>
         <label>Send Reminder Email</label>
-        <locationX>50</locationX>
-        <locationY>2198</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
             <targetReference>Asg_Escalated</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -38,8 +39,8 @@
     <assignments>
         <name>Asg_Open_Count</name>
         <label>Asg Open Count</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOpenCount</assignToReference>
             <operator>AssignCount</operator>
@@ -54,8 +55,8 @@
     <assignments>
         <name>Asg_Raise_Priority</name>
         <label>Asg Raise Priority</label>
-        <locationX>50</locationX>
-        <locationY>2030</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varTask.Priority</assignToReference>
             <operator>Assign</operator>
@@ -77,8 +78,8 @@
     <assignments>
         <name>Asg_Escalated</name>
         <label>Asg Escalated</label>
-        <locationX>50</locationX>
-        <locationY>2366</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outResult</assignToReference>
             <operator>Assign</operator>
@@ -90,8 +91,8 @@
     <assignments>
         <name>Asg_Done</name>
         <label>Asg Done</label>
-        <locationX>314</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outResult</assignToReference>
             <operator>Assign</operator>
@@ -103,8 +104,8 @@
     <assignments>
         <name>Asg_Skipped</name>
         <label>Asg Skipped</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outResult</assignToReference>
             <operator>Assign</operator>
@@ -116,8 +117,8 @@
     <decisions>
         <name>Dec_Event_Found</name>
         <label>Dec Event Found</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Skipped</targetReference>
         </defaultConnector>
@@ -148,9 +149,10 @@
     <decisions>
         <name>Dec_Event_Still_Exists</name>
         <label>Dec Event Still Exists</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Asg_Skipped</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Deleted</defaultConnectorLabel>
@@ -173,8 +175,8 @@
     <decisions>
         <name>Dec_Any_Open</name>
         <label>Dec Any Open</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Done</targetReference>
         </defaultConnector>
@@ -212,8 +214,8 @@
     <loops>
         <name>Loop_Open_Followups</name>
         <label>Loop Open Followups</label>
-        <locationX>50</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varTask</assignNextValueToReference>
         <collectionReference>Get_Open_Followups</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -233,7 +235,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -246,8 +248,8 @@
     <recordLookups>
         <name>Get_Event</name>
         <label>Get Event</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Event_Found</targetReference>
@@ -270,13 +272,14 @@
     <recordLookups>
         <name>Get_Event_After_End</name>
         <label>Get Event After End</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Event_Still_Exists</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -294,13 +297,14 @@
     <recordLookups>
         <name>Get_Open_Followups</name>
         <label>Get Open Followups</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Open_Count</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -325,18 +329,19 @@
     <recordUpdates>
         <name>Update_Followups</name>
         <label>Update Followups</label>
-        <locationX>314</locationX>
-        <locationY>2030</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Reminder_Email</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colTasksToUpdate</inputReference>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Event</targetReference>
@@ -346,8 +351,8 @@
     <subflows>
         <name>Sub_Create_Followup</name>
         <label>Sub Create Followup</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Wait_3_Days</targetReference>
         </connector>
@@ -372,8 +377,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>
@@ -457,10 +462,11 @@ Open follow-up task(s): {!varOpenCount}. Priority has been raised to High.</text
     <waits>
         <name>Wait_Until_Event_End</name>
         <label>Wait Until Event End</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Default Path</defaultConnectorLabel>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <waitEvents>
@@ -494,10 +500,11 @@ Open follow-up task(s): {!varOpenCount}. Priority has been raised to High.</text
     <waits>
         <name>Wait_3_Days</name>
         <label>Wait 3 Days</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Default Path</defaultConnectorLabel>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <waitEvents>

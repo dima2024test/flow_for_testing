@@ -3,14 +3,15 @@
     <actionCalls>
         <name>Send_Threshold_Email</name>
         <label>Send Threshold Email</label>
-        <locationX>578</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
             <targetReference>Sub_Log_Batch_Error</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -38,8 +39,8 @@
     <assignments>
         <name>Asg_Next_Count</name>
         <label>Asg Next Count</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varCount</assignToReference>
             <operator>Assign</operator>
@@ -54,8 +55,8 @@
     <assignments>
         <name>Asg_Collect_Stale</name>
         <label>Asg Collect Stale</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>colStale</assignToReference>
             <operator>Add</operator>
@@ -70,8 +71,8 @@
     <decisions>
         <name>Dec_Counter_Exists</name>
         <label>Dec Counter Exists</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Week_Counter</targetReference>
         </defaultConnector>
@@ -95,8 +96,8 @@
     <decisions>
         <name>Dec_Threshold</name>
         <label>Dec Threshold</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Sub_Log_Batch_Error</targetReference>
         </defaultConnector>
@@ -170,8 +171,8 @@
     <loops>
         <name>Loop_Stale_Counters</name>
         <label>Loop Stale Counters</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varStale</assignNextValueToReference>
         <collectionReference>Get_Stale_Counters</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -191,7 +192,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -204,12 +205,13 @@
     <recordCreates>
         <name>Create_Week_Counter</name>
         <label>Create Week Counter</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Get_Stale_Counters</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -260,9 +262,10 @@
     <recordCreates>
         <name>Sub_Log_Batch_Error</name>
         <label>Sub Log Batch Error</label>
-        <locationX>842</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -307,8 +310,8 @@
     <recordCreates>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <inputAssignments>
             <field>Subject</field>
             <value>
@@ -345,12 +348,13 @@
     <recordDeletes>
         <name>Delete_Stale_Counters</name>
         <label>Delete Stale Counters</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Sub_Log_Batch_Error</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colStale</inputReference>
@@ -358,8 +362,8 @@
     <recordLookups>
         <name>Get_Admin_Profile</name>
         <label>Get Admin Profile</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Admin_User</targetReference>
@@ -382,13 +386,14 @@
     <recordLookups>
         <name>Get_Admin_User</name>
         <label>Get Admin User</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Week_Counter</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -415,13 +420,14 @@
     <recordLookups>
         <name>Get_Week_Counter</name>
         <label>Get Week Counter</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Counter_Exists</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -439,13 +445,14 @@
     <recordLookups>
         <name>Get_Stale_Counters</name>
         <label>Get Stale Counters</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Stale_Counters</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -470,12 +477,13 @@
     <recordUpdates>
         <name>Update_Week_Counter</name>
         <label>Update Week Counter</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Threshold</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -501,7 +509,7 @@
         <object>Task</object>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Admin_Profile</targetReference>

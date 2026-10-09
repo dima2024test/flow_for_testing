@@ -3,14 +3,15 @@
     <actionCalls>
         <name>Send_Jump_Email</name>
         <label>Send Jump Email</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
             <targetReference>Create_Call_Task</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -38,8 +39,8 @@
     <assignments>
         <name>Asg_Raise_Task</name>
         <label>Asg Raise Task</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varTask.Priority</assignToReference>
             <operator>Assign</operator>
@@ -75,8 +76,8 @@
     <decisions>
         <name>Dec_Task_Not_High</name>
         <label>Dec Task Not High</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Loop_Tasks</targetReference>
         </defaultConnector>
@@ -100,8 +101,8 @@
     <decisions>
         <name>Dec_Any_Raised</name>
         <label>Dec Any Raised</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Dec_Prior_Rating</targetReference>
         </defaultConnector>
@@ -125,8 +126,8 @@
     <decisions>
         <name>Dec_Prior_Rating</name>
         <label>Dec Prior Rating</label>
-        <locationX>578</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Call_Task</targetReference>
         </defaultConnector>
@@ -150,8 +151,8 @@
     <decisions>
         <name>Dec_Still_Untouched</name>
         <label>Dec Still Untouched</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Being Worked</defaultConnectorLabel>
         <rules>
             <name>Untouched</name>
@@ -179,8 +180,8 @@
     <decisions>
         <name>Dec_Has_Email</name>
         <label>Dec Has Email</label>
-        <locationX>842</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>No Email</defaultConnectorLabel>
         <rules>
             <name>Email_Present</name>
@@ -201,8 +202,8 @@
     <decisions>
         <name>Dec_Contact_Found</name>
         <label>Dec Contact Found</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>No Contact</defaultConnectorLabel>
         <rules>
             <name>Contact_Found</name>
@@ -237,8 +238,8 @@
     <loops>
         <name>Loop_Tasks</name>
         <label>Loop Tasks</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varTask</assignNextValueToReference>
         <collectionReference>Get_Open_Lead_Tasks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -258,7 +259,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -271,9 +272,10 @@
     <recordCreates>
         <name>Create_Call_Task</name>
         <label>Create Call Task</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -324,12 +326,13 @@
     <recordCreates>
         <name>Create_Stalled_Task</name>
         <label>Create Stalled Task</label>
-        <locationX>578</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Has_Email</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -374,8 +377,8 @@
     <recordLookups>
         <name>Get_Open_Lead_Tasks</name>
         <label>Get Open Lead Tasks</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Tasks</targetReference>
@@ -412,13 +415,14 @@
     <recordLookups>
         <name>Get_Lead_Later</name>
         <label>Get Lead Later</label>
-        <locationX>314</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Still_Untouched</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -436,13 +440,14 @@
     <recordLookups>
         <name>Get_Matching_Contact</name>
         <label>Get Matching Contact</label>
-        <locationX>578</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Contact_Found</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -460,18 +465,19 @@
     <recordUpdates>
         <name>Update_Tasks</name>
         <label>Update Tasks</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Prior_Rating</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colTasksToUpdate</inputReference>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Open_Lead_Tasks</targetReference>
@@ -510,8 +516,8 @@
     <subflows>
         <name>Sub_Contact_Snapshot</name>
         <label>Sub Contact Snapshot</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Contact_Activity_Snapshot</flowName>
         <inputAssignments>
             <name>inContactId</name>
@@ -527,8 +533,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>578</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

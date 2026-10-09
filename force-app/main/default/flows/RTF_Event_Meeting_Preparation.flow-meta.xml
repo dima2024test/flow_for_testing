@@ -3,11 +3,12 @@
     <actionCalls>
         <name>Send_Reminder_Email</name>
         <label>Send Reminder Email</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -35,8 +36,8 @@
     <assignments>
         <name>Asg_Count_Meeting</name>
         <label>Asg Count Meeting</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOtherMeetings</assignToReference>
             <operator>Add</operator>
@@ -51,8 +52,8 @@
     <assignments>
         <name>Asg_Open_Prep_Count</name>
         <label>Asg Open Prep Count</label>
-        <locationX>578</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOpenPrepCount</assignToReference>
             <operator>AssignCount</operator>
@@ -67,8 +68,8 @@
     <decisions>
         <name>Dec_Who_Type</name>
         <label>Dec Who Type</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Prep_Task</targetReference>
         </defaultConnector>
@@ -92,8 +93,8 @@
     <decisions>
         <name>Dec_Organizer_Active</name>
         <label>Dec Organizer Active</label>
-        <locationX>578</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Inactive</defaultConnectorLabel>
         <rules>
             <name>Active</name>
@@ -121,8 +122,8 @@
     <decisions>
         <name>Dec_Prep_Open</name>
         <label>Dec Prep Open</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Prepared</defaultConnectorLabel>
         <rules>
             <name>Prep_Open</name>
@@ -167,8 +168,8 @@
     <loops>
         <name>Loop_Meetings</name>
         <label>Loop Meetings</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionReference>Get_Nearby_Meetings</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -187,7 +188,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -200,9 +201,10 @@
     <recordCreates>
         <name>Create_Prep_Task</name>
         <label>Create Prep Task</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -259,8 +261,8 @@
     <recordLookups>
         <name>Get_Nearby_Meetings</name>
         <label>Get Nearby Meetings</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Meetings</targetReference>
@@ -304,13 +306,14 @@
     <recordLookups>
         <name>Get_Organizer</name>
         <label>Get Organizer</label>
-        <locationX>314</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Organizer_Active</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -328,13 +331,14 @@
     <recordLookups>
         <name>Get_Open_Prep_Tasks</name>
         <label>Get Open Prep Tasks</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Open_Prep_Count</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -371,7 +375,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Who_Type</targetReference>
@@ -410,8 +414,8 @@
     <subflows>
         <name>Sub_Contact_Snapshot</name>
         <label>Sub Contact Snapshot</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Create_Prep_Task</targetReference>
         </connector>
@@ -434,8 +438,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>842</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Open_Count</name>
         <label>Asg Open Count</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOpenCount</assignToReference>
             <operator>AssignCount</operator>
@@ -20,8 +20,8 @@
     <assignments>
         <name>Asg_Count_Overdue</name>
         <label>Asg Count Overdue</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOverdue</assignToReference>
             <operator>Add</operator>
@@ -36,8 +36,8 @@
     <assignments>
         <name>Asg_Owner_Admin</name>
         <label>Asg Owner Admin</label>
-        <locationX>578</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOwnerId</assignToReference>
             <operator>Assign</operator>
@@ -59,8 +59,8 @@
     <assignments>
         <name>Asg_Owner_User</name>
         <label>Asg Owner User</label>
-        <locationX>314</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOwnerId</assignToReference>
             <operator>Assign</operator>
@@ -76,14 +76,15 @@
             </value>
         </assignmentItems>
         <connector>
+            <isGoTo>true</isGoTo>
             <targetReference>Create_Fix_Task</targetReference>
         </connector>
     </assignments>
     <decisions>
         <name>Dec_User_State</name>
         <label>Dec User State</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Owner_Admin</targetReference>
         </defaultConnector>
@@ -136,8 +137,8 @@
     <decisions>
         <name>Dec_Is_Overdue</name>
         <label>Dec Is Overdue</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Loop_User_Tasks</targetReference>
         </defaultConnector>
@@ -161,8 +162,8 @@
     <decisions>
         <name>Dec_Overloaded</name>
         <label>Dec Overloaded</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Owner_User</targetReference>
         </defaultConnector>
@@ -185,6 +186,7 @@
                 </rightValue>
             </conditions>
             <connector>
+                <isGoTo>true</isGoTo>
                 <targetReference>Asg_Owner_Admin</targetReference>
             </connector>
             <label>Overloaded</label>
@@ -207,8 +209,8 @@
     <loops>
         <name>Loop_User_Tasks</name>
         <label>Loop User Tasks</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varTask</assignNextValueToReference>
         <collectionReference>Get_User_Open_Tasks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -228,7 +230,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -241,9 +243,10 @@
     <recordCreates>
         <name>Create_Handover_Task</name>
         <label>Create Handover Task</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -288,9 +291,10 @@
     <recordCreates>
         <name>Create_Fix_Task</name>
         <label>Create Fix Task</label>
-        <locationX>578</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -335,8 +339,8 @@
     <recordCreates>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <inputAssignments>
             <field>Subject</field>
             <value>
@@ -373,8 +377,8 @@
     <recordLookups>
         <name>Get_Interview_User</name>
         <label>Get Interview User</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Admin_Profile</targetReference>
@@ -397,13 +401,14 @@
     <recordLookups>
         <name>Get_Admin_Profile</name>
         <label>Get Admin Profile</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Admin_User</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -421,13 +426,14 @@
     <recordLookups>
         <name>Get_Admin_User</name>
         <label>Get Admin User</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_User_State</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -454,13 +460,14 @@
     <recordLookups>
         <name>Get_User_Open_Tasks</name>
         <label>Get User Open Tasks</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Open_Count</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -485,12 +492,13 @@
     <recordUpdates>
         <name>Upd_Reassign_Open_Tasks</name>
         <label>Upd Reassign Open Tasks</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Create_Handover_Task</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -517,7 +525,7 @@
         <object>Task</object>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Interview_User</targetReference>

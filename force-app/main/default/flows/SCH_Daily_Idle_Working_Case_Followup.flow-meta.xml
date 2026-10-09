@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Task_Count</name>
         <label>Asg Task Count</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varTaskCount</assignToReference>
             <operator>AssignCount</operator>
@@ -20,8 +20,8 @@
     <assignments>
         <name>Asg_Bump</name>
         <label>Asg Bump</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varTask.Priority</assignToReference>
             <operator>Assign</operator>
@@ -50,8 +50,8 @@
     <decisions>
         <name>Dec_Idle</name>
         <label>Dec Idle</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Recently Updated</defaultConnectorLabel>
         <rules>
             <name>Idle</name>
@@ -72,8 +72,8 @@
     <decisions>
         <name>Dec_Has_Tasks</name>
         <label>Dec Has Tasks</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Dec_Has_Contact</targetReference>
         </defaultConnector>
@@ -97,8 +97,8 @@
     <decisions>
         <name>Dec_Has_Contact</name>
         <label>Dec Has Contact</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Followup_Task</targetReference>
         </defaultConnector>
@@ -122,8 +122,8 @@
     <decisions>
         <name>Dec_Task_Overdue</name>
         <label>Dec Task Overdue</label>
-        <locationX>578</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Loop_Tasks</targetReference>
         </defaultConnector>
@@ -154,8 +154,8 @@
     <decisions>
         <name>Dec_Any_Bumped</name>
         <label>Dec Any Bumped</label>
-        <locationX>842</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Nothing Overdue</defaultConnectorLabel>
         <rules>
             <name>Bumped</name>
@@ -190,8 +190,8 @@
     <loops>
         <name>Loop_Tasks</name>
         <label>Loop Tasks</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varTask</assignNextValueToReference>
         <collectionReference>Get_Case_Tasks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -211,7 +211,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -224,9 +224,10 @@
     <recordCreates>
         <name>Create_Followup_Task</name>
         <label>Create Followup Task</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -283,8 +284,8 @@
     <recordLookups>
         <name>Get_Case_Tasks</name>
         <label>Get Case Tasks</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Task_Count</targetReference>
@@ -314,12 +315,13 @@
     <recordUpdates>
         <name>Update_Tasks</name>
         <label>Update Tasks</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Update_Case_Priority</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colTasksToUpdate</inputReference>
@@ -327,9 +329,10 @@
     <recordUpdates>
         <name>Update_Case_Priority</name>
         <label>Update Case Priority</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -349,7 +352,7 @@
         <object>Case</object>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Idle</targetReference>
@@ -374,8 +377,8 @@
     <subflows>
         <name>Sub_Contact_Snapshot</name>
         <label>Sub Contact Snapshot</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Create_Followup_Task</targetReference>
         </connector>
@@ -398,8 +401,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

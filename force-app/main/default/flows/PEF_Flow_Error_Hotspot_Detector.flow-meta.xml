@@ -3,14 +3,15 @@
     <actionCalls>
         <name>Send_Hotspot_Email</name>
         <label>Send Hotspot Email</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
             <targetReference>Sub_Log_Error</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -38,8 +39,8 @@
     <assignments>
         <name>Asg_Hits</name>
         <label>Asg Hits</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varHits</assignToReference>
             <operator>AssignCount</operator>
@@ -54,8 +55,8 @@
     <assignments>
         <name>Asg_Append_Date</name>
         <label>Asg Append Date</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varDates</assignToReference>
             <operator>Add</operator>
@@ -78,8 +79,8 @@
         <name>Sort_Newest</name>
         <elementSubtype>SortCollectionProcessor</elementSubtype>
         <label>Sort Newest</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionProcessorType>SortCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Recent_Logs</collectionReference>
         <connector>
@@ -95,8 +96,8 @@
         <name>Filter_Same_Element</name>
         <elementSubtype>FilterCollectionProcessor</elementSubtype>
         <label>Filter Same Element</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>currentItem_Filter_Same_Element</assignNextValueToReference>
         <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Recent_Logs</collectionReference>
@@ -115,8 +116,8 @@
     <decisions>
         <name>Dec_Hotspot</name>
         <label>Dec Hotspot</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Sub_Log_Error</targetReference>
         </defaultConnector>
@@ -140,8 +141,8 @@
     <decisions>
         <name>Dec_Hotspot_Exists</name>
         <label>Dec Hotspot Exists</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Hotspot_Task</targetReference>
         </defaultConnector>
@@ -194,8 +195,8 @@
     <loops>
         <name>Loop_Hits</name>
         <label>Loop Hits</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varHit</assignNextValueToReference>
         <collectionReference>Filter_Same_Element</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -215,7 +216,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -228,12 +229,13 @@
     <recordCreates>
         <name>Create_Hotspot_Task</name>
         <label>Create Hotspot Task</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Hotspot_Email</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -266,9 +268,10 @@
     <recordCreates>
         <name>Sub_Log_Error</name>
         <label>Sub Log Error</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -307,8 +310,8 @@
     <recordCreates>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <inputAssignments>
             <field>Subject</field>
             <value>
@@ -345,8 +348,8 @@
     <recordLookups>
         <name>Get_Recent_Logs</name>
         <label>Get Recent Logs</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Sort_Newest</targetReference>
@@ -383,13 +386,14 @@
     <recordLookups>
         <name>Get_Existing_Hotspot</name>
         <label>Get Existing Hotspot</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Hotspot_Exists</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -412,7 +416,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Recent_Logs</targetReference>

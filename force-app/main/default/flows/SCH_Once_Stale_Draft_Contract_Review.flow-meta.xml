@@ -3,11 +3,12 @@
     <actionCalls>
         <name>Send_Summary_Email</name>
         <label>Send Summary Email</label>
-        <locationX>578</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -35,8 +36,8 @@
     <assignments>
         <name>Asg_Total</name>
         <label>Asg Total</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varTotal</assignToReference>
             <operator>AssignCount</operator>
@@ -51,8 +52,8 @@
     <assignments>
         <name>Asg_Review_Task</name>
         <label>Asg Review Task</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varNewTask.Subject</assignToReference>
             <operator>Assign</operator>
@@ -116,8 +117,8 @@
     <assignments>
         <name>Asg_Pending</name>
         <label>Asg Pending</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varPending</assignToReference>
             <operator>Add</operator>
@@ -132,8 +133,8 @@
     <decisions>
         <name>Dec_Any_Drafts</name>
         <label>Dec Any Drafts</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Summary_Task</targetReference>
         </defaultConnector>
@@ -157,8 +158,8 @@
     <decisions>
         <name>Dec_Start_Passed</name>
         <label>Dec Start Passed</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Pending</targetReference>
         </defaultConnector>
@@ -182,8 +183,8 @@
     <decisions>
         <name>Dec_Has_Review_Tasks</name>
         <label>Dec Has Review Tasks</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Summary_Task</targetReference>
         </defaultConnector>
@@ -221,8 +222,8 @@
     <loops>
         <name>Loop_Contracts</name>
         <label>Loop Contracts</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varContract</assignNextValueToReference>
         <collectionReference>Get_Draft_Contracts</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -242,7 +243,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -255,12 +256,13 @@
     <recordCreates>
         <name>Create_Review_Tasks</name>
         <label>Create Review Tasks</label>
-        <locationX>578</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Create_Summary_Task</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colNewTasks</inputReference>
@@ -268,12 +270,13 @@
     <recordCreates>
         <name>Create_Summary_Task</name>
         <label>Create Summary Task</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Summary_Email</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -312,8 +315,8 @@
     <recordLookups>
         <name>Get_Draft_Contracts</name>
         <label>Get Draft Contracts</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Total</targetReference>
@@ -343,7 +346,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Draft_Contracts</targetReference>
@@ -359,8 +362,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

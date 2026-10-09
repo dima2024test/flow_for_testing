@@ -3,11 +3,12 @@
     <actionCalls>
         <name>Send_Removal_Email</name>
         <label>Send Removal Email</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -35,8 +36,8 @@
     <assignments>
         <name>Asg_Accumulate</name>
         <label>Asg Accumulate</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varRemainingTotal</assignToReference>
             <operator>Add</operator>
@@ -58,8 +59,8 @@
     <decisions>
         <name>Dec_Deal_State</name>
         <label>Dec Deal State</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Not Found</defaultConnectorLabel>
         <rules>
             <name>Closed_Deal</name>
@@ -95,8 +96,8 @@
     <decisions>
         <name>Dec_Last_Product</name>
         <label>Dec Last Product</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Dec_Large_Removal</targetReference>
         </defaultConnector>
@@ -120,8 +121,8 @@
     <decisions>
         <name>Dec_Large_Removal</name>
         <label>Dec Large Removal</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Dec_Has_Account</targetReference>
         </defaultConnector>
@@ -145,8 +146,8 @@
     <decisions>
         <name>Dec_Has_Account</name>
         <label>Dec Has Account</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>No Account</defaultConnectorLabel>
         <rules>
             <name>Has_Account</name>
@@ -188,8 +189,8 @@
     <loops>
         <name>Loop_Items</name>
         <label>Loop Items</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varItem</assignNextValueToReference>
         <collectionReference>Get_Remaining_Items</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -209,7 +210,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -222,12 +223,13 @@
     <recordCreates>
         <name>Create_Closed_Deal_Task</name>
         <label>Create Closed Deal Task</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Removal_Email</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -278,12 +280,13 @@
     <recordCreates>
         <name>Create_Empty_Deal_Task</name>
         <label>Create Empty Deal Task</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Has_Account</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -334,12 +337,13 @@
     <recordCreates>
         <name>Create_Large_Removal_Task</name>
         <label>Create Large Removal Task</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Has_Account</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -390,8 +394,8 @@
     <recordLookups>
         <name>Get_Opportunity</name>
         <label>Get Opportunity</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Deal_State</targetReference>
@@ -414,13 +418,14 @@
     <recordLookups>
         <name>Get_Remaining_Items</name>
         <label>Get Remaining Items</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Items</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -443,7 +448,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Opportunity</targetReference>
@@ -456,8 +461,8 @@
     <subflows>
         <name>Sub_Pipeline_Summary</name>
         <label>Sub Pipeline Summary</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Opportunity_Pipeline_Summary</flowName>
         <inputAssignments>
             <name>inAccountId</name>
@@ -475,8 +480,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

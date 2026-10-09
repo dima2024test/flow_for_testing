@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Account_Context</name>
         <label>Asg Account Context</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varAccountRating</assignToReference>
             <operator>Assign</operator>
@@ -27,8 +27,8 @@
     <assignments>
         <name>Asg_Increment_Open</name>
         <label>Asg Increment Open</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOpenCaseCount</assignToReference>
             <operator>Add</operator>
@@ -43,8 +43,8 @@
     <assignments>
         <name>Asg_Priority_High</name>
         <label>Asg Priority High</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>$Record.Priority</assignToReference>
             <operator>Assign</operator>
@@ -59,8 +59,8 @@
     <assignments>
         <name>Asg_Priority_Medium</name>
         <label>Asg Priority Medium</label>
-        <locationX>578</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>$Record.Priority</assignToReference>
             <operator>Assign</operator>
@@ -75,8 +75,8 @@
     <assignments>
         <name>Asg_Priority_Low</name>
         <label>Asg Priority Low</label>
-        <locationX>842</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>$Record.Priority</assignToReference>
             <operator>Assign</operator>
@@ -91,8 +91,8 @@
     <assignments>
         <name>Asg_Default_Origin</name>
         <label>Asg Default Origin</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>$Record.Origin</assignToReference>
             <operator>Assign</operator>
@@ -104,8 +104,8 @@
     <decisions>
         <name>Dec_Has_Account</name>
         <label>Dec Has Account</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Dec_Has_Contact</targetReference>
         </defaultConnector>
@@ -129,8 +129,8 @@
     <decisions>
         <name>Dec_Has_Contact</name>
         <label>Dec Has Contact</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Dec_Priority_Rule</targetReference>
         </defaultConnector>
@@ -154,8 +154,8 @@
     <decisions>
         <name>Dec_Case_Is_Open</name>
         <label>Dec Case Is Open</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Loop_Contact_Cases</targetReference>
         </defaultConnector>
@@ -179,8 +179,8 @@
     <decisions>
         <name>Dec_Priority_Rule</name>
         <label>Dec Priority Rule</label>
-        <locationX>578</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Priority_Low</targetReference>
         </defaultConnector>
@@ -233,8 +233,8 @@
     <decisions>
         <name>Dec_Origin_Missing</name>
         <label>Dec Origin Missing</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Origin Set</defaultConnectorLabel>
         <rules>
             <name>Origin_Missing</name>
@@ -264,8 +264,8 @@
     <loops>
         <name>Loop_Contact_Cases</name>
         <label>Loop Contact Cases</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionReference>Get_Contact_Cases</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -284,7 +284,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -297,8 +297,8 @@
     <recordLookups>
         <name>Get_Account</name>
         <label>Get Account</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Account_Context</targetReference>
@@ -318,8 +318,8 @@
     <recordLookups>
         <name>Get_Contact_Cases</name>
         <label>Get Contact Cases</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Contact_Cases</targetReference>
@@ -344,7 +344,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Has_Account</targetReference>

@@ -3,14 +3,15 @@
     <actionCalls>
         <name>Send_Critical_Email</name>
         <label>Send Critical Email</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
             <targetReference>Sub_Log_Batch_Error</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Batch_Error</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -38,8 +39,8 @@
     <assignments>
         <name>Asg_Severity_Critical</name>
         <label>Asg Severity Critical</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varSeverity</assignToReference>
             <operator>Assign</operator>
@@ -54,8 +55,8 @@
     <assignments>
         <name>Asg_Severity_Error</name>
         <label>Asg Severity Error</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varSeverity</assignToReference>
             <operator>Assign</operator>
@@ -70,8 +71,8 @@
     <decisions>
         <name>Dec_Phase</name>
         <label>Dec Phase</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Severity_Error</targetReference>
         </defaultConnector>
@@ -102,8 +103,8 @@
     <decisions>
         <name>Dec_Admin_Found</name>
         <label>Dec Admin Found</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Task_Default_Owner</targetReference>
         </defaultConnector>
@@ -127,8 +128,8 @@
     <decisions>
         <name>Dec_Is_Critical</name>
         <label>Dec Is Critical</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Sub_Log_Batch_Error</targetReference>
         </defaultConnector>
@@ -177,7 +178,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -190,12 +191,13 @@
     <recordCreates>
         <name>Create_Task_For_Admin</name>
         <label>Create Task For Admin</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Is_Critical</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -240,12 +242,13 @@
     <recordCreates>
         <name>Create_Task_Default_Owner</name>
         <label>Create Task Default Owner</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Sub_Log_Batch_Error</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -284,9 +287,10 @@
     <recordCreates>
         <name>Sub_Log_Batch_Error</name>
         <label>Sub Log Batch Error</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -331,8 +335,8 @@
     <recordCreates>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <inputAssignments>
             <field>Subject</field>
             <value>
@@ -369,8 +373,8 @@
     <recordLookups>
         <name>Get_Admin_Profile</name>
         <label>Get Admin Profile</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Admin_User</targetReference>
@@ -393,13 +397,14 @@
     <recordLookups>
         <name>Get_Admin_User</name>
         <label>Get Admin User</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Admin_Found</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -424,7 +429,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Phase</targetReference>

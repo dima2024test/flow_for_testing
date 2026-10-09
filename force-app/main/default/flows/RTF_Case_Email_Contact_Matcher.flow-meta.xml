@@ -3,8 +3,8 @@
     <actionCalls>
         <name>Send_Unlinked_Alert</name>
         <label>Send Unlinked Alert</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
@@ -38,8 +38,8 @@
     <assignments>
         <name>Asg_Match_Count</name>
         <label>Asg Match Count</label>
-        <locationX>578</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varMatchCount</assignToReference>
             <operator>AssignCount</operator>
@@ -54,8 +54,8 @@
     <assignments>
         <name>Asg_Candidate</name>
         <label>Asg Candidate</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varBestContactId</assignToReference>
             <operator>Assign</operator>
@@ -91,8 +91,8 @@
     <decisions>
         <name>Dec_Priority_High</name>
         <label>Dec Priority High</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Triage_Task</targetReference>
         </defaultConnector>
@@ -116,8 +116,8 @@
     <decisions>
         <name>Dec_Match_Result</name>
         <label>Dec Match Result</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_No_Match_Task</targetReference>
         </defaultConnector>
@@ -165,8 +165,8 @@
     <loops>
         <name>Loop_Candidates</name>
         <label>Loop Candidates</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varContact</assignNextValueToReference>
         <collectionReference>Get_Matching_Contacts</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -186,7 +186,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -199,9 +199,10 @@
     <recordCreates>
         <name>Create_Triage_Task</name>
         <label>Create Triage Task</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -252,9 +253,10 @@
     <recordCreates>
         <name>Create_Review_Task</name>
         <label>Create Review Task</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -305,9 +307,10 @@
     <recordCreates>
         <name>Create_No_Match_Task</name>
         <label>Create No Match Task</label>
-        <locationX>578</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -358,13 +361,14 @@
     <recordLookups>
         <name>Get_Matching_Contacts</name>
         <label>Get Matching Contacts</label>
-        <locationX>314</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Match_Count</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -384,12 +388,13 @@
     <recordUpdates>
         <name>Update_Case_Contact</name>
         <label>Update Case Contact</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Sub_Contact_Snapshot</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -415,7 +420,7 @@
         <object>Case</object>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Priority_High</targetReference>
@@ -449,8 +454,8 @@
     <subflows>
         <name>Sub_Contact_Snapshot</name>
         <label>Sub Contact Snapshot</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Contact_Activity_Snapshot</flowName>
         <inputAssignments>
             <name>inContactId</name>
@@ -466,8 +471,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>842</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

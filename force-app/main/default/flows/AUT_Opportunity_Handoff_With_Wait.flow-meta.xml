@@ -3,14 +3,15 @@
     <actionCalls>
         <name>Send_Reminder_Email</name>
         <label>Send Reminder Email</label>
-        <locationX>50</locationX>
-        <locationY>2366</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
             <targetReference>Asg_Reminded</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -38,8 +39,8 @@
     <assignments>
         <name>Asg_Build_Intro_Task</name>
         <label>Asg Build Intro Task</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varNewTask.Subject</assignToReference>
             <operator>Assign</operator>
@@ -103,8 +104,8 @@
     <assignments>
         <name>Asg_Open_Count</name>
         <label>Asg Open Count</label>
-        <locationX>50</locationX>
-        <locationY>2030</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOpenCount</assignToReference>
             <operator>AssignCount</operator>
@@ -119,8 +120,8 @@
     <assignments>
         <name>Asg_Reminded</name>
         <label>Asg Reminded</label>
-        <locationX>50</locationX>
-        <locationY>2534</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outResult</assignToReference>
             <operator>Assign</operator>
@@ -132,8 +133,8 @@
     <assignments>
         <name>Asg_Completed</name>
         <label>Asg Completed</label>
-        <locationX>314</locationX>
-        <locationY>2366</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outResult</assignToReference>
             <operator>Assign</operator>
@@ -145,8 +146,8 @@
     <assignments>
         <name>Asg_Skipped</name>
         <label>Asg Skipped</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outResult</assignToReference>
             <operator>Assign</operator>
@@ -158,8 +159,8 @@
     <decisions>
         <name>Dec_Closed_Won</name>
         <label>Dec Closed Won</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Skipped</targetReference>
         </defaultConnector>
@@ -190,9 +191,10 @@
     <decisions>
         <name>Dec_Owner_Valid</name>
         <label>Dec Owner Valid</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Asg_Skipped</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Invalid Owner</defaultConnectorLabel>
@@ -215,8 +217,8 @@
     <decisions>
         <name>Dec_Any_Open</name>
         <label>Dec Any Open</label>
-        <locationX>50</locationX>
-        <locationY>2198</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Completed</targetReference>
         </defaultConnector>
@@ -259,8 +261,8 @@
     <loops>
         <name>Loop_Roles</name>
         <label>Loop Roles</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varRole</assignNextValueToReference>
         <collectionReference>Get_Contact_Roles</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -280,7 +282,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -293,12 +295,13 @@
     <recordCreates>
         <name>Create_Intro_Tasks</name>
         <label>Create Intro Tasks</label>
-        <locationX>314</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Wait_7_Days</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colNewTasks</inputReference>
@@ -306,8 +309,8 @@
     <recordLookups>
         <name>Get_Opportunity</name>
         <label>Get Opportunity</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Closed_Won</targetReference>
@@ -330,13 +333,14 @@
     <recordLookups>
         <name>Get_New_Owner</name>
         <label>Get New Owner</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Owner_Valid</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -361,13 +365,14 @@
     <recordLookups>
         <name>Get_Contact_Roles</name>
         <label>Get Contact Roles</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Roles</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -385,13 +390,14 @@
     <recordLookups>
         <name>Get_Open_Intro_Tasks</name>
         <label>Get Open Intro Tasks</label>
-        <locationX>50</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Open_Count</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -421,7 +427,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Opportunity</targetReference>
@@ -431,8 +437,8 @@
     <subflows>
         <name>Sub_Data_Quality</name>
         <label>Sub Data Quality</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Wait_1_Day</targetReference>
         </connector>
@@ -457,8 +463,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>
@@ -563,10 +569,11 @@ Account data quality grade: {!varGrade}</text>
     <waits>
         <name>Wait_1_Day</name>
         <label>Wait 1 Day</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Default Path</defaultConnectorLabel>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <waitEvents>
@@ -600,10 +607,11 @@ Account data quality grade: {!varGrade}</text>
     <waits>
         <name>Wait_7_Days</name>
         <label>Wait 7 Days</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Default Path</defaultConnectorLabel>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <waitEvents>

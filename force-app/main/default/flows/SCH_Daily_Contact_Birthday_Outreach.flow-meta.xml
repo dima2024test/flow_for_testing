@@ -3,11 +3,12 @@
     <actionCalls>
         <name>Send_Owner_Note</name>
         <label>Send Owner Note</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -35,8 +36,8 @@
     <assignments>
         <name>Asg_Greeted</name>
         <label>Asg Greeted</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varGreeted</assignToReference>
             <operator>Assign</operator>
@@ -51,8 +52,8 @@
     <decisions>
         <name>Dec_Is_Birthday</name>
         <label>Dec Is Birthday</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Not Today</defaultConnectorLabel>
         <rules>
             <name>Birthday_Today</name>
@@ -73,8 +74,8 @@
     <decisions>
         <name>Dec_Recent_Greeting</name>
         <label>Dec Recent Greeting</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Loop_Greetings</targetReference>
         </defaultConnector>
@@ -98,8 +99,8 @@
     <decisions>
         <name>Dec_Already_Greeted</name>
         <label>Dec Already Greeted</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Sub_Contact_Snapshot</targetReference>
         </defaultConnector>
@@ -120,8 +121,8 @@
     <decisions>
         <name>Dec_Open_Issues</name>
         <label>Dec Open Issues</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Greeting_Task</targetReference>
         </defaultConnector>
@@ -166,8 +167,8 @@
     <loops>
         <name>Loop_Greetings</name>
         <label>Loop Greetings</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varTask</assignNextValueToReference>
         <collectionReference>Get_Previous_Greetings</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -187,7 +188,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -200,12 +201,13 @@
     <recordCreates>
         <name>Create_Issue_Task</name>
         <label>Create Issue Task</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Owner_Note</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -256,12 +258,13 @@
     <recordCreates>
         <name>Create_Greeting_Task</name>
         <label>Create Greeting Task</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Owner_Note</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -312,8 +315,8 @@
     <recordLookups>
         <name>Get_Previous_Greetings</name>
         <label>Get Previous Greetings</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Greetings</targetReference>
@@ -341,7 +344,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Is_Birthday</targetReference>
@@ -373,8 +376,8 @@
     <subflows>
         <name>Sub_Contact_Snapshot</name>
         <label>Sub Contact Snapshot</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Open_Issues</targetReference>
         </connector>
@@ -401,8 +404,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

@@ -3,11 +3,12 @@
     <actionCalls>
         <name>Send_Audit_Email</name>
         <label>Send Audit Email</label>
-        <locationX>842</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -35,8 +36,8 @@
     <assignments>
         <name>Asg_Active_Count</name>
         <label>Asg Active Count</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varActive</assignToReference>
             <operator>AssignCount</operator>
@@ -51,8 +52,8 @@
     <assignments>
         <name>Asg_Missing_Code</name>
         <label>Asg Missing Code</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varMissingCode</assignToReference>
             <operator>Add</operator>
@@ -74,8 +75,8 @@
     <assignments>
         <name>Asg_Missing_Family</name>
         <label>Asg Missing Family</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varMissingFamily</assignToReference>
             <operator>Add</operator>
@@ -97,8 +98,8 @@
     <assignments>
         <name>Asg_New_Count</name>
         <label>Asg New Count</label>
-        <locationX>578</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varNewProducts</assignToReference>
             <operator>AssignCount</operator>
@@ -114,8 +115,8 @@
         <name>Filter_New_Products</name>
         <elementSubtype>FilterCollectionProcessor</elementSubtype>
         <label>Filter New Products</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>currentItem_Filter_New_Products</assignNextValueToReference>
         <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Active_Products</collectionReference>
@@ -134,8 +135,8 @@
     <decisions>
         <name>Dec_Any_Products</name>
         <label>Dec Any Products</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Audit_Task</targetReference>
         </defaultConnector>
@@ -159,8 +160,8 @@
     <decisions>
         <name>Dec_Data_Gap</name>
         <label>Dec Data Gap</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Loop_Products</targetReference>
         </defaultConnector>
@@ -199,8 +200,8 @@
     <decisions>
         <name>Dec_Gaps_Found</name>
         <label>Dec Gaps Found</label>
-        <locationX>578</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Catalog Clean</defaultConnectorLabel>
         <rules>
             <name>Gaps</name>
@@ -247,8 +248,8 @@
     <loops>
         <name>Loop_Products</name>
         <label>Loop Products</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varProduct</assignNextValueToReference>
         <collectionReference>Get_Active_Products</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -268,7 +269,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -281,12 +282,13 @@
     <recordCreates>
         <name>Create_Audit_Task</name>
         <label>Create Audit Task</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Gaps_Found</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -325,8 +327,8 @@
     <recordLookups>
         <name>Get_Active_Products</name>
         <label>Get Active Products</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Active_Count</targetReference>
@@ -349,7 +351,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Active_Products</targetReference>
@@ -365,8 +367,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Copy_Phone</name>
         <label>Asg Copy Phone</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>$Record.Phone</assignToReference>
             <operator>Assign</operator>
@@ -20,8 +20,8 @@
     <assignments>
         <name>Asg_Copy_Address</name>
         <label>Asg Copy Address</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>$Record.MailingStreet</assignToReference>
             <operator>Assign</operator>
@@ -57,8 +57,8 @@
     <assignments>
         <name>Asg_Default_Source</name>
         <label>Asg Default Source</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>$Record.LeadSource</assignToReference>
             <operator>Assign</operator>
@@ -73,8 +73,8 @@
     <assignments>
         <name>Asg_Count_Duplicate</name>
         <label>Asg Count Duplicate</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varDuplicateCount</assignToReference>
             <operator>Add</operator>
@@ -89,8 +89,8 @@
     <assignments>
         <name>Asg_Duplicate_Note</name>
         <label>Asg Duplicate Note</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>$Record.Description</assignToReference>
             <operator>Assign</operator>
@@ -102,8 +102,8 @@
     <decisions>
         <name>Dec_Has_Account</name>
         <label>Dec Has Account</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Dec_Lead_Source</targetReference>
         </defaultConnector>
@@ -127,8 +127,8 @@
     <decisions>
         <name>Dec_Phone_Missing</name>
         <label>Dec Phone Missing</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Dec_Address_Missing</targetReference>
         </defaultConnector>
@@ -159,8 +159,8 @@
     <decisions>
         <name>Dec_Address_Missing</name>
         <label>Dec Address Missing</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Dec_Lead_Source</targetReference>
         </defaultConnector>
@@ -191,8 +191,8 @@
     <decisions>
         <name>Dec_Lead_Source</name>
         <label>Dec Lead Source</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Dec_Has_Email</targetReference>
         </defaultConnector>
@@ -216,8 +216,8 @@
     <decisions>
         <name>Dec_Has_Email</name>
         <label>Dec Has Email</label>
-        <locationX>578</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Skip Check</defaultConnectorLabel>
         <rules>
             <name>Has_Email</name>
@@ -245,8 +245,8 @@
     <decisions>
         <name>Dec_Duplicate_Found</name>
         <label>Dec Duplicate Found</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Unique</defaultConnectorLabel>
         <rules>
             <name>Duplicate</name>
@@ -276,8 +276,8 @@
     <loops>
         <name>Loop_Same_Email</name>
         <label>Loop Same Email</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionReference>Get_Same_Email_Contacts</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -296,7 +296,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -309,8 +309,8 @@
     <recordLookups>
         <name>Get_Account</name>
         <label>Get Account</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Phone_Missing</targetReference>
@@ -330,8 +330,8 @@
     <recordLookups>
         <name>Get_Same_Email_Contacts</name>
         <label>Get Same Email Contacts</label>
-        <locationX>578</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Same_Email</targetReference>
@@ -349,7 +349,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Has_Account</targetReference>

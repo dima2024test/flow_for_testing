@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Count_Open</name>
         <label>Asg Count Open</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outOpenTasks</assignToReference>
             <operator>Add</operator>
@@ -20,8 +20,8 @@
     <assignments>
         <name>Asg_Count_Overdue</name>
         <label>Asg Count Overdue</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outOverdueTasks</assignToReference>
             <operator>Add</operator>
@@ -36,8 +36,8 @@
     <assignments>
         <name>Asg_Case_Count</name>
         <label>Asg Case Count</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outOpenCases</assignToReference>
             <operator>AssignCount</operator>
@@ -52,8 +52,8 @@
     <assignments>
         <name>Asg_At_Risk</name>
         <label>Asg At Risk</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outEngagement</assignToReference>
             <operator>Assign</operator>
@@ -68,8 +68,8 @@
     <assignments>
         <name>Asg_Active</name>
         <label>Asg Active</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outEngagement</assignToReference>
             <operator>Assign</operator>
@@ -81,8 +81,8 @@
     <assignments>
         <name>Asg_Dormant</name>
         <label>Asg Dormant</label>
-        <locationX>578</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outEngagement</assignToReference>
             <operator>Assign</operator>
@@ -94,8 +94,8 @@
     <assignments>
         <name>Asg_Unknown</name>
         <label>Asg Unknown</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outEngagement</assignToReference>
             <operator>Assign</operator>
@@ -107,8 +107,8 @@
     <decisions>
         <name>Dec_Contact_Found</name>
         <label>Dec Contact Found</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Unknown</targetReference>
         </defaultConnector>
@@ -132,8 +132,8 @@
     <decisions>
         <name>Dec_Overdue</name>
         <label>Dec Overdue</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Loop_Tasks</targetReference>
         </defaultConnector>
@@ -157,8 +157,8 @@
     <decisions>
         <name>Dec_Engagement</name>
         <label>Dec Engagement</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Dormant</targetReference>
         </defaultConnector>
@@ -201,8 +201,8 @@
     <loops>
         <name>Loop_Tasks</name>
         <label>Loop Tasks</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varTask</assignNextValueToReference>
         <collectionReference>Get_Open_Tasks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -222,7 +222,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -235,9 +235,10 @@
     <recordCreates>
         <name>Create_Flag_Task</name>
         <label>Create Flag Task</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -282,8 +283,8 @@
     <recordLookups>
         <name>Get_Contact</name>
         <label>Get Contact</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Contact_Found</targetReference>
@@ -306,13 +307,14 @@
     <recordLookups>
         <name>Get_Open_Tasks</name>
         <label>Get Open Tasks</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Tasks</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -337,13 +339,14 @@
     <recordLookups>
         <name>Get_Open_Cases</name>
         <label>Get Open Cases</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Case_Count</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -366,7 +369,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Contact</targetReference>
@@ -376,8 +379,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

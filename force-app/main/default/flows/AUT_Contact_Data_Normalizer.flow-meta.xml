@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Count_To_Fix</name>
         <label>Asg Count To Fix</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varToFixCount</assignToReference>
             <operator>AssignCount</operator>
@@ -20,8 +20,8 @@
     <assignments>
         <name>Asg_Copy_Address</name>
         <label>Asg Copy Address</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varContact.MailingStreet</assignToReference>
             <operator>Assign</operator>
@@ -50,8 +50,8 @@
     <assignments>
         <name>Asg_Copy_Phone</name>
         <label>Asg Copy Phone</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varContact.Phone</assignToReference>
             <operator>Assign</operator>
@@ -66,8 +66,8 @@
     <assignments>
         <name>Asg_Add_To_Update</name>
         <label>Asg Add To Update</label>
-        <locationX>314</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>colContactsToUpdate</assignToReference>
             <operator>Add</operator>
@@ -89,8 +89,8 @@
     <assignments>
         <name>Asg_Nothing_To_Do</name>
         <label>Asg Nothing To Do</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outUpdatedCount</assignToReference>
             <operator>Assign</operator>
@@ -103,8 +103,8 @@
         <name>Filter_Contacts_Missing_Data</name>
         <elementSubtype>FilterCollectionProcessor</elementSubtype>
         <label>Filter Contacts Missing Data</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>currentItem_Filter_Contacts_Missing_Data</assignNextValueToReference>
         <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Contacts</collectionReference>
@@ -130,8 +130,8 @@
     <decisions>
         <name>Dec_Account_Found</name>
         <label>Dec Account Found</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Nothing_To_Do</targetReference>
         </defaultConnector>
@@ -155,9 +155,10 @@
     <decisions>
         <name>Dec_Any_To_Fix</name>
         <label>Dec Any To Fix</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Asg_Nothing_To_Do</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Nothing To Fix</defaultConnectorLabel>
@@ -180,8 +181,8 @@
     <decisions>
         <name>Dec_Missing_Address</name>
         <label>Dec Missing Address</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Dec_Missing_Phone</targetReference>
         </defaultConnector>
@@ -212,8 +213,8 @@
     <decisions>
         <name>Dec_Missing_Phone</name>
         <label>Dec Missing Phone</label>
-        <locationX>314</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Add_To_Update</targetReference>
         </defaultConnector>
@@ -248,8 +249,8 @@
     <loops>
         <name>Loop_Contacts</name>
         <label>Loop Contacts</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varContact</assignNextValueToReference>
         <collectionReference>Filter_Contacts_Missing_Data</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -269,7 +270,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -282,8 +283,8 @@
     <recordLookups>
         <name>Get_Account</name>
         <label>Get Account</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Account_Found</targetReference>
@@ -306,13 +307,14 @@
     <recordLookups>
         <name>Get_Contacts</name>
         <label>Get Contacts</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Filter_Contacts_Missing_Data</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -330,15 +332,16 @@
     <recordUpdates>
         <name>Update_Contacts</name>
         <label>Update Contacts</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colContactsToUpdate</inputReference>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Account</targetReference>
@@ -348,8 +351,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

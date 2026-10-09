@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Contact</name>
         <label>Asg Contact</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varContactId</assignToReference>
             <operator>Assign</operator>
@@ -20,8 +20,8 @@
     <decisions>
         <name>Dec_Expiry_Window</name>
         <label>Dec Expiry Window</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Not Yet</defaultConnectorLabel>
         <rules>
             <name>Expired</name>
@@ -57,8 +57,8 @@
     <decisions>
         <name>Dec_Renewal_Exists</name>
         <label>Dec Renewal Exists</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Get_Account_Contacts</targetReference>
         </defaultConnector>
@@ -79,8 +79,8 @@
     <decisions>
         <name>Dec_Usable_Contact</name>
         <label>Dec Usable Contact</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Loop_Contacts</targetReference>
         </defaultConnector>
@@ -125,8 +125,8 @@
     <loops>
         <name>Loop_Contacts</name>
         <label>Loop Contacts</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionReference>Get_Account_Contacts</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -145,7 +145,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -158,8 +158,8 @@
     <recordCreates>
         <name>Create_Expired_Task</name>
         <label>Create Expired Task</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
@@ -199,12 +199,13 @@
     <recordCreates>
         <name>Create_Renewal_Opportunity</name>
         <label>Create Renewal Opportunity</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Create_Renewal_Task</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -249,9 +250,10 @@
     <recordCreates>
         <name>Create_Renewal_Task</name>
         <label>Create Renewal Task</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -302,13 +304,14 @@
     <recordLookups>
         <name>Get_Existing_Renewal</name>
         <label>Get Existing Renewal</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Renewal_Exists</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -333,13 +336,14 @@
     <recordLookups>
         <name>Get_Account_Contacts</name>
         <label>Get Account Contacts</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Contacts</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -357,7 +361,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Expiry_Window</targetReference>
@@ -382,8 +386,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

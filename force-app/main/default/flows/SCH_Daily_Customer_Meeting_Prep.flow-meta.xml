@@ -3,11 +3,12 @@
     <actionCalls>
         <name>Send_Overdue_Warning</name>
         <label>Send Overdue Warning</label>
-        <locationX>50</locationX>
-        <locationY>2030</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -35,8 +36,8 @@
     <assignments>
         <name>Asg_Event_Count</name>
         <label>Asg Event Count</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varEventCount</assignToReference>
             <operator>AssignCount</operator>
@@ -51,8 +52,8 @@
     <assignments>
         <name>Asg_Existing_Count</name>
         <label>Asg Existing Count</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varExisting</assignToReference>
             <operator>AssignCount</operator>
@@ -67,8 +68,8 @@
     <assignments>
         <name>Asg_Prep_Task</name>
         <label>Asg Prep Task</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varNewTask.Subject</assignToReference>
             <operator>Assign</operator>
@@ -161,8 +162,8 @@
         <name>Sort_Events</name>
         <elementSubtype>SortCollectionProcessor</elementSubtype>
         <label>Sort Events</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionProcessorType>SortCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Upcoming_Events</collectionReference>
         <connector>
@@ -179,8 +180,8 @@
         <name>Filter_Existing_Prep</name>
         <elementSubtype>FilterCollectionProcessor</elementSubtype>
         <label>Filter Existing Prep</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>currentItem_Filter_Existing_Prep</assignNextValueToReference>
         <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Recent_Prep_Tasks</collectionReference>
@@ -206,8 +207,8 @@
     <decisions>
         <name>Dec_Any_Events</name>
         <label>Dec Any Events</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>No Meetings</defaultConnectorLabel>
         <rules>
             <name>Has_Events</name>
@@ -228,8 +229,8 @@
     <decisions>
         <name>Dec_Already_Prepared</name>
         <label>Dec Already Prepared</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Prep_Task</targetReference>
         </defaultConnector>
@@ -253,8 +254,8 @@
     <decisions>
         <name>Dec_Has_New_Tasks</name>
         <label>Dec Has New Tasks</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>All Prepared</defaultConnectorLabel>
         <rules>
             <name>Has_New</name>
@@ -275,8 +276,8 @@
     <decisions>
         <name>Dec_Soonest_Is_Contact</name>
         <label>Dec Soonest Is Contact</label>
-        <locationX>314</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Lead</defaultConnectorLabel>
         <rules>
             <name>Is_Contact</name>
@@ -297,8 +298,8 @@
     <decisions>
         <name>Dec_Has_Overdue</name>
         <label>Dec Has Overdue</label>
-        <locationX>50</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>All Current</defaultConnectorLabel>
         <rules>
             <name>Has_Overdue</name>
@@ -353,8 +354,8 @@
     <loops>
         <name>Loop_Events</name>
         <label>Loop Events</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varEvent</assignNextValueToReference>
         <collectionReference>Get_Upcoming_Events</collectionReference>
         <iterationOrder>Desc</iterationOrder>
@@ -374,7 +375,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -387,12 +388,13 @@
     <recordCreates>
         <name>Create_Prep_Tasks</name>
         <label>Create Prep Tasks</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Soonest_Is_Contact</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colNewTasks</inputReference>
@@ -400,8 +402,8 @@
     <recordLookups>
         <name>Get_Upcoming_Events</name>
         <label>Get Upcoming Events</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Event_Count</targetReference>
@@ -445,13 +447,14 @@
     <recordLookups>
         <name>Get_Recent_Prep_Tasks</name>
         <label>Get Recent Prep Tasks</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Sort_Events</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -474,7 +477,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Upcoming_Events</targetReference>
@@ -490,8 +493,8 @@
     <subflows>
         <name>Sub_Contact_Snapshot</name>
         <label>Sub Contact Snapshot</label>
-        <locationX>314</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Has_Overdue</targetReference>
         </connector>
@@ -518,8 +521,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

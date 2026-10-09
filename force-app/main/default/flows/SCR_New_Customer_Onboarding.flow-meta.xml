@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Duplicate_Count</name>
         <label>Asg Duplicate Count</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varDuplicateCount</assignToReference>
             <operator>AssignCount</operator>
@@ -36,8 +36,8 @@
     <decisions>
         <name>Dec_Duplicates</name>
         <label>Dec Duplicates</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Account</targetReference>
         </defaultConnector>
@@ -61,8 +61,8 @@
     <decisions>
         <name>Dec_User_Choice</name>
         <label>Dec User Choice</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Scr_Cancelled</targetReference>
         </defaultConnector>
@@ -78,6 +78,7 @@
                 </rightValue>
             </conditions>
             <connector>
+                <isGoTo>true</isGoTo>
                 <targetReference>Create_Account</targetReference>
             </connector>
             <label>Continue Anyway</label>
@@ -86,8 +87,8 @@
     <decisions>
         <name>Dec_Create_Opportunity</name>
         <label>Dec Create Opportunity</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Sub_Health_Score</targetReference>
         </defaultConnector>
@@ -139,7 +140,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -152,13 +153,14 @@
     <recordCreates>
         <name>Create_Account</name>
         <label>Create Account</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignRecordIdToReference>varAccountId</assignRecordIdToReference>
         <connector>
             <targetReference>Scr_Contact_Details</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -190,12 +192,13 @@
     <recordCreates>
         <name>Create_Contact</name>
         <label>Create Contact</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Create_Opportunity</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -234,12 +237,13 @@
     <recordCreates>
         <name>Create_New_Opportunity</name>
         <label>Create New Opportunity</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Sub_Health_Score</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -278,8 +282,8 @@
     <recordLookups>
         <name>Get_Duplicate_Accounts</name>
         <label>Get Duplicate Accounts</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Duplicate_Count</targetReference>
@@ -302,8 +306,8 @@
     <screens>
         <name>Scr_Account_Details</name>
         <label>Scr Account Details</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -354,8 +358,8 @@
     <screens>
         <name>Scr_Duplicate_Warning</name>
         <label>Scr Duplicate Warning</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -383,8 +387,8 @@
     <screens>
         <name>Scr_Contact_Details</name>
         <label>Scr Contact Details</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -430,8 +434,8 @@
     <screens>
         <name>Scr_Summary</name>
         <label>Scr Summary</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -446,8 +450,8 @@
     <screens>
         <name>Scr_Cancelled</name>
         <label>Scr Cancelled</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -462,8 +466,8 @@
     <screens>
         <name>Scr_Error</name>
         <label>Scr Error</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
@@ -476,7 +480,7 @@
         <showHeader>true</showHeader>
     </screens>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Scr_Account_Details</targetReference>
@@ -486,8 +490,8 @@
     <subflows>
         <name>Sub_Health_Score</name>
         <label>Sub Health Score</label>
-        <locationX>314</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Scr_Summary</targetReference>
         </connector>
@@ -510,8 +514,8 @@
     <subflows>
         <name>Sub_Log_Fault</name>
         <label>Sub Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Scr_Error</targetReference>
         </connector>

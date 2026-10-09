@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Locking</name>
         <label>Asg Locking</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varCategory</assignToReference>
             <operator>Assign</operator>
@@ -34,8 +34,8 @@
     <assignments>
         <name>Asg_Limits</name>
         <label>Asg Limits</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varCategory</assignToReference>
             <operator>Assign</operator>
@@ -64,8 +64,8 @@
     <assignments>
         <name>Asg_Resources</name>
         <label>Asg Resources</label>
-        <locationX>578</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varCategory</assignToReference>
             <operator>Assign</operator>
@@ -94,8 +94,8 @@
     <assignments>
         <name>Asg_Data</name>
         <label>Asg Data</label>
-        <locationX>842</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varCategory</assignToReference>
             <operator>Assign</operator>
@@ -124,8 +124,8 @@
     <assignments>
         <name>Asg_Unclassified</name>
         <label>Asg Unclassified</label>
-        <locationX>1106</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varCategory</assignToReference>
             <operator>Assign</operator>
@@ -154,8 +154,8 @@
     <assignments>
         <name>Asg_Close_Stale</name>
         <label>Asg Close Stale</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varCat.Status</assignToReference>
             <operator>Assign</operator>
@@ -177,8 +177,8 @@
     <assignments>
         <name>Asg_Count_Fresh</name>
         <label>Asg Count Fresh</label>
-        <locationX>314</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varFreshCount</assignToReference>
             <operator>Add</operator>
@@ -194,8 +194,8 @@
         <name>Sort_Oldest_First</name>
         <elementSubtype>SortCollectionProcessor</elementSubtype>
         <label>Sort Oldest First</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionProcessorType>SortCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Open_Category_Tasks</collectionReference>
         <connector>
@@ -210,8 +210,8 @@
     <decisions>
         <name>Dec_Keyword</name>
         <label>Dec Keyword</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Unclassified</targetReference>
         </defaultConnector>
@@ -301,8 +301,8 @@
     <decisions>
         <name>Dec_Is_Stale</name>
         <label>Dec Is Stale</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Count_Fresh</targetReference>
         </defaultConnector>
@@ -326,8 +326,8 @@
     <decisions>
         <name>Dec_Fresh_Exists</name>
         <label>Dec Fresh Exists</label>
-        <locationX>578</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Category_Task</targetReference>
         </defaultConnector>
@@ -375,8 +375,8 @@
     <loops>
         <name>Loop_Category_Tasks</name>
         <label>Loop Category Tasks</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varCat</assignNextValueToReference>
         <collectionReference>Get_Open_Category_Tasks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -396,7 +396,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -409,12 +409,13 @@
     <recordCreates>
         <name>Create_Category_Task</name>
         <label>Create Category Task</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Sub_Log_Batch_Error</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -459,9 +460,10 @@
     <recordCreates>
         <name>Sub_Log_Batch_Error</name>
         <label>Sub Log Batch Error</label>
-        <locationX>314</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -506,8 +508,8 @@
     <recordCreates>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <inputAssignments>
             <field>Subject</field>
             <value>
@@ -544,8 +546,8 @@
     <recordLookups>
         <name>Get_Admin_Profile</name>
         <label>Get Admin Profile</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Admin_User</targetReference>
@@ -568,13 +570,14 @@
     <recordLookups>
         <name>Get_Admin_User</name>
         <label>Get Admin User</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Get_Open_Category_Tasks</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -601,13 +604,14 @@
     <recordLookups>
         <name>Get_Open_Category_Tasks</name>
         <label>Get Open Category Tasks</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Sort_Oldest_First</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -632,18 +636,19 @@
     <recordUpdates>
         <name>Update_Closed_Tasks</name>
         <label>Update Closed Tasks</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Fresh_Exists</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colToClose</inputReference>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Keyword</targetReference>

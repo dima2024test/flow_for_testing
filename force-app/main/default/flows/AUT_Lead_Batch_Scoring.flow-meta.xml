@@ -3,11 +3,12 @@
     <actionCalls>
         <name>Send_Summary_Email</name>
         <label>Send Summary Email</label>
-        <locationX>314</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -35,8 +36,8 @@
     <assignments>
         <name>Asg_Owner_Input</name>
         <label>Asg Owner Input</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOwnerId</assignToReference>
             <operator>Assign</operator>
@@ -51,8 +52,8 @@
     <assignments>
         <name>Asg_Owner_Running_User</name>
         <label>Asg Owner Running User</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOwnerId</assignToReference>
             <operator>Assign</operator>
@@ -67,8 +68,8 @@
     <assignments>
         <name>Asg_Lead_Count</name>
         <label>Asg Lead Count</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varLeadCount</assignToReference>
             <operator>AssignCount</operator>
@@ -83,8 +84,8 @@
     <assignments>
         <name>Asg_Scored</name>
         <label>Asg Scored</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outScoredCount</assignToReference>
             <operator>Add</operator>
@@ -99,8 +100,8 @@
     <assignments>
         <name>Asg_Hot</name>
         <label>Asg Hot</label>
-        <locationX>50</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outHotCount</assignToReference>
             <operator>Add</operator>
@@ -115,8 +116,8 @@
     <assignments>
         <name>Asg_Cold</name>
         <label>Asg Cold</label>
-        <locationX>314</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outColdCount</assignToReference>
             <operator>Add</operator>
@@ -131,8 +132,8 @@
     <assignments>
         <name>Asg_No_Leads</name>
         <label>Asg No Leads</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outScoredCount</assignToReference>
             <operator>Assign</operator>
@@ -145,8 +146,8 @@
         <name>Sort_Newest_25</name>
         <elementSubtype>SortCollectionProcessor</elementSubtype>
         <label>Sort Newest 25</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionProcessorType>SortCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Open_Leads</collectionReference>
         <connector>
@@ -162,8 +163,8 @@
     <decisions>
         <name>Dec_Owner_Provided</name>
         <label>Dec Owner Provided</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Owner_Input</targetReference>
         </defaultConnector>
@@ -194,8 +195,8 @@
     <decisions>
         <name>Dec_Has_Leads</name>
         <label>Dec Has Leads</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_No_Leads</targetReference>
         </defaultConnector>
@@ -219,8 +220,8 @@
     <decisions>
         <name>Dec_Rating_Result</name>
         <label>Dec Rating Result</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Loop_Leads</targetReference>
         </defaultConnector>
@@ -259,8 +260,8 @@
     <decisions>
         <name>Dec_Notify</name>
         <label>Dec Notify</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>No Notification</defaultConnectorLabel>
         <rules>
             <name>Notify</name>
@@ -297,8 +298,8 @@
     <loops>
         <name>Loop_Leads</name>
         <label>Loop Leads</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varLead</assignNextValueToReference>
         <collectionReference>Get_Open_Leads</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -318,7 +319,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -331,8 +332,8 @@
     <recordLookups>
         <name>Get_Open_Leads</name>
         <label>Get Open Leads</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Lead_Count</targetReference>
@@ -369,7 +370,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Owner_Provided</targetReference>
@@ -379,8 +380,8 @@
     <subflows>
         <name>Sub_Score_Lead</name>
         <label>Sub Score Lead</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Asg_Scored</targetReference>
         </connector>
@@ -399,8 +400,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Collect_Contact</name>
         <label>Asg Collect Contact</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varMissingEmail</assignToReference>
             <operator>Add</operator>
@@ -27,8 +27,8 @@
     <assignments>
         <name>Asg_Issue_Count</name>
         <label>Asg Issue Count</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outIssueCount</assignToReference>
             <operator>Assign</operator>
@@ -43,8 +43,8 @@
     <assignments>
         <name>Asg_Grade_A</name>
         <label>Asg Grade A</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outQualityGrade</assignToReference>
             <operator>Assign</operator>
@@ -59,8 +59,8 @@
     <assignments>
         <name>Asg_Grade_B</name>
         <label>Asg Grade B</label>
-        <locationX>314</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outQualityGrade</assignToReference>
             <operator>Assign</operator>
@@ -75,8 +75,8 @@
     <assignments>
         <name>Asg_Grade_C</name>
         <label>Asg Grade C</label>
-        <locationX>578</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outQualityGrade</assignToReference>
             <operator>Assign</operator>
@@ -91,8 +91,8 @@
     <assignments>
         <name>Asg_Summary</name>
         <label>Asg Summary</label>
-        <locationX>50</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outSummary</assignToReference>
             <operator>Assign</operator>
@@ -107,8 +107,8 @@
     <assignments>
         <name>Asg_Not_Found</name>
         <label>Asg Not Found</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outQualityGrade</assignToReference>
             <operator>Assign</operator>
@@ -121,8 +121,8 @@
         <name>Filter_No_Email</name>
         <elementSubtype>FilterCollectionProcessor</elementSubtype>
         <label>Filter No Email</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>currentItem_Filter_No_Email</assignNextValueToReference>
         <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Contacts</collectionReference>
@@ -141,8 +141,8 @@
     <decisions>
         <name>Dec_Account_Found</name>
         <label>Dec Account Found</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Not_Found</targetReference>
         </defaultConnector>
@@ -166,8 +166,8 @@
     <decisions>
         <name>Dec_Grade</name>
         <label>Dec Grade</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Grade_C</targetReference>
         </defaultConnector>
@@ -206,8 +206,8 @@
     <decisions>
         <name>Dec_Create_Task</name>
         <label>Dec Create Task</label>
-        <locationX>50</locationX>
-        <locationY>2030</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>No Task</defaultConnectorLabel>
         <rules>
             <name>Report_Requested</name>
@@ -255,8 +255,8 @@
     <loops>
         <name>Loop_Contacts_No_Email</name>
         <label>Loop Contacts No Email</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varContact</assignNextValueToReference>
         <collectionReference>Filter_No_Email</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -276,7 +276,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -289,9 +289,10 @@
     <recordCreates>
         <name>Create_Report_Task</name>
         <label>Create Report Task</label>
-        <locationX>50</locationX>
-        <locationY>2198</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -342,8 +343,8 @@
     <recordLookups>
         <name>Get_Account</name>
         <label>Get Account</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Account_Found</targetReference>
@@ -366,13 +367,14 @@
     <recordLookups>
         <name>Get_Contacts</name>
         <label>Get Contacts</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Filter_No_Email</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -388,7 +390,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Account</targetReference>
@@ -398,8 +400,8 @@
     <subflows>
         <name>Sub_Duplicate_Check</name>
         <label>Sub Duplicate Check</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Sub_Warranty_Check</targetReference>
         </connector>
@@ -422,8 +424,8 @@
     <subflows>
         <name>Sub_Warranty_Check</name>
         <label>Sub Warranty Check</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Get_Contacts</targetReference>
         </connector>
@@ -454,8 +456,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

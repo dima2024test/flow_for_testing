@@ -3,14 +3,15 @@
     <actionCalls>
         <name>Send_Escalation_Email</name>
         <label>Send Escalation Email</label>
-        <locationX>50</locationX>
-        <locationY>2030</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
             <targetReference>Dec_Retry</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -38,8 +39,8 @@
     <assignments>
         <name>Asg_Escalation_Context</name>
         <label>Asg Escalation Context</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOriginalPriority</assignToReference>
             <operator>Assign</operator>
@@ -61,8 +62,8 @@
     <assignments>
         <name>Asg_Owner_User</name>
         <label>Asg Owner User</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOwnerId</assignToReference>
             <operator>Assign</operator>
@@ -84,8 +85,8 @@
     <assignments>
         <name>Asg_Owner_Fallback</name>
         <label>Asg Owner Fallback</label>
-        <locationX>314</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOwnerId</assignToReference>
             <operator>Assign</operator>
@@ -107,8 +108,8 @@
     <assignments>
         <name>Asg_Increment_Attempt</name>
         <label>Asg Increment Attempt</label>
-        <locationX>50</locationX>
-        <locationY>2366</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varAttempt</assignToReference>
             <operator>Add</operator>
@@ -117,14 +118,15 @@
             </value>
         </assignmentItems>
         <connector>
+            <isGoTo>true</isGoTo>
             <targetReference>Wait_For_Response</targetReference>
         </connector>
     </assignments>
     <assignments>
         <name>Asg_Result_Escalated</name>
         <label>Asg Result Escalated</label>
-        <locationX>314</locationX>
-        <locationY>2366</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outStatus</assignToReference>
             <operator>Assign</operator>
@@ -136,8 +138,8 @@
     <assignments>
         <name>Asg_Result_Resolved</name>
         <label>Asg Result Resolved</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outStatus</assignToReference>
             <operator>Assign</operator>
@@ -149,8 +151,8 @@
     <assignments>
         <name>Asg_Result_Skipped</name>
         <label>Asg Result Skipped</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outStatus</assignToReference>
             <operator>Assign</operator>
@@ -162,8 +164,8 @@
     <decisions>
         <name>Dec_Case_Open</name>
         <label>Dec Case Open</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Result_Skipped</targetReference>
         </defaultConnector>
@@ -194,8 +196,8 @@
     <decisions>
         <name>Dec_Still_Open</name>
         <label>Dec Still Open</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Result_Resolved</targetReference>
         </defaultConnector>
@@ -219,8 +221,8 @@
     <decisions>
         <name>Dec_Owner_Is_User</name>
         <label>Dec Owner Is User</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Owner_Fallback</targetReference>
         </defaultConnector>
@@ -244,8 +246,8 @@
     <decisions>
         <name>Dec_Retry</name>
         <label>Dec Retry</label>
-        <locationX>50</locationX>
-        <locationY>2198</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Result_Escalated</targetReference>
         </defaultConnector>
@@ -289,7 +291,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -302,12 +304,13 @@
     <recordCreates>
         <name>Create_Escalation_Task</name>
         <label>Create Escalation Task</label>
-        <locationX>50</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Escalation_Email</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -352,8 +355,8 @@
     <recordLookups>
         <name>Get_Case</name>
         <label>Get Case</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Case_Open</targetReference>
@@ -376,13 +379,14 @@
     <recordLookups>
         <name>Get_Case_After_Wait</name>
         <label>Get Case After Wait</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Still_Open</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -400,13 +404,14 @@
     <recordLookups>
         <name>Get_Owner_User</name>
         <label>Get Owner User</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Owner_Is_User</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -431,12 +436,13 @@
     <recordUpdates>
         <name>Update_Case_Priority</name>
         <label>Update Case Priority</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Wait_For_Response</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -456,7 +462,7 @@
         <object>Case</object>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Case</targetReference>
@@ -466,8 +472,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>
@@ -561,10 +567,11 @@ Attempt: {!varAttempt}</text>
     <waits>
         <name>Wait_For_Response</name>
         <label>Wait For Response</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Default Path</defaultConnectorLabel>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <waitEvents>

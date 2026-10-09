@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Filtered_Tasks</name>
         <label>Asg Filtered Tasks</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>colSource</assignToReference>
             <operator>Assign</operator>
@@ -20,8 +20,8 @@
     <assignments>
         <name>Asg_All_Tasks</name>
         <label>Asg All Tasks</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>colSource</assignToReference>
             <operator>Assign</operator>
@@ -36,8 +36,8 @@
     <assignments>
         <name>Asg_Change_Owner</name>
         <label>Asg Change Owner</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varTask.OwnerId</assignToReference>
             <operator>Assign</operator>
@@ -66,8 +66,8 @@
     <assignments>
         <name>Asg_Done</name>
         <label>Asg Done</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outResult</assignToReference>
             <operator>Assign</operator>
@@ -79,8 +79,8 @@
     <assignments>
         <name>Asg_Nothing_Moved</name>
         <label>Asg Nothing Moved</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outResult</assignToReference>
             <operator>Assign</operator>
@@ -92,8 +92,8 @@
     <assignments>
         <name>Asg_Invalid_Target</name>
         <label>Asg Invalid Target</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outResult</assignToReference>
             <operator>Assign</operator>
@@ -106,8 +106,8 @@
         <name>Filter_High_Priority</name>
         <elementSubtype>FilterCollectionProcessor</elementSubtype>
         <label>Filter High Priority</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>currentItem_Filter_High_Priority</assignNextValueToReference>
         <collectionProcessorType>FilterCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Open_Tasks</collectionReference>
@@ -126,8 +126,8 @@
     <decisions>
         <name>Dec_Target_Valid</name>
         <label>Dec Target Valid</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Invalid_Target</targetReference>
         </defaultConnector>
@@ -158,8 +158,8 @@
     <decisions>
         <name>Dec_Priority_Mode</name>
         <label>Dec Priority Mode</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_All_Tasks</targetReference>
         </defaultConnector>
@@ -183,8 +183,8 @@
     <decisions>
         <name>Dec_Anything_Moved</name>
         <label>Dec Anything Moved</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Nothing_Moved</targetReference>
         </defaultConnector>
@@ -212,8 +212,8 @@
     <loops>
         <name>Loop_Tasks</name>
         <label>Loop Tasks</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varTask</assignNextValueToReference>
         <collectionReference>colSource</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -233,7 +233,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -246,12 +246,13 @@
     <recordCreates>
         <name>Create_Audit_Task</name>
         <label>Create Audit Task</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Asg_Done</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -296,8 +297,8 @@
     <recordLookups>
         <name>Get_Target_User</name>
         <label>Get Target User</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Target_Valid</targetReference>
@@ -327,13 +328,14 @@
     <recordLookups>
         <name>Get_Open_Tasks</name>
         <label>Get Open Tasks</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Priority_Mode</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -358,18 +360,19 @@
     <recordUpdates>
         <name>Update_Tasks</name>
         <label>Update Tasks</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Create_Audit_Task</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colToUpdate</inputReference>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Target_User</targetReference>
@@ -379,8 +382,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

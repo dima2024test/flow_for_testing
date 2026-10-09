@@ -1,6 +1,6 @@
 # Flow Demo Pack: 100 flow для Salesforce
 
-5 типов × 20 flow, API 62.0, все в статусе **Active**. Используются только стандартные объекты и поля: нет кастомных полей, объектов, email templates, custom notification types, очередей, record types или approval processes.
+5 типов × 20 flow, API 62.0, все в статусе **Active**, канвас **Auto-Layout** (там, где ветки сходятся в уже нарисованный элемент, используются Go To-коннекторы). Используются только стандартные объекты и поля: нет кастомных полей, объектов, email templates, custom notification types, очередей, record types или approval processes.
 
 Наборы: 1 и 2 — по 5 flow каждого типа, 3 — по 10 flow каждого типа.
 
@@ -202,5 +202,6 @@ python3 flowgen/make_readme.py .             # обновить README и packag
 - входы и выходы subflow;
 - число элементов (10–20);
 - picklist в формулах и условиях, `BR()`, ссылки на loop-элементы в формулах;
+- корректность структуры для Auto-Layout (точки слияния веток, Go To);
 - Wait вне autolaunched flow, Subflow в platform-event flow;
 - checkbox-поля на экранах (`isRequired` должен быть true), `limit` в сортировке, async path на update без условия изменения.

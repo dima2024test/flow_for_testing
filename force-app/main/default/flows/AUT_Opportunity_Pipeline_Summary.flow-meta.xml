@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Deal_Count</name>
         <label>Asg Deal Count</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outDealCount</assignToReference>
             <operator>AssignCount</operator>
@@ -20,8 +20,8 @@
     <assignments>
         <name>Asg_Accumulate</name>
         <label>Asg Accumulate</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outTotalPipeline</assignToReference>
             <operator>Add</operator>
@@ -43,8 +43,8 @@
     <assignments>
         <name>Asg_Top_Deal</name>
         <label>Asg Top Deal</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outTopDealName</assignToReference>
             <operator>Assign</operator>
@@ -59,8 +59,8 @@
     <assignments>
         <name>Asg_Late_Stage</name>
         <label>Asg Late Stage</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outLateStageCount</assignToReference>
             <operator>Add</operator>
@@ -75,8 +75,8 @@
     <assignments>
         <name>Asg_No_Deals</name>
         <label>Asg No Deals</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outTotalPipeline</assignToReference>
             <operator>Assign</operator>
@@ -96,8 +96,8 @@
         <name>Sort_By_Amount</name>
         <elementSubtype>SortCollectionProcessor</elementSubtype>
         <label>Sort By Amount</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionProcessorType>SortCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Open_Opportunities</collectionReference>
         <connector>
@@ -112,8 +112,8 @@
     <decisions>
         <name>Dec_Has_Deals</name>
         <label>Dec Has Deals</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_No_Deals</targetReference>
         </defaultConnector>
@@ -137,8 +137,8 @@
     <decisions>
         <name>Dec_Top_Deal</name>
         <label>Dec Top Deal</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Dec_Late_Stage</targetReference>
         </defaultConnector>
@@ -162,8 +162,8 @@
     <decisions>
         <name>Dec_Late_Stage</name>
         <label>Dec Late Stage</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Loop_Opportunities</targetReference>
         </defaultConnector>
@@ -187,8 +187,8 @@
     <decisions>
         <name>Dec_Create_Task</name>
         <label>Dec Create Task</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>No Task</defaultConnectorLabel>
         <rules>
             <name>Task_Requested</name>
@@ -225,8 +225,8 @@
     <loops>
         <name>Loop_Opportunities</name>
         <label>Loop Opportunities</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varOpp</assignNextValueToReference>
         <collectionReference>Get_Open_Opportunities</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -246,7 +246,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -259,9 +259,10 @@
     <recordCreates>
         <name>Create_Summary_Task</name>
         <label>Create Summary Task</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -306,8 +307,8 @@
     <recordLookups>
         <name>Get_Open_Opportunities</name>
         <label>Get Open Opportunities</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Deal_Count</targetReference>
@@ -335,7 +336,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Open_Opportunities</targetReference>
@@ -345,8 +346,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

@@ -3,14 +3,15 @@
     <actionCalls>
         <name>Send_Admin_Email</name>
         <label>Send Admin Email</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
             <targetReference>Asg_Result_Logged</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Asg_Result_Logged</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -38,8 +39,8 @@
     <assignments>
         <name>Asg_Critical</name>
         <label>Asg Critical</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varPriority</assignToReference>
             <operator>Assign</operator>
@@ -61,8 +62,8 @@
     <assignments>
         <name>Asg_Standard</name>
         <label>Asg Standard</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varPriority</assignToReference>
             <operator>Assign</operator>
@@ -84,8 +85,8 @@
     <assignments>
         <name>Asg_Provided_Owner</name>
         <label>Asg Provided Owner</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOwnerId</assignToReference>
             <operator>Assign</operator>
@@ -100,8 +101,8 @@
     <assignments>
         <name>Asg_Owner_From_User</name>
         <label>Asg Owner From User</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOwnerId</assignToReference>
             <operator>Assign</operator>
@@ -123,8 +124,8 @@
     <assignments>
         <name>Asg_Fallback_Owner</name>
         <label>Asg Fallback Owner</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOwnerId</assignToReference>
             <operator>Assign</operator>
@@ -139,8 +140,8 @@
     <assignments>
         <name>Asg_Count_Recent</name>
         <label>Asg Count Recent</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varRecentCount</assignToReference>
             <operator>AssignCount</operator>
@@ -155,8 +156,8 @@
     <assignments>
         <name>Asg_Result_Logged</name>
         <label>Asg Result Logged</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outLogged</assignToReference>
             <operator>Assign</operator>
@@ -175,8 +176,8 @@
     <assignments>
         <name>Asg_Result_Failed</name>
         <label>Asg Result Failed</label>
-        <locationX>578</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outLogged</assignToReference>
             <operator>Assign</operator>
@@ -195,8 +196,8 @@
     <assignments>
         <name>Asg_Result_Skipped</name>
         <label>Asg Result Skipped</label>
-        <locationX>578</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outLogged</assignToReference>
             <operator>Assign</operator>
@@ -215,8 +216,8 @@
     <decisions>
         <name>Dec_Severity</name>
         <label>Dec Severity</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Standard</targetReference>
         </defaultConnector>
@@ -240,8 +241,8 @@
     <decisions>
         <name>Dec_Owner_Provided</name>
         <label>Dec Owner Provided</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Get_Running_User</targetReference>
         </defaultConnector>
@@ -265,8 +266,8 @@
     <decisions>
         <name>Dec_User_Found</name>
         <label>Dec User Found</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Fallback_Owner</targetReference>
         </defaultConnector>
@@ -297,8 +298,8 @@
     <decisions>
         <name>Dec_Throttle</name>
         <label>Dec Throttle</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Error_Task</targetReference>
         </defaultConnector>
@@ -322,8 +323,8 @@
     <decisions>
         <name>Dec_Notify</name>
         <label>Dec Notify</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Result_Logged</targetReference>
         </defaultConnector>
@@ -374,7 +375,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -387,8 +388,8 @@
     <recordCreates>
         <name>Create_Error_Task</name>
         <label>Create Error Task</label>
-        <locationX>578</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Notify</targetReference>
         </connector>
@@ -437,13 +438,14 @@
     <recordLookups>
         <name>Get_Running_User</name>
         <label>Get Running User</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_User_Found</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Asg_Fallback_Owner</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -461,13 +463,14 @@
     <recordLookups>
         <name>Get_Recent_Logs</name>
         <label>Get Recent Logs</label>
-        <locationX>578</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Count_Recent</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Create_Error_Task</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -497,7 +500,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Severity</targetReference>

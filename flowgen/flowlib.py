@@ -3,6 +3,7 @@ from xml.sax.saxutils import escape
 from collections import deque
 
 API = "62.0"
+LAYOUT = "auto"   # "auto" -> AUTO_LAYOUT_CANVAS with Go To connectors; "free" -> FREE_FORM_CANVAS
 
 
 class R:
@@ -360,14 +361,22 @@ class Flow:
 
     def xml(self):
         pos, _ = self._layout()
+        gotos = set()
+        self.layout_anomalies = []
+        if LAYOUT == "auto":
+            import autolayout
+            gotos, self.layout_anomalies = autolayout.compute(self)
+            pos = {n: (0, 0) for n in pos}
+        self.goto_count = len(gotos)
         groups = {}
         for e in self.elements:
             x, y = pos[e["name"]]
+            body = autolayout.apply(e["body"], e["name"], gotos) if gotos else e["body"]
             head = tag("name", e["name"]) + (tag("elementSubtype", e["subtype"]) if e["subtype"] else "") + tag("label", escape(e["label"])) \
                 + tag("locationX", str(x)) + tag("locationY", str(y))
-            groups.setdefault(e["tag"], []).append(tag(e["tag"], head + e["body"]))
+            groups.setdefault(e["tag"], []).append(tag(e["tag"], head + body))
         pmv = "".join(tag("processMetadataValues", tag("name", k) + tag("value", value_xml(v))) for k, v in
-                      (("BuilderType", "LightningFlowBuilder"), ("CanvasMode", "FREE_FORM_CANVAS"), ("OriginBuilderType", "LightningFlowBuilder")))
+                      (("BuilderType", "LightningFlowBuilder"), ("CanvasMode", "AUTO_LAYOUT_CANVAS" if LAYOUT == "auto" else "FREE_FORM_CANVAS"), ("OriginBuilderType", "LightningFlowBuilder")))
         order = ["actionCalls", "apiVersion", "assignments", "choices", "collectionProcessors", "constants", "decisions",
                  "description", "dynamicChoiceSets", "environments", "formulas", "interviewLabel", "label", "loops",
                  "processMetadataValues", "processType", "recordCreates", "recordDeletes", "recordLookups", "recordUpdates",
@@ -389,7 +398,8 @@ class Flow:
             elif k == "processType":
                 out.append(tag("processType", "Flow" if self.kind == "screen" else "AutoLaunchedFlow"))
             elif k == "start":
-                out.append(tag("start", tag("locationX", "50") + tag("locationY", "0") + self.start_body))
+                sb = autolayout.apply(self.start_body, "__START__", gotos) if gotos else self.start_body
+                out.append(tag("start", tag("locationX", "0" if LAYOUT == "auto" else "50") + tag("locationY", "0") + sb))
             elif k == "status":
                 out.append(tag("status", "Active"))
             elif k in self.res:

@@ -138,6 +138,8 @@ for api, f in flows.items():
         if bad:
             errors.append(f"{api}: before-save has {bad}")
     # lint
+    for an in getattr(f, "layout_anomalies", []):
+        errors.append(f"{api}: auto-layout: {an}")
     if "BR()" in xml:
         errors.append(f"{api}: BR() in formula")
     if len(api) > 80 or len(f.label) > 255:

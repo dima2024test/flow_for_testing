@@ -3,11 +3,12 @@
     <actionCalls>
         <name>Send_Handover_Email</name>
         <label>Send Handover Email</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -35,8 +36,8 @@
     <assignments>
         <name>Asg_Opp_Owner</name>
         <label>Asg Opp Owner</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varOpp.OwnerId</assignToReference>
             <operator>Assign</operator>
@@ -65,8 +66,8 @@
     <assignments>
         <name>Asg_Task_Owner</name>
         <label>Asg Task Owner</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varTask.OwnerId</assignToReference>
             <operator>Assign</operator>
@@ -95,8 +96,8 @@
     <decisions>
         <name>Dec_Owner_Changed</name>
         <label>Dec Owner Changed</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Same Owner</defaultConnectorLabel>
         <rules>
             <name>Owner_Changed</name>
@@ -117,8 +118,8 @@
     <decisions>
         <name>Dec_Any_Opps</name>
         <label>Dec Any Opps</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Get_Open_Tasks</targetReference>
         </defaultConnector>
@@ -142,8 +143,8 @@
     <decisions>
         <name>Dec_Any_Tasks</name>
         <label>Dec Any Tasks</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Create_Handover_Task</targetReference>
         </defaultConnector>
@@ -171,8 +172,8 @@
     <loops>
         <name>Loop_Opportunities</name>
         <label>Loop Opportunities</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varOpp</assignNextValueToReference>
         <collectionReference>Get_Open_Opportunities</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -186,8 +187,8 @@
     <loops>
         <name>Loop_Tasks</name>
         <label>Loop Tasks</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varTask</assignNextValueToReference>
         <collectionReference>Get_Open_Tasks</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -207,7 +208,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -220,12 +221,13 @@
     <recordCreates>
         <name>Create_Handover_Task</name>
         <label>Create Handover Task</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Handover_Email</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -270,8 +272,8 @@
     <recordLookups>
         <name>Get_Open_Opportunities</name>
         <label>Get Open Opportunities</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Opportunities</targetReference>
@@ -308,13 +310,14 @@
     <recordLookups>
         <name>Get_Open_Tasks</name>
         <label>Get Open Tasks</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Tasks</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -346,12 +349,13 @@
     <recordUpdates>
         <name>Update_Opportunities</name>
         <label>Update Opportunities</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Get_Open_Tasks</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colOppsToUpdate</inputReference>
@@ -359,18 +363,19 @@
     <recordUpdates>
         <name>Update_Tasks</name>
         <label>Update Tasks</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Create_Handover_Task</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputReference>colTasksToUpdate</inputReference>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Owner_Changed</targetReference>
@@ -383,8 +388,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

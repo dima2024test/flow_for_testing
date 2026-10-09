@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Reason_Past_Due</name>
         <label>Asg Reason Past Due</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varReason</assignToReference>
             <operator>Assign</operator>
@@ -20,8 +20,8 @@
     <assignments>
         <name>Asg_Reason_Stale</name>
         <label>Asg Reason Stale</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varReason</assignToReference>
             <operator>Assign</operator>
@@ -36,8 +36,8 @@
     <assignments>
         <name>Asg_Primary_Contact</name>
         <label>Asg Primary Contact</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varPrimaryContactId</assignToReference>
             <operator>Assign</operator>
@@ -52,8 +52,8 @@
     <assignments>
         <name>Asg_Skip</name>
         <label>Asg Skip</label>
-        <locationX>314</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varReason</assignToReference>
             <operator>Assign</operator>
@@ -65,8 +65,8 @@
     <decisions>
         <name>Dec_Deal_Health</name>
         <label>Dec Deal Health</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Healthy</defaultConnectorLabel>
         <rules>
             <name>Past_Due</name>
@@ -102,8 +102,8 @@
     <decisions>
         <name>Dec_Reminder_Exists</name>
         <label>Dec Reminder Exists</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Get_Contact_Roles</targetReference>
         </defaultConnector>
@@ -127,8 +127,8 @@
     <decisions>
         <name>Dec_Is_Primary</name>
         <label>Dec Is Primary</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Loop_Contact_Roles</targetReference>
         </defaultConnector>
@@ -152,8 +152,8 @@
     <decisions>
         <name>Dec_Large_Deal</name>
         <label>Dec Large Deal</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Regular Deal</defaultConnectorLabel>
         <rules>
             <name>Large_Deal</name>
@@ -193,8 +193,8 @@
     <loops>
         <name>Loop_Contact_Roles</name>
         <label>Loop Contact Roles</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionReference>Get_Contact_Roles</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -213,7 +213,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -226,12 +226,13 @@
     <recordCreates>
         <name>Create_Reminder_Task</name>
         <label>Create Reminder Task</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Large_Deal</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -282,8 +283,8 @@
     <recordLookups>
         <name>Get_Existing_Reminder</name>
         <label>Get Existing Reminder</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Reminder_Exists</targetReference>
@@ -320,13 +321,14 @@
     <recordLookups>
         <name>Get_Contact_Roles</name>
         <label>Get Contact Roles</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Contact_Roles</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -344,9 +346,10 @@
     <recordUpdates>
         <name>Update_Next_Step</name>
         <label>Update Next Step</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -366,7 +369,7 @@
         <object>Opportunity</object>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Deal_Health</targetReference>
@@ -391,8 +394,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

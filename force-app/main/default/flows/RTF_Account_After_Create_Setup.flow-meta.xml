@@ -3,14 +3,15 @@
     <actionCalls>
         <name>Send_Duplicate_Alert</name>
         <label>Send Duplicate Alert</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <actionName>emailSimple</actionName>
         <actionType>emailSimple</actionType>
         <connector>
             <targetReference>Sub_Normalize_Contacts</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Sub_Normalize_Contacts</targetReference>
         </faultConnector>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -38,8 +39,8 @@
     <assignments>
         <name>Asg_Default_Segment</name>
         <label>Asg Default Segment</label>
-        <locationX>578</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varSegment</assignToReference>
             <operator>Assign</operator>
@@ -54,8 +55,8 @@
     <assignments>
         <name>Asg_Duplicate_Count</name>
         <label>Asg Duplicate Count</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varDuplicateCount</assignToReference>
             <operator>AssignCount</operator>
@@ -70,8 +71,8 @@
     <assignments>
         <name>Asg_Collect_Duplicate</name>
         <label>Asg Collect Duplicate</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varDuplicateList</assignToReference>
             <operator>Add</operator>
@@ -93,8 +94,8 @@
     <decisions>
         <name>Dec_Account_Type</name>
         <label>Dec Account Type</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Default_Segment</targetReference>
         </defaultConnector>
@@ -140,8 +141,8 @@
     <decisions>
         <name>Dec_Has_Duplicates</name>
         <label>Dec Has Duplicates</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Sub_Normalize_Contacts</targetReference>
         </defaultConnector>
@@ -165,8 +166,8 @@
     <decisions>
         <name>Dec_Score_Low</name>
         <label>Dec Score Low</label>
-        <locationX>842</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Healthy</defaultConnectorLabel>
         <rules>
             <name>Low_Score</name>
@@ -206,8 +207,8 @@
     <loops>
         <name>Loop_Duplicates</name>
         <label>Loop Duplicates</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionReference>Get_Similar_Accounts</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -226,7 +227,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -239,8 +240,8 @@
     <recordCreates>
         <name>Create_Welcome_Task</name>
         <label>Create Welcome Task</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Get_Similar_Accounts</targetReference>
         </connector>
@@ -289,12 +290,13 @@
     <recordCreates>
         <name>Create_Starter_Opportunity</name>
         <label>Create Starter Opportunity</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Get_Similar_Accounts</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -333,12 +335,13 @@
     <recordCreates>
         <name>Create_Duplicate_Review_Task</name>
         <label>Create Duplicate Review Task</label>
-        <locationX>314</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Send_Duplicate_Alert</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -383,9 +386,10 @@
     <recordCreates>
         <name>Create_Nurture_Task</name>
         <label>Create Nurture Task</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -430,13 +434,14 @@
     <recordLookups>
         <name>Get_Similar_Accounts</name>
         <label>Get Similar Accounts</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Duplicate_Count</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -459,7 +464,7 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Account_Type</targetReference>
@@ -483,8 +488,8 @@
     <subflows>
         <name>Sub_Normalize_Contacts</name>
         <label>Sub Normalize Contacts</label>
-        <locationX>314</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Contact_Data_Normalizer</flowName>
         <inputAssignments>
             <name>inAccountId</name>
@@ -500,8 +505,8 @@
     <subflows>
         <name>Sub_Health_Score</name>
         <label>Sub Health Score</label>
-        <locationX>314</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Dec_Score_Low</targetReference>
         </connector>
@@ -524,8 +529,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>578</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>

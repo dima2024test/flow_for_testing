@@ -4,8 +4,8 @@
     <assignments>
         <name>Asg_Similar_Count</name>
         <label>Asg Similar Count</label>
-        <locationX>50</locationX>
-        <locationY>686</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varSimilarCount</assignToReference>
             <operator>AssignCount</operator>
@@ -20,8 +20,8 @@
     <assignments>
         <name>Asg_Append_Suggestion</name>
         <label>Asg Append Suggestion</label>
-        <locationX>50</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>varSuggestions</assignToReference>
             <operator>Add</operator>
@@ -36,8 +36,8 @@
     <assignments>
         <name>Asg_Not_Deflected</name>
         <label>Asg Not Deflected</label>
-        <locationX>50</locationX>
-        <locationY>2366</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outResult</assignToReference>
             <operator>Assign</operator>
@@ -49,8 +49,8 @@
     <assignments>
         <name>Asg_Deflected</name>
         <label>Asg Deflected</label>
-        <locationX>314</locationX>
-        <locationY>2366</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outResult</assignToReference>
             <operator>Assign</operator>
@@ -62,8 +62,8 @@
     <assignments>
         <name>Asg_Skipped</name>
         <label>Asg Skipped</label>
-        <locationX>314</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignmentItems>
             <assignToReference>outResult</assignToReference>
             <operator>Assign</operator>
@@ -76,8 +76,8 @@
         <name>Sort_Recent_Five</name>
         <elementSubtype>SortCollectionProcessor</elementSubtype>
         <label>Sort Recent Five</label>
-        <locationX>50</locationX>
-        <locationY>1022</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <collectionProcessorType>SortCollectionProcessor</collectionProcessorType>
         <collectionReference>Get_Similar_Closed</collectionReference>
         <connector>
@@ -93,8 +93,8 @@
     <decisions>
         <name>Dec_Case_New</name>
         <label>Dec Case New</label>
-        <locationX>50</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Asg_Skipped</targetReference>
         </defaultConnector>
@@ -132,9 +132,10 @@
     <decisions>
         <name>Dec_Has_Similar</name>
         <label>Dec Has Similar</label>
-        <locationX>50</locationX>
-        <locationY>854</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Asg_Skipped</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>None Found</defaultConnectorLabel>
@@ -157,8 +158,8 @@
     <decisions>
         <name>Dec_Still_New</name>
         <label>Dec Still New</label>
-        <locationX>50</locationX>
-        <locationY>2030</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnector>
             <targetReference>Delete_Suggestion_Task</targetReference>
         </defaultConnector>
@@ -196,8 +197,8 @@
     <loops>
         <name>Loop_Similar</name>
         <label>Loop Similar</label>
-        <locationX>50</locationX>
-        <locationY>1190</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNextValueToReference>varSimilar</assignNextValueToReference>
         <collectionReference>Get_Similar_Closed</collectionReference>
         <iterationOrder>Asc</iterationOrder>
@@ -217,7 +218,7 @@
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -230,13 +231,14 @@
     <recordCreates>
         <name>Create_Suggestion_Task</name>
         <label>Create Suggestion Task</label>
-        <locationX>50</locationX>
-        <locationY>1526</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignRecordIdToReference>varSuggestionTaskId</assignRecordIdToReference>
         <connector>
             <targetReference>Wait_For_Self_Service</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <inputAssignments>
@@ -286,12 +288,13 @@
     <recordDeletes>
         <name>Delete_Suggestion_Task</name>
         <label>Delete Suggestion Task</label>
-        <locationX>314</locationX>
-        <locationY>2198</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Asg_Deflected</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -321,8 +324,8 @@
     <recordLookups>
         <name>Get_Case</name>
         <label>Get Case</label>
-        <locationX>50</locationX>
-        <locationY>182</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Case_New</targetReference>
@@ -345,13 +348,14 @@
     <recordLookups>
         <name>Get_Similar_Closed</name>
         <label>Get Similar Closed</label>
-        <locationX>50</locationX>
-        <locationY>518</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Asg_Similar_Count</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -383,13 +387,14 @@
     <recordLookups>
         <name>Get_Case_After_Wait</name>
         <label>Get Case After Wait</label>
-        <locationX>50</locationX>
-        <locationY>1862</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Dec_Still_New</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -407,12 +412,13 @@
     <recordUpdates>
         <name>Update_Case_Working</name>
         <label>Update Case Working</label>
-        <locationX>50</locationX>
-        <locationY>2198</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Asg_Not_Deflected</targetReference>
         </connector>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <filterLogic>and</filterLogic>
@@ -432,7 +438,7 @@
         <object>Case</object>
     </recordUpdates>
     <start>
-        <locationX>50</locationX>
+        <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Get_Case</targetReference>
@@ -442,8 +448,8 @@
     <subflows>
         <name>Sub_Contact_Snapshot</name>
         <label>Sub Contact Snapshot</label>
-        <locationX>314</locationX>
-        <locationY>1358</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>Create_Suggestion_Task</targetReference>
         </connector>
@@ -462,8 +468,8 @@
     <subflows>
         <name>Log_Fault</name>
         <label>Log Fault</label>
-        <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <flowName>AUT_Log_Flow_Error</flowName>
         <inputAssignments>
             <name>inFlowName</name>
@@ -565,10 +571,11 @@ Contact engagement: {!varEngagement}</text>
     <waits>
         <name>Wait_For_Self_Service</name>
         <label>Wait For Self Service</label>
-        <locationX>50</locationX>
-        <locationY>1694</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <defaultConnectorLabel>Default Path</defaultConnectorLabel>
         <faultConnector>
+            <isGoTo>true</isGoTo>
             <targetReference>Log_Fault</targetReference>
         </faultConnector>
         <waitEvents>

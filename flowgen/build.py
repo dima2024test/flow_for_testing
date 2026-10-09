@@ -1,26 +1,53 @@
 import os, re, sys, json, shutil
 import xml.etree.ElementTree as ET
-import autolaunched, record_triggered, scheduled, platform_event, screen
-import autolaunched2, record_triggered2, scheduled2, platform_event2, screen2
+import importlib, glob
 
-OUT = sys.argv[1] if len(sys.argv) > 1 else "/home/claude/flow-pack"
+# usage: python3 build.py <out_dir>   |   python3 build.py --check   (validate only, no files written)
+CHECK = "--check" in sys.argv
+args = [a for a in sys.argv[1:] if not a.startswith("--")]
+OUT = args[0] if args else "/home/claude/flow-pack-build"
 FLOWDIR = os.path.join(OUT, "force-app/main/default/flows")
 NS = "{http://soap.sforce.com/2006/04/metadata}"
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
 
-groups = {"Autolaunched (No Trigger)": autolaunched.ALL + autolaunched2.ALL, "Record-Triggered": record_triggered.ALL + record_triggered2.ALL,
-          "Schedule-Triggered": scheduled.ALL + scheduled2.ALL, "Platform Event-Triggered": platform_event.ALL + platform_event2.ALL,
-          "Screen": screen.ALL + screen2.ALL}
+TYPES = [("autolaunched", "Autolaunched (No Trigger)"), ("record_triggered", "Record-Triggered"), ("scheduled", "Schedule-Triggered"),
+         ("platform_event", "Platform Event-Triggered"), ("screen", "Screen")]
+groups = {}
+for prefix, g in TYPES:
+    mods = sorted(os.path.basename(p)[:-3] for p in glob.glob(os.path.join(HERE, prefix + "*.py")))
+    mods = [m for m in mods if re.fullmatch(prefix + r"\d*", m)]
+    mods.sort(key=lambda m: int(m[len(prefix):] or 1))
+    groups[g] = []
+    for m in mods:
+        try:
+            groups[g] += [(m, fn) for fn in importlib.import_module(m).ALL]
+        except Exception as ex:
+            print(f"ERROR module {m} failed to import: {ex!r}")
 
-if os.path.exists(OUT):
-    shutil.rmtree(OUT)
-os.makedirs(FLOWDIR)
+PICKLISTS = {"Type", "Status", "Priority", "StageName", "LeadSource", "Rating", "Industry", "Origin", "Reason", "ForecastCategoryName", "Salutation"}
+
+if not CHECK:
+    if os.path.exists(os.path.join(OUT, ".git")):
+        sys.exit("refusing to wipe a git repo; pass a scratch out_dir")
+    if os.path.exists(OUT):
+        shutil.rmtree(OUT)
+    os.makedirs(FLOWDIR)
 
 flows = {}
 for g, fns in groups.items():
-    for fn in fns:
-        f = fn()
+    for mod, fn in fns:
+        try:
+            f = fn()
+        except Exception as ex:
+            import traceback
+            print(f"ERROR {mod}.{fn.__name__} failed: {ex!r}\n" + traceback.format_exc(limit=3))
+            continue
         f.group = g
-        assert f.api not in flows, f.api
+        f.module = mod
+        if f.api in flows:
+            print(f"ERROR duplicate flow api name {f.api} ({mod})")
+            continue
         flows[f.api] = f
 
 errors = []
@@ -35,7 +62,8 @@ for api, f in flows.items():
     pretty = md.parseString(xml).toprettyxml(indent="    ")
     pretty = "\n".join(l for l in pretty.splitlines() if l.strip())
     pretty = pretty.replace('<?xml version="1.0" ?>', '<?xml version="1.0" encoding="UTF-8"?>', 1) + "\n"
-    open(path, "w").write(pretty)
+    if not CHECK:
+        open(path, "w").write(pretty)
     root = ET.fromstring(xml)
     # names
     for n in f.names | {api}:
@@ -109,11 +137,37 @@ for api, f in flows.items():
         bad = {e["tag"] for e in f.elements} - {"assignments", "decisions", "recordLookups", "loops"}
         if bad:
             errors.append(f"{api}: before-save has {bad}")
-    summary.append(dict(api=api, group=f.group, label=f.label, description=f.description, count=cnt, kinds=kinds, fault=has_fault))
+    # lint
+    if "BR()" in xml:
+        errors.append(f"{api}: BR() in formula")
+    if len(api) > 80 or len(f.label) > 255:
+        errors.append(f"{api}: name/label too long")
+    for el in root.iter(NS + "formulas"):
+        expr = el.find(NS + "expression").text or ""
+        for m in re.findall(r"\{!(Loop_[A-Za-z0-9_]+)\.", expr):
+            errors.append(f"{api}: formula references loop element {m}; use loop var")
+        for m in re.findall(r"\{!([A-Za-z0-9_$]+)\.([A-Za-z]+)\}", expr):
+            if m[1] in PICKLISTS and f"TEXT({{!{m[0]}.{m[1]}}})" not in expr and f"ISPICKVAL({{!{m[0]}.{m[1]}}}" not in expr:
+                errors.append(f"{api}: picklist {m[0]}.{m[1]} in formula without TEXT()")
+    for el in root.iter():
+        if el.tag in (NS + "conditions", NS + "filters"):
+            fld = el.find(NS + "leftValueReference")
+            fld = fld.text if fld is not None else (el.find(NS + "field").text if el.find(NS + "field") is not None else "")
+            op = el.find(NS + "operator").text
+            if fld.split(".")[-1] in PICKLISTS and op in ("Contains", "StartsWith", "EndsWith") and ("$Record" in fld or el.find(NS + "field") is not None):
+                errors.append(f"{api}: text operator {op} on picklist {fld}")
+    if f.kind != "auto" and any(e["tag"] == "waits" for e in f.elements):
+        errors.append(f"{api}: wait outside autolaunched")
+    if f.kind == "screen" and not any(e["tag"] == "screens" for e in f.elements):
+        errors.append(f"{api}: screen flow without screens")
+    summary.append(dict(api=api, module=f.module, group=f.group, label=f.label, description=f.description, count=cnt, kinds=kinds, fault=has_fault))
 
 for e in errors:
     print("ERROR", e)
-json.dump(summary, open(os.path.join("/home/claude/flowgen", "summary.json"), "w"), indent=1)
+if not CHECK:
+    json.dump(summary, open(os.path.join(HERE, "summary.json"), "w"), indent=1)
 for s in summary:
+    if CHECK and "-v" not in sys.argv:
+        continue
     print(f"{s['group'][:12]:12} {s['api']:42} {s['count']:3} fault={s['fault']} {s['kinds']}")
-print("errors:", len(errors))
+print("flows:", len(flows), "errors:", len(errors))

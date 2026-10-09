@@ -1,56 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
+        <members>AUT_Account_Data_Quality_Report</members>
+        <members>AUT_Account_Duplicate_Finder</members>
         <members>AUT_Account_Health_Calculator</members>
+        <members>AUT_Asset_Warranty_Check</members>
+        <members>AUT_Case_Deflection_With_Wait</members>
         <members>AUT_Case_Escalation_With_Wait</members>
         <members>AUT_Contact_Activity_Snapshot</members>
         <members>AUT_Contact_Data_Normalizer</members>
+        <members>AUT_Contract_Activation_Checklist_Wait</members>
         <members>AUT_Contract_Renewal_With_Wait</members>
+        <members>AUT_Event_Followup_Task_Creator</members>
+        <members>AUT_Event_Followup_With_Wait</members>
+        <members>AUT_Lead_Batch_Scoring</members>
         <members>AUT_Lead_Nurture_With_Wait</members>
+        <members>AUT_Lead_Score_Calculator</members>
         <members>AUT_Log_Flow_Error</members>
         <members>AUT_Opportunity_Followup_Sequence</members>
+        <members>AUT_Opportunity_Handoff_With_Wait</members>
         <members>AUT_Opportunity_Pipeline_Summary</members>
         <members>AUT_Task_Bulk_Reassign</members>
         <members>PEF_Batch_Apex_Error_Case_Creator</members>
         <members>PEF_Batch_Apex_Error_Logger</members>
         <members>PEF_Batch_Error_Daily_Rollup</members>
+        <members>PEF_Batch_Error_Keyword_Classifier</members>
+        <members>PEF_Batch_Error_Request_Correlator</members>
         <members>PEF_Batch_Error_Scope_Router</members>
+        <members>PEF_Batch_Error_Weekly_Counter</members>
+        <members>PEF_Batch_Phase_Retry_Planner</members>
         <members>PEF_Flow_Error_Case_Escalation</members>
         <members>PEF_Flow_Error_Hotspot_Detector</members>
+        <members>PEF_Flow_Error_Interview_User_Workload</members>
         <members>PEF_Flow_Error_Monitor</members>
+        <members>PEF_Flow_Error_Namespace_Stats</members>
+        <members>PEF_Flow_Error_Process_Type_Router</members>
         <members>PEF_Flow_Error_User_Coaching</members>
         <members>PEF_Platform_Status_Alert_Handler</members>
+        <members>PEF_Status_Alert_Admin_Rotation</members>
+        <members>PEF_Status_Alert_Component_Recovery</members>
+        <members>PEF_Status_Alert_Deactivated_User_Check</members>
         <members>PEF_Status_Alert_Service_Digest</members>
         <members>RTF_Account_After_Create_Setup</members>
+        <members>RTF_Account_Became_Customer_Welcome</members>
         <members>RTF_Account_Owner_Change_Cascade</members>
+        <members>RTF_Asset_Usage_End_Renewal</members>
         <members>RTF_Case_Before_Save_Triage</members>
         <members>RTF_Case_Closed_Followup</members>
+        <members>RTF_Case_Email_Contact_Matcher</members>
         <members>RTF_Case_High_Priority_Escalation</members>
         <members>RTF_Contact_Before_Save_Defaults</members>
+        <members>RTF_Contact_Email_Change_Sync</members>
+        <members>RTF_Contract_Activation_Checkin</members>
+        <members>RTF_Event_Meeting_Preparation</members>
+        <members>RTF_Lead_Hot_Rating_Acceleration</members>
         <members>RTF_Lead_Intake_Processing</members>
         <members>RTF_Opportunity_Amount_Change_Audit</members>
         <members>RTF_Opportunity_Closed_Processing</members>
+        <members>RTF_Opportunity_Create_Contact_Roles</members>
+        <members>RTF_Opportunity_Product_Before_Delete</members>
+        <members>RTF_Task_Before_Save_Workload_Balancer</members>
         <members>RTF_Task_Completed_Followup</members>
         <members>SCH_Daily_Case_SLA_Monitor</members>
+        <members>SCH_Daily_Contact_Birthday_Outreach</members>
+        <members>SCH_Daily_Customer_Meeting_Prep</members>
+        <members>SCH_Daily_Idle_Working_Case_Followup</members>
         <members>SCH_Daily_Lead_Followup</members>
+        <members>SCH_Daily_Orphan_Task_Account_Linker</members>
         <members>SCH_Daily_Overdue_Task_Digest</members>
         <members>SCH_Daily_Stale_Opportunity_Review</members>
         <members>SCH_Nightly_Case_Aging_Report</members>
+        <members>SCH_Once_Stale_Draft_Contract_Review</members>
         <members>SCH_Weekly_Account_Health_Batch</members>
+        <members>SCH_Weekly_Asset_Usage_End_Review</members>
         <members>SCH_Weekly_Contract_Expiry_Check</members>
         <members>SCH_Weekly_Demo_Task_Cleanup</members>
         <members>SCH_Weekly_Inactive_Account_Review</members>
+        <members>SCH_Weekly_Inactive_User_Handover</members>
+        <members>SCH_Weekly_New_Lead_Source_Report</members>
+        <members>SCH_Weekly_Opportunity_Product_Check</members>
         <members>SCH_Weekly_Pipeline_Snapshot</members>
+        <members>SCH_Weekly_Product_Catalog_Audit</members>
+        <members>SCR_Account_Health_Check_Console</members>
         <members>SCR_Account_Hierarchy_Overview</members>
         <members>SCR_Account_Task_Planner</members>
+        <members>SCR_Asset_Registration_Wizard</members>
         <members>SCR_Case_Bulk_Close</members>
+        <members>SCR_Case_Duplicate_Review</members>
         <members>SCR_Case_Intake_Wizard</members>
         <members>SCR_Contact_Quick_Update</members>
+        <members>SCR_Contract_Creation_Wizard</members>
+        <members>SCR_Event_Rescheduler</members>
+        <members>SCR_Lead_BANT_Qualification</members>
         <members>SCR_Lead_To_Account_Builder</members>
         <members>SCR_Meeting_Scheduler</members>
         <members>SCR_New_Customer_Onboarding</members>
         <members>SCR_Opportunity_Bulk_Stage_Update</members>
+        <members>SCR_Opportunity_Clone_Lite</members>
+        <members>SCR_Opportunity_Contact_Role_Assignment</members>
         <members>SCR_Opportunity_Discount_Calculator</members>
+        <members>SCR_Opportunity_Product_Adder</members>
+        <members>SCR_Task_Bulk_Reassign_Console</members>
         <name>Flow</name>
     </types>
     <version>62.0</version>

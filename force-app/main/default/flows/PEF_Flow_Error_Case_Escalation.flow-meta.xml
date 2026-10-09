@@ -149,7 +149,7 @@
     <formulas>
         <name>fxAppended</name>
         <dataType>String</dataType>
-        <expression>LEFT(BLANKVALUE({!Get_Open_Error_Case.Description}, '') &amp; BR() &amp; TEXT({!$Record.EventDate}) &amp; ' - ' &amp; {!$Record.ElementApiName} &amp; ': ' &amp; BLANKVALUE({!$Record.ErrorMessage}, ''), 31000)</expression>
+        <expression>LEFT(BLANKVALUE({!Get_Open_Error_Case.Description}, '') &amp; ' || ' &amp; TEXT({!$Record.EventDate}) &amp; ' - ' &amp; {!$Record.ElementApiName} &amp; ': ' &amp; BLANKVALUE({!$Record.ErrorMessage}, ''), 31000)</expression>
     </formulas>
     <interviewLabel>PEF Flow Error Case Escalation {!$Flow.CurrentDateTime}</interviewLabel>
     <label>PEF Flow Error Case Escalation</label>

@@ -17,7 +17,7 @@ def account_create():
     f.formula("fxDueDate", "Date", "TODAY() + 2")
     f.tt("ttDuplicateBody", "Account {!$Record.Name} ({!$Record.Id}) was created, but {!varDuplicateCount} account(s) with the same name already exist:\n{!varDuplicateList}")
     f.decision("Dec_Account_Type", [
-        ("Customer", [("$Record.Type", "Contains", "Customer")], "Create_Welcome_Task"),
+        ("Customer", [("$Record.Type", "EqualTo", "Customer - Direct"), ("$Record.Type", "EqualTo", "Customer - Channel")], "Create_Welcome_Task", "or"),
         ("Prospect", [("$Record.Type", "EqualTo", "Prospect")], "Create_Starter_Opportunity")],
         "Asg_Default_Segment", "Other")
     f.create("Create_Welcome_Task", "Task", {"Subject": PFX + "Welcome call for new customer", "WhatId": R("$Record.Id"), "OwnerId": R("$Record.OwnerId"),

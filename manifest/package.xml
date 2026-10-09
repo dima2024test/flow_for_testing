@@ -3,29 +3,54 @@
     <types>
         <members>AUT_Account_Health_Calculator</members>
         <members>AUT_Case_Escalation_With_Wait</members>
+        <members>AUT_Contact_Activity_Snapshot</members>
         <members>AUT_Contact_Data_Normalizer</members>
+        <members>AUT_Contract_Renewal_With_Wait</members>
+        <members>AUT_Lead_Nurture_With_Wait</members>
         <members>AUT_Log_Flow_Error</members>
         <members>AUT_Opportunity_Followup_Sequence</members>
+        <members>AUT_Opportunity_Pipeline_Summary</members>
+        <members>AUT_Task_Bulk_Reassign</members>
         <members>PEF_Batch_Apex_Error_Case_Creator</members>
         <members>PEF_Batch_Apex_Error_Logger</members>
+        <members>PEF_Batch_Error_Daily_Rollup</members>
+        <members>PEF_Batch_Error_Scope_Router</members>
         <members>PEF_Flow_Error_Case_Escalation</members>
+        <members>PEF_Flow_Error_Hotspot_Detector</members>
         <members>PEF_Flow_Error_Monitor</members>
+        <members>PEF_Flow_Error_User_Coaching</members>
         <members>PEF_Platform_Status_Alert_Handler</members>
+        <members>PEF_Status_Alert_Service_Digest</members>
         <members>RTF_Account_After_Create_Setup</members>
+        <members>RTF_Account_Owner_Change_Cascade</members>
         <members>RTF_Case_Before_Save_Triage</members>
+        <members>RTF_Case_Closed_Followup</members>
         <members>RTF_Case_High_Priority_Escalation</members>
+        <members>RTF_Contact_Before_Save_Defaults</members>
         <members>RTF_Lead_Intake_Processing</members>
+        <members>RTF_Opportunity_Amount_Change_Audit</members>
         <members>RTF_Opportunity_Closed_Processing</members>
+        <members>RTF_Task_Completed_Followup</members>
+        <members>SCH_Daily_Case_SLA_Monitor</members>
         <members>SCH_Daily_Lead_Followup</members>
+        <members>SCH_Daily_Overdue_Task_Digest</members>
         <members>SCH_Daily_Stale_Opportunity_Review</members>
         <members>SCH_Nightly_Case_Aging_Report</members>
         <members>SCH_Weekly_Account_Health_Batch</members>
+        <members>SCH_Weekly_Contract_Expiry_Check</members>
         <members>SCH_Weekly_Demo_Task_Cleanup</members>
+        <members>SCH_Weekly_Inactive_Account_Review</members>
+        <members>SCH_Weekly_Pipeline_Snapshot</members>
+        <members>SCR_Account_Hierarchy_Overview</members>
         <members>SCR_Account_Task_Planner</members>
+        <members>SCR_Case_Bulk_Close</members>
         <members>SCR_Case_Intake_Wizard</members>
+        <members>SCR_Contact_Quick_Update</members>
         <members>SCR_Lead_To_Account_Builder</members>
+        <members>SCR_Meeting_Scheduler</members>
         <members>SCR_New_Customer_Onboarding</members>
         <members>SCR_Opportunity_Bulk_Stage_Update</members>
+        <members>SCR_Opportunity_Discount_Calculator</members>
         <name>Flow</name>
     </types>
     <version>62.0</version>

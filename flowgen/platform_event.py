@@ -44,7 +44,7 @@ def batch_case():
     f.var("varNewCaseId", "String")
     f.formula("fxSubject", "String", f"LEFT('{PFX}Batch failure: ' & BLANKVALUE({{!$Record.ExceptionType}}, 'Unknown exception'), 255)")
     f.formula("fxAppendedDescription", "String",
-              "LEFT(BLANKVALUE({!varCase.Description}, '') & BR() & '--- Repeat at ' & TEXT(NOW()) & ': ' & BLANKVALUE({!$Record.Message}, ''), 31000)")
+              "LEFT(BLANKVALUE({!varCase.Description}, '') & ' || ' & '--- Repeat at ' & TEXT(NOW()) & ': ' & BLANKVALUE({!$Record.Message}, ''), 31000)")
     f.tt("ttDescription", "Batch Apex job {!$Record.AsyncApexJobId} failed in phase {!$Record.Phase}.\n{!$Record.ExceptionType}: {!$Record.Message}\n\n{!$Record.StackTrace}")
     f.assign("Asg_Build_Subject", [("varSubject", "Assign", R("fxSubject"))], "Get_Existing_Cases")
     f.get("Get_Existing_Cases", "Case", [("Subject", "EqualTo", R("varSubject")), ("IsClosed", "EqualTo", False)], "Asg_Existing_Count", "Log_Fault")
@@ -115,7 +115,7 @@ def flow_error_case():
     f.var("varCaseId", "String")
     f.formula("fxSubject", "String", f"LEFT('{PFX}Flow failure: ' & {{!$Record.FlowApiName}}, 255)")
     f.formula("fxAppended", "String",
-              "LEFT(BLANKVALUE({!Get_Open_Error_Case.Description}, '') & BR() & TEXT({!$Record.EventDate}) & ' - ' & {!$Record.ElementApiName} & ': ' & BLANKVALUE({!$Record.ErrorMessage}, ''), 31000)")
+              "LEFT(BLANKVALUE({!Get_Open_Error_Case.Description}, '') & ' || ' & TEXT({!$Record.EventDate}) & ' - ' & {!$Record.ElementApiName} & ': ' & BLANKVALUE({!$Record.ErrorMessage}, ''), 31000)")
     f.tt("ttDescription", "Flow: {!$Record.FlowApiName} (version {!$Record.FlowVersionId})\nInterview: {!$Record.InterviewGuid}\n"
                           "Element: {!$Record.ElementApiName} ({!$Record.ElementType})\nError: {!$Record.ErrorMessage}")
     f.decision("Dec_Flow_Category", [("Demo_Screen_Flow", [("$Record.FlowApiName", "StartsWith", "SCR_")], "Asg_Priority_Medium")], "Asg_Priority_High", "Other Flow")

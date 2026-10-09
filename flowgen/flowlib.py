@@ -274,13 +274,13 @@ class Flow:
 
     # ---------- start ----------
     def start(self, nxt=None, obj=None, trigger=None, record_trigger=None, filters=(), changed=False,
-              schedule=None, paths=()):
+              schedule=None, paths=(), filter_logic="and"):
         """paths: list of dicts {name,label,target,num,unit,field,source} or {'async':target}"""
         x = conn("connector", nxt)
         if changed:
             x += tag("doesRequireRecordChangedToMeetCriteria", "true")
         if filters:
-            x += tag("filterLogic", "and") + "".join(filt_xml(f) for f in filters)
+            x += tag("filterLogic", filter_logic) + "".join(filt_xml(f) for f in filters)
         if obj:
             x += tag("object", obj)
         if record_trigger:

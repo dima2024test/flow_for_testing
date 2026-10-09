@@ -101,12 +101,19 @@
         <defaultConnectorLabel>Other</defaultConnectorLabel>
         <rules>
             <name>Customer</name>
-            <conditionLogic>and</conditionLogic>
+            <conditionLogic>or</conditionLogic>
             <conditions>
                 <leftValueReference>$Record.Type</leftValueReference>
-                <operator>Contains</operator>
+                <operator>EqualTo</operator>
                 <rightValue>
-                    <stringValue>Customer</stringValue>
+                    <stringValue>Customer - Direct</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Type</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Customer - Channel</stringValue>
                 </rightValue>
             </conditions>
             <connector>

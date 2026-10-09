@@ -231,7 +231,7 @@
     <formulas>
         <name>fxAppendedDescription</name>
         <dataType>String</dataType>
-        <expression>LEFT(BLANKVALUE({!varCase.Description}, '') &amp; BR() &amp; '--- Repeat at ' &amp; TEXT(NOW()) &amp; ': ' &amp; BLANKVALUE({!$Record.Message}, ''), 31000)</expression>
+        <expression>LEFT(BLANKVALUE({!varCase.Description}, '') &amp; ' || ' &amp; '--- Repeat at ' &amp; TEXT(NOW()) &amp; ': ' &amp; BLANKVALUE({!$Record.Message}, ''), 31000)</expression>
     </formulas>
     <interviewLabel>PEF Batch Apex Error Case Creator {!$Flow.CurrentDateTime}</interviewLabel>
     <label>PEF Batch Apex Error Case Creator</label>

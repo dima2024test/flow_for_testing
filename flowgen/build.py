@@ -1,13 +1,15 @@
 import os, re, sys, json, shutil
 import xml.etree.ElementTree as ET
 import autolaunched, record_triggered, scheduled, platform_event, screen
+import autolaunched2, record_triggered2, scheduled2, platform_event2, screen2
 
 OUT = sys.argv[1] if len(sys.argv) > 1 else "/home/claude/flow-pack"
 FLOWDIR = os.path.join(OUT, "force-app/main/default/flows")
 NS = "{http://soap.sforce.com/2006/04/metadata}"
 
-groups = {"Autolaunched (No Trigger)": autolaunched.ALL, "Record-Triggered": record_triggered.ALL,
-          "Schedule-Triggered": scheduled.ALL, "Platform Event-Triggered": platform_event.ALL, "Screen": screen.ALL}
+groups = {"Autolaunched (No Trigger)": autolaunched.ALL + autolaunched2.ALL, "Record-Triggered": record_triggered.ALL + record_triggered2.ALL,
+          "Schedule-Triggered": scheduled.ALL + scheduled2.ALL, "Platform Event-Triggered": platform_event.ALL + platform_event2.ALL,
+          "Screen": screen.ALL + screen2.ALL}
 
 if os.path.exists(OUT):
     shutil.rmtree(OUT)
@@ -18,6 +20,7 @@ for g, fns in groups.items():
     for fn in fns:
         f = fn()
         f.group = g
+        assert f.api not in flows, f.api
         flows[f.api] = f
 
 errors = []
@@ -69,9 +72,11 @@ for api, f in flows.items():
     for r in refs:
         base = r.split(".")[0]
         if base.startswith("$"):
-            if base not in ("$Record", "$Flow", "$User"):
+            if base not in ("$Record", "$Record__Prior", "$Flow", "$User"):
                 errors.append(f"{api}: odd global {r}")
-            if base == "$Record" and f.kind in ("auto", "screen"):
+            if base == "$Record__Prior" and "<recordTriggerType>Update</recordTriggerType>" not in xml and "<recordTriggerType>CreateAndUpdate</recordTriggerType>" not in xml:
+                errors.append(f"{api}: $Record__Prior without update trigger")
+            if base.startswith("$Record") and f.kind in ("auto", "screen"):
                 errors.append(f"{api}: $Record used in {f.kind}")
             continue
         if base not in f.names:
